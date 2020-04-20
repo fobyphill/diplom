@@ -103,6 +103,7 @@
     <Content Include="About.aspx" />
     <Content Include="add_consumpt.aspx" />
     <Content Include="App_Data\plaza.accdb" />
+    <Content Include="autentific.aspx" />
     <Content Include="consumptions.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -214,6 +215,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="autentific.aspx.cs">
+      <DependentUpon>autentific.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="autentific.aspx.designer.cs">
+      <DependentUpon>autentific.aspx</DependentUpon>
+    </Compile>
     <Compile Include="consumptions.aspx.cs">
       <DependentUpon>consumptions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

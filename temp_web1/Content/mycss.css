@@ -62,7 +62,8 @@ h1{
     display:inline-block;
 }
 .mybutton {
-
+    background-color: #26a9e0;
+    color: white;
 }
 .redtext
 {
