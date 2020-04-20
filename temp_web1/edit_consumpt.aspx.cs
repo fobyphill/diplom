@@ -123,12 +123,12 @@ namespace temp_web1
             string bil = ddl_bils.SelectedValue;
 
             //Зададим пользователя, внесшего изменения. Пока что просто укажем админа
-            string id_user = "1";
+            string login_user = "admin";
             //Объединим данные в переменной запроса
             string q_update_con = "update consumptions set data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
-            ", bil_con="+bil+", descript_con = '" + tb_descript.Text + "', change_id = " +
-            id_user + " where id_con = " + id_con;
+            ", bil_con="+bil+", descript_con = '" + tb_descript.Text + "', change_login = '" +
+            login_user + "' where id_con = " + id_con;
             OleDbCommand com = new OleDbCommand(q_update_con, ole_con);
             if (!flag)
             {
@@ -158,7 +158,6 @@ namespace temp_web1
 
             //Забираем данные с нода
             string p_i = pn.Value.ToString();
-
             while (dr.Read())
             {
                 if (dr[3].ToString() == p_i)

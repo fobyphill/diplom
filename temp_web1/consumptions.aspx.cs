@@ -18,14 +18,14 @@ namespace temp_web1
                 string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
                 //СОздаем запрос к БД
-                string sql1 = "SELECT consumptions.id_con, consumptions.data_create, " +
+                string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
                     "consumptions.data_change, consumptions.value_con, cats.name_cat, bils.name_bil, " +
                     "consumptions.descript_con, users.fam_user, users2.fam_user " +
                     "from ((((consumptions " +
                     "inner join users on " +
-                    "consumptions.create_id = users.id_user) " +
+                    "consumptions.create_login = users.login_user) " +
                     "inner join users2 on " +
-                    "consumptions.change_id = users2.id_user) " +
+                    "consumptions.change_login = users2.login_user) " +
                     "inner join cats on consumptions.cat_con = cats.id_cat) " +
                     "inner join bils on consumptions.bil_con = bils.id_bil)"+
                     "order by consumptions.id_con";
@@ -33,7 +33,7 @@ namespace temp_web1
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 //Выполняем запрос. Результат - массив в формате "Команда"
-                OleDbCommand ole_com = new OleDbCommand(sql1, ole_con);
+                OleDbCommand ole_com = new OleDbCommand(q_table, ole_con);
                 ole_com.CommandType = CommandType.Text;//тип команды - текст
                 //Создаем формат массива - Дата Адаптер
                 //OleDbDataAdapter da = new OleDbDataAdapter(ole_com);

@@ -119,15 +119,15 @@ namespace temp_web1
             
             // После добавлени авторизации эту переменную необходимо будет допилить,
             // чтобы она показывала реальное айди юзера, а не единицу.
-            int num_user = 1;
+            string login_user = "admin";
 
             //Заполним данными запрос
             string q_add = "insert into consumptions" +
             "(id_con, data_create, data_change, value_con, cat_con, bil_con, "+
-            "descript_con, create_id, change_id)" +
+            "descript_con, create_login, change_login)" +
             "values ("+((++id_max).ToString())+", '"+dt
-            + "', '" + dt + "', " + value_str + ", " + num_cat+", "+bil+", '" + descript_con + "', "
-            +num_user.ToString()+", "+num_user.ToString()+")";
+            + "', '" + dt + "', " + value_str + ", " + num_cat+", "+bil+", '" + descript_con + "', '"
+            +login_user+"', '"+login_user+"')";
             OleDbCommand com3 = new OleDbCommand(q_add, ole_con);
             if (!flag)
             {
