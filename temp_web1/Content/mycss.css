@@ -1,0 +1,110 @@
+﻿body
+{
+    background-color:#e4e9eb;
+}
+p
+{
+    margin:0px;
+}
+h1{
+    margin:0;
+}
+.forlink {
+    margin: 10px;
+}
+
+.myhead
+{
+    width:1170px;
+    height:70px;
+    background-color: white;
+    margin: 10px 70px;
+}
+.textcenter
+{
+    display: table-cell;
+    vertical-align:middle;
+    width:1170px;
+    height:70px;
+}
+.mymenu
+{
+      width: 200px;
+      margin-left: 70px;
+      display: inline-block;
+      vertical-align: top;
+}
+
+.logo1
+{
+    color: #26a9e0;
+}
+.logo2
+{
+    color: #16dbdb;
+}
+
+.maincontent
+{
+    width:955px;
+    background-color: white;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+}
+
+.mar10
+{
+    margin: 10px;
+}
+.onerow
+{
+    display:inline-block;
+}
+.mybutton {
+
+}
+.redtext
+{
+    color: red;
+}
+.onetable
+{
+    margin:10px 10px 0 10px;
+    
+}
+
+.invis
+{
+    display:none;
+}
+
+.modalwin
+{
+    width: 200px;
+    background-color:#26a9e0;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+.hint
+{
+    font-style: italic;
+    font-weight: bold;
+    
+}
+.stress
+{
+    color: red;
+}
+.divhint
+{
+    background-color:#16dbdb;
+    padding: 5px;
+}
+.border1
+{
+    border-color: #26a9e0;
+    border-style:solid;
+    border-width:1px;
+}
