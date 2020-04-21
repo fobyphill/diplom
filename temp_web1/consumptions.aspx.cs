@@ -11,10 +11,16 @@ namespace temp_web1
 {
     public partial class consumptions : System.Web.UI.Page
     {
+        string login_user; // логин пользователя
         protected void Page_Load(object sender, EventArgs e)
         {
+            login_user = (string)Session["login_user"];
+            if (login_user == null)
+            { Response.Redirect("autentific.aspx"); }
             if (!Page.IsPostBack)
-            {               //Создаем строку подключения
+            {
+                
+                //Создаем строку подключения
                 string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
                 //СОздаем запрос к БД

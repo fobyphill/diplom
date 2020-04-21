@@ -25,7 +25,7 @@ namespace temp_web1
             OleDbDataReader dr = my_query(q_autorize);
             if (dr.Read())
             {
-                login_user = dr[2].ToString();
+                Session["login_user"] = dr[2].ToString();
                 name_user = dr[0].ToString();
                 fam_user = dr[1].ToString();
                 status_user = char.Parse(dr[4].ToString());
