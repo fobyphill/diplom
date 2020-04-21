@@ -11,14 +11,21 @@ namespace temp_web1
 {
     public partial class consumptions : System.Web.UI.Page
     {
-        string login_user; // логин пользователя
+        string login_user, name_user, fam_user;
+        char status_user; // переменные для данных пользователя
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            login_user = (string)Session["login_user"];
-            if (login_user == null)
-            { Response.Redirect("autentific.aspx"); }
             if (!Page.IsPostBack)
             {
+                //Зададим параметры пользователя
+                login_user = (string)Session["login_user"];
+                name_user = (string)Session["name_user"];
+                fam_user = (string)Session["fam_user"];
+                //status_user = (char)Session["status_user"];
+
+                //Выведем пользователя на экран
+               // l_user.Text = name_user;
                 
                 //Создаем строку подключения
                 string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
@@ -50,6 +57,8 @@ namespace temp_web1
                 gv1.DataBind();
                 //  gv1.Columns[1].ControlStyle.Width = 100;
             }
+            if (login_user == null)
+            { Response.Redirect("autentific.aspx"); }
         }
 
         protected void b_add_con_Click(object sender, EventArgs e)

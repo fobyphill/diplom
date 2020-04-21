@@ -12,8 +12,13 @@
     <form id="form1" runat="server">
     <div>
         <div class="myhead">
-            <div class="textcenter">
-                <h1 ><span class="logo1">Пла</span><span class="logo2">За</span></h1>
+           <div class="textcenter ">
+                <div class="onerow">
+                    <h1 ><span class="logo1">Пла</span><span class="logo2">За</span></h1>
+                </div>
+                <div class="onerow textright">
+                     <asp:Label ID="l_user" runat="server" Text="Авторизуйтесь пожалуйста"></asp:Label>
+                </div>
             </div>
         </div>
         <div class="auten">

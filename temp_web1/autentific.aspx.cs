@@ -14,7 +14,6 @@ namespace temp_web1
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["login_user"] = "";
-            Session["login_user"] = "";
             Session["name_user"] = "";
             Session["fam_user"] = "";
             Session["status_user"] = ' ';
