@@ -11,8 +11,13 @@ namespace temp_web1
 {
     public partial class add_consumpt : System.Web.UI.Page
     {
+        string login_user;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
+            login_user = (string)Session["login_user"];
+            if (login_user == null)
+            { Response.Redirect("autentific.aspx"); }
             if (!Page.IsPostBack)
             {
                 string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
@@ -115,12 +120,6 @@ namespace temp_web1
             string bil = ddl_bils.SelectedValue.ToString();
             if (ddl_bils.Items.Count == 0)
             { flag = true; }
-
-            
-            // После добавлени авторизации эту переменную необходимо будет допилить,
-            // чтобы она показывала реальное айди юзера, а не единицу.
-            string login_user = "admin";
-
             //Заполним данными запрос
             string q_add = "insert into consumptions" +
             "(id_con, data_create, data_change, value_con, cat_con, bil_con, "+

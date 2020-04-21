@@ -13,22 +13,23 @@ namespace temp_web1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["login_user"] = "";
+            Session["login_user"] = "";
+            Session["name_user"] = "";
+            Session["fam_user"] = "";
+            Session["status_user"] = ' ';
         }
 
         protected void b_enter_Click(object sender, EventArgs e)
         {
-            string login_user, name_user, fam_user;
-            char status_user;
-
             string q_autorize = "select * from users where login_user = '" + tb_login.Text + "' and pass_user = '" + tb_password.Text + "'";
             OleDbDataReader dr = my_query(q_autorize);
             if (dr.Read())
             {
                 Session["login_user"] = dr[2].ToString();
-                name_user = dr[0].ToString();
-                fam_user = dr[1].ToString();
-                status_user = char.Parse(dr[4].ToString());
+                Session["name_user"] = dr[0].ToString();
+                Session["fam_user"] = dr[1].ToString();
+                Session["status_user"] = char.Parse(dr[4].ToString());
                 Response.Redirect("consumptions.aspx");
             }
             else { l_incorrect.Visible = true; }

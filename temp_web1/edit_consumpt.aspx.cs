@@ -11,8 +11,12 @@ namespace temp_web1
 {
     public partial class edit_consumpt : System.Web.UI.Page
     {
+        string login_user;
         protected void Page_Load(object sender, EventArgs e)
         {
+            login_user = (string)Session["login_user"];
+            if (login_user == null)
+            { Response.Redirect("autentific.aspx"); }
             if (!Page.IsPostBack)// Запускаем эту программу только в первый раз
             {
                 string id_con = Request.QueryString["id_con"];
@@ -60,7 +64,11 @@ namespace temp_web1
                 foreach(TreeNode n in tv.Nodes)
                 {
                     if (n.Value.ToString() == cat_id)
-                    { n.Select(); }
+                    { 
+                        n.Select();
+                        break;
+                    }
+                    select_child(n, cat_id);
                 }
                 
                 tb_value.Text = value;//Выводим значения расхода
@@ -122,8 +130,6 @@ namespace temp_web1
             //Получим значение счета
             string bil = ddl_bils.SelectedValue;
 
-            //Зададим пользователя, внесшего изменения. Пока что просто укажем админа
-            string login_user = "admin";
             //Объединим данные в переменной запроса
             string q_update_con = "update consumptions set data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
@@ -170,5 +176,20 @@ namespace temp_web1
             ole_con.Close();
 
         }
+        void select_child(TreeNode n, string cat)
+        {
+            if (n.ChildNodes.Count > 0)
+            {
+                foreach (TreeNode n_ch in n.ChildNodes)
+                {
+                    if (n_ch.Value.ToString() == cat)
+                    {
+                        n_ch.Select();
+                        break;
+                    }
+                    select_child(n_ch, cat);
+                }
+            }
+        }// конец процедуры выделения
     }
 }
