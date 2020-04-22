@@ -6,7 +6,7 @@
     <div class="mymenu">
        <div class="forlink"><a href="Default.aspx">Главная</a></div>
        <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
-       <div class="forlink"> <a href="Default.aspx">Категории затрат</a></div>
+       <div class="forlink"> <a href="cats.aspx">Категории затрат</a></div>
        <div class="forlink"> <a href="Default.aspx">Счета</a></div>
        <div class="forlink"> <a href="Default.aspx">Пользователи</a></div>
        <div class="forlink"> <a href="Default.aspx">Отчеты</a></div>
@@ -87,10 +87,10 @@
         <div class="mar10 onerow">
                     <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
             
-            
+            </div>
             <ajaxToolkit:ModalPopupExtender TargetControlID="b_inv" PopupControlID="p_modal_confirm" 
                 ID="mpe" runat="server" DropShadow="True"></ajaxToolkit:ModalPopupExtender>
-       </div>
+       
         <div class="invis"><asp:Button ID="b_inv" runat="server" Text="Невидимка" /></div>
         
 

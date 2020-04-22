@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" 
     CodeBehind="edit_consumpt.aspx.cs" Inherits="temp_web1.edit_consumpt" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,7 +28,6 @@
    </div>
    <div class="maincontent">
         <div class="mar10">
-    
             <div class="onerow border1">
                 <asp:Panel ID="p_tv" runat="server" ScrollBars="Vertical">
                     <asp:TreeView ID="tv" Width="276px" Height="276px" runat="server">
