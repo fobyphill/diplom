@@ -15,8 +15,17 @@ namespace temp_web1
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
             login_user = (string)Session["login_user"];
-            if (login_user != "")
-            { l_user.Text = name_user + " " + fam_user; }
+            if (login_user != null)
+            { 
+                l_user.Text = name_user + " " + fam_user;
+                b_exit.Visible = true;
+            }
+        }
+
+        protected void b_exit_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("autorise.aspx");
         }
     }
 }

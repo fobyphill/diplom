@@ -13,7 +13,21 @@ namespace temp_web1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session.Abandon();
+            /*if (!Page.IsPostBack)
+            { Session.Abandon(); }*/
+
+        }
+
+        OleDbDataReader my_query(string q)//Процедура запроса данных из БД
+        {
+            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+               "C:\\Users\\phill\\documents\\plaza.accdb";
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q, ole_con);
+            com.CommandType = CommandType.Text;//тип команды - текст
+            OleDbDataReader dr = com.ExecuteReader();
+            return dr;
 
         }
 
@@ -31,17 +45,7 @@ namespace temp_web1
             }
             else { l_incorrect.Visible = true; }
         }
-        OleDbDataReader my_query(string q)//Процедура запроса данных из БД
-        {
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-               "C:\\Users\\phill\\documents\\plaza.accdb";
-            OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbCommand com = new OleDbCommand(q, ole_con);
-            com.CommandType = CommandType.Text;//тип команды - текст
-            OleDbDataReader dr = com.ExecuteReader();
-            return dr;
 
-        }
+
     }
 }

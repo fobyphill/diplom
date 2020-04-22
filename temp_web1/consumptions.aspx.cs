@@ -24,7 +24,7 @@ namespace temp_web1
 
             //перебросим пользователя на экран авторизации по окончании сессии
             if (login_user == null)
-            { Response.Redirect("autentific.aspx"); }
+            { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
             {

@@ -47,6 +47,7 @@
                 </div>
                 <div class="onerow textright">
                      <asp:Label ID="l_user" runat="server" Text="Авторизуйтесь пожалуйста"></asp:Label>
+                    <asp:Button ID="b_exit" runat="server" Text="Выход" OnClick="b_exit_Click" Visible="False" />
                 </div>
             </div>
         </div>
