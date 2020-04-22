@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace temp_web1
@@ -46,7 +47,7 @@ namespace temp_web1
 
         protected void b_add_cat_Click(object sender, EventArgs e)
         {
-
+            p_add_edit.CssClass = "vis";
         }
 
         protected void b_change_Click(object sender, EventArgs e)

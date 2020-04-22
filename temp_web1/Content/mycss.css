@@ -85,6 +85,10 @@ h1{
 {
     display:none;
 }
+. vis
+{
+    display: normal;
+}
 
 .modalwin
 {
