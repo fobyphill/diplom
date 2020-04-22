@@ -67,13 +67,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_parent_cat;
         
         /// <summary>
-        /// cat control.
+        /// tb_cat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cat;
+        protected global::System.Web.UI.WebControls.TextBox tb_cat;
         
         /// <summary>
         /// l_cat control.

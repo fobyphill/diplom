@@ -15,6 +15,7 @@ namespace temp_web1
         {
             /*if (!Page.IsPostBack)
             { Session.Abandon(); }*/
+            Session["flag_add_edit_cat"] = "0";
 
         }
 

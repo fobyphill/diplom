@@ -13,7 +13,7 @@
         <div class="mar10">
             <div class="onerow border1">
                 <asp:Panel ID="p_tv" runat="server" ScrollBars="Vertical">
-                    <asp:TreeView ID="tv" Width="276px" Height="276px" runat="server">
+                    <asp:TreeView ID="tv" Width="276px" Height="276px" runat="server" OnSelectedNodeChanged="tv_SelectedNodeChanged">
                         <NodeStyle BorderColor="Black" ForeColor="Black" />
                         <SelectedNodeStyle BackColor="#16dbdb" />
                     </asp:TreeView>
@@ -29,11 +29,11 @@
                 <asp:Label ID="l_parent_cat" runat="server" Text="Кликните по родительской категории или введите ее название здесь">
                 </asp:Label>
                 <br />
-                 <asp:TextBox ID="cat" runat="server"></asp:TextBox>
+                 <asp:TextBox ID="tb_cat" runat="server"></asp:TextBox>
                 <asp:Label ID="l_cat" runat="server" Text="Укажите название категории"></asp:Label>
             </div>
             <div class=" mar10 onerow">
-                <asp:Button ID="b_save" runat="server" Text="Сохранить" />
+                <asp:Button ID="b_save" runat="server" Text="Сохранить" OnClick="b_save_Click" />
             </div>
             <div id="div_add_edit" class=" mar10 onerow">
                 <asp:Button ID="b_cancel" runat="server" Text="Отменить" />
