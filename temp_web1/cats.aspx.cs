@@ -14,8 +14,6 @@ namespace temp_web1
     {
         string login_user, name_user, fam_user;
         char status_user; // переменные для данных пользователя
-        //bool add_edit_flag;// флаг добавления-редактирования. Равен лжи по умолчанию и при добавлении категории. 
-        //Равен правде при редактировании категории
 
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                "C:\\Users\\phill\\documents\\plaza.accdb";
@@ -117,8 +115,8 @@ namespace temp_web1
 
         protected void b_save_Click(object sender, EventArgs e)
         {
-            string id_cat;
-            string id_parent_cat;
+            string id_cat = "";
+            string id_parent_cat = "";
             if ((string)Session["flag_add_edit_cat"] == "a")//найдем параметры запроса в случае добавления
             {
                 //Получим ID категории
@@ -141,19 +139,37 @@ namespace temp_web1
             {
                 //Получим ID категории
                 id_cat = tv.SelectedNode.Value.ToString();
+
+                //Получим ID родительской категории
+
+                foreach (TreeNode n in tv.Nodes)
+                {
+                    if (n.Text == tb_parent_cat.Text)
+                    {
+                        Session["id_parent_cat"] = n.Value.ToString();
+                        break;
+                    }
+                    else 
+                    {
+                        find_parent_cat(n, tb_parent_cat.Text);
+                        if (Session["id_parent_cat"] != null)
+                        { break; }
+                    }
+                }
+                id_parent_cat = (string)Session["id_parent_cat"];
             }
 
             //запрос на добавление данных
             string ex_add = "INSERT INTO cats ( id_cat, name_cat, parent_id ) VALUES (" + id_cat + ", '" + tb_cat.Text + "', " +
                 id_parent_cat + ")";
             //Вносим изменение в БД
-            OleDbConnection ole_con = new OleDbConnection(con_str);
+       /*     OleDbConnection ole_con = new OleDbConnection(con_str);
             ole_con.Open();
             OleDbCommand com = new OleDbCommand(ex_add, ole_con);
             com.CommandType = CommandType.Text;
             com.ExecuteNonQuery();
             System.Threading.Thread.Sleep(450);
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect(Request.RawUrl);*/
         }
         OleDbDataReader my_query(string q)//Процедура запроса данных из БД
         {
@@ -165,5 +181,26 @@ namespace temp_web1
             return dr;
 
         }
+        void find_parent_cat(TreeNode n, string cat) //процедура нахождения категории
+        {
+            if (n.ChildNodes.Count > 0)
+            {
+                foreach (TreeNode n_ch in n.ChildNodes)
+                {
+                    if (n_ch.Text == cat)
+                    {
+                        Session["id_parent_cat"] = n_ch.Value.ToString();
+                        break;
+                    }
+                    else {
+                        find_parent_cat(n_ch, cat);
+                        if (Session["id_parent_cat"] != null)
+                        { break; }
+                        }
+
+                }
+
+            }
+        }// конец процедуры поиска категории
     }
 }
