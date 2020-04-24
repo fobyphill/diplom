@@ -34,11 +34,8 @@
                  <asp:TextBox ID="tb_cat" runat="server"></asp:TextBox>
                 <asp:Label ID="l_cat" runat="server" Text="Категория затрат"></asp:Label>
                 <br />
-                <asp:TextBox ID="tb_descript" runat="server" Height="72px" Width="119px"></asp:TextBox>
+                <asp:TextBox ID="tb_descript" runat="server" Height="72px" Width="119px" TextMode="MultiLine"></asp:TextBox>
                 <asp:Label ID="l_descript" runat="server" Text="Описание"></asp:Label>
-            </div>
-            <div class=" mar10 onerow">
-                <asp:Button ID="b_save" runat="server" Text="Сохранить" OnClick="b_save_Click" />
             </div>
         </asp:Panel>
        

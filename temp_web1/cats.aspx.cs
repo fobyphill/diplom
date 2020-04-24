@@ -26,14 +26,28 @@ namespace temp_web1
             { Response.Redirect("autentific.aspx"); }*/
             if (!Page.IsPostBack)
             {
-                string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-               "C:\\Users\\phill\\documents\\plaza.accdb";
-                string q_cat = "select * from cats";
-                OleDbConnection ole_con = new OleDbConnection(con_str);
-                ole_con.Open();
-                OleDbCommand com = new OleDbCommand(q_cat, ole_con);
-                com.CommandType = CommandType.Text;//тип команды - текст
-                OleDbDataReader dr = com.ExecuteReader();
+                //создадим массив из айди категорий и описаний
+                
+                string q_decript = "select id_cat, descript_cat from cats";
+                OleDbDataReader dr = my_query(q_decript);
+                int i = 0;
+                while (dr.Read())
+                { i++; }
+                dr.Close();
+                string[,] descript_cats = new string[i,2];
+                i = 0;
+                dr = my_query(q_decript);
+                while (dr.Read())
+                {
+                    descript_cats[i, 0] = dr[0].ToString();
+                    descript_cats[i, 1] = dr[1].ToString();
+                    i++;
+                }
+                dr.Close();
+                Session["descript_cats"] = descript_cats;
+
+               string q_cat = "select * from cats";
+                dr = my_query(q_cat);
                 //Заполним поля категорий
                 while (dr.Read())
                 {
@@ -50,18 +64,75 @@ namespace temp_web1
 
         protected void b_add_cat_Click(object sender, EventArgs e)
         {
-            Session["flag_add_edit_cat"] = "a";
-            p_add_edit.CssClass = "vis";
-            l_parent_cat.Text = "Кликните по родителькой категории. <br />Пустая строка создаст корневую категорию";
+            bool flag_add = false; // Если флаг включается, значит некорректные данные
+            //Получим ID категории
+            string q_max_id = "SELECT Max(id_cat) FROM cats;";
+            OleDbDataReader dr = my_query(q_max_id);
+            dr.Read();
+            int id = Int32.Parse(dr[0].ToString());
+            id++;
+             string id_cat = id.ToString();
+             string id_parent_cat = "";
+            dr.Close();
 
+            //Получим ID Родительской категории
+            if (tb_parent_cat.Text == "")
+            { id_parent_cat = "0"; }
+            else
+            {
+                foreach (TreeNode n in tv.Nodes)
+                {
+                    if (n.Text == tb_parent_cat.Text)
+                    {
+                        Session["id_parent_cat"] = n.Value.ToString();
+                        break;
+                    }
+                    else
+                    {
+                        find_parent_cat(n, tb_parent_cat.Text);
+                        if (Session["id_parent_cat"] != null)
+                        { break; }
+                    }
+                }
+                id_parent_cat = (string)Session["id_parent_cat"];
+            }
+            if (l_cat.Text == "")
+            {
+                l_cat.Text = "Заполните поле \"Категория\"";
+                flag_add = true;
+            }
+            if (id_parent_cat == null)
+            { l_parent_cat.Text = "Укажите категорию корректно";
+            flag_add = true;
+            }
+            
+            //запрос на добавление данных
+            string ex_add = "INSERT INTO cats ( id_cat, name_cat, descript_cat, parent_id ) VALUES (" + id_cat + ", '" + tb_cat.Text + "', '"
+                +tb_descript.Text +"', " + id_parent_cat + ")";
+
+            //Вносим изменение в БД
+            if (!flag_add)
+            {
+                querry_execute(ex_add);
+                System.Threading.Thread.Sleep(450);
+                Response.Redirect(Request.RawUrl);
+            }
+
+
+        }
+        void querry_execute(string q_e)
+        {
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_e, ole_con);
+            com.CommandType = CommandType.Text;
+            com.ExecuteNonQuery();
+            ole_con.Close();
         }
 
         protected void b_change_Click(object sender, EventArgs e)
         {
-            Session["flag_add_edit_cat"] = "e";
-            p_add_edit.CssClass = "vis";
-            l_parent_cat.Text = "родительская категория";
-            l_cat.Text = "Выберите категорию для редактирования";
+            
         }
 
         protected void b_delete_Click(object sender, EventArgs e)
@@ -103,14 +174,31 @@ namespace temp_web1
 
         protected void tv_SelectedNodeChanged(object sender, EventArgs e)
         {
-            if ((string)Session["flag_add_edit_cat"] == "a")
-            { tb_parent_cat.Text = tv.SelectedNode.Text; }
-            else if ((string)Session["flag_add_edit_cat"] == "e")// если нажата кнопка "редактировать"
-            {
+            //Указываем категорию
                 tb_cat.Text = tv.SelectedNode.Text;
-                TreeNode pn = tv.SelectedNode.Parent;
-                tb_parent_cat.Text = pn.Text;
-            }
+            //Выедем описание категории
+                string[,] descript_cats = (string[,])Session["descript_cats"];
+                for (int i = 0; i < descript_cats.Length; i++ )
+                {
+                    if (descript_cats[i, 0] == tv.SelectedNode.Value.ToString())
+                    {
+                        tb_descript.Text = descript_cats[i,1];
+                        break;
+                    }
+                }
+           // tb_descript.Text = 
+                if (tv.SelectedNode.Parent == null)
+                {
+                    tb_parent_cat.Text = "";
+                }
+                else
+                {
+                    TreeNode pn = tv.SelectedNode.Parent;
+                    tb_parent_cat.Text = pn.Text;
+                }
+
+            //Указываем описание
+
         }
 
         protected void b_save_Click(object sender, EventArgs e)
@@ -119,20 +207,7 @@ namespace temp_web1
             string id_parent_cat = "";
             if ((string)Session["flag_add_edit_cat"] == "a")//найдем параметры запроса в случае добавления
             {
-                //Получим ID категории
-                string q_max_id = "SELECT Max(id_cat) FROM cats;";
-                OleDbDataReader dr = my_query(q_max_id);
-                dr.Read();
-                int id = Int32.Parse(dr[0].ToString());
-                id++;
-                id_cat = id.ToString();
-                dr.Close();
-
-                //Получим ID Родительской категории
-                if (tb_parent_cat.Text == "")
-                { id_parent_cat = "0"; }
-                else
-                { id_parent_cat = tv.SelectedNode.Value.ToString(); }
+                
             }
 
             if ((string)Session["flag_add_edit_cat"] == "e") // найдем параметры запроса в случае редактирования
@@ -140,36 +215,11 @@ namespace temp_web1
                 //Получим ID категории
                 id_cat = tv.SelectedNode.Value.ToString();
 
-                //Получим ID родительской категории
-
-                foreach (TreeNode n in tv.Nodes)
-                {
-                    if (n.Text == tb_parent_cat.Text)
-                    {
-                        Session["id_parent_cat"] = n.Value.ToString();
-                        break;
-                    }
-                    else 
-                    {
-                        find_parent_cat(n, tb_parent_cat.Text);
-                        if (Session["id_parent_cat"] != null)
-                        { break; }
-                    }
-                }
-                id_parent_cat = (string)Session["id_parent_cat"];
+                
             }
 
-            //запрос на добавление данных
-            string ex_add = "INSERT INTO cats ( id_cat, name_cat, parent_id ) VALUES (" + id_cat + ", '" + tb_cat.Text + "', " +
-                id_parent_cat + ")";
-            //Вносим изменение в БД
-       /*     OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbCommand com = new OleDbCommand(ex_add, ole_con);
-            com.CommandType = CommandType.Text;
-            com.ExecuteNonQuery();
-            System.Threading.Thread.Sleep(450);
-            Response.Redirect(Request.RawUrl);*/
+            
+            
         }
         OleDbDataReader my_query(string q)//Процедура запроса данных из БД
         {
