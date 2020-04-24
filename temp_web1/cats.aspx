@@ -26,7 +26,7 @@
         <asp:Panel ID="p_add_edit" runat="server">
             <div class="onerow"> 
                 <asp:ImageButton ID="ib_show_hide" ImageUrl="img/checkbox.png" Width="20px" runat="server" OnClick="ib_show_hide_Click" />
-                <asp:Label ID="l_collapse" runat="server" Text="Развернуть все"></asp:Label><br />
+                <asp:Label ID="l_collapse" runat="server" Text="Свернуть все"></asp:Label><br />
                 <asp:TextBox ID="tb_parent_cat" runat="server"></asp:TextBox>
                 <asp:Label ID="l_parent_cat" runat="server" Text="Родительская категория">
                 </asp:Label>

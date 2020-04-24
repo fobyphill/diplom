@@ -95,6 +95,7 @@ namespace temp_web1
                     }
                 }
                 id_parent_cat = (string)Session["id_parent_cat"];
+                Session["id_parent_cat"] = null;
             }
             if (l_cat.Text == "")
             {
@@ -132,7 +133,60 @@ namespace temp_web1
 
         protected void b_change_Click(object sender, EventArgs e)
         {
+            bool flag_edit = false;
+            string id_cat = "";
+            //Получим ID категории
+            if (tv.SelectedNode == null)
+            { 
+                l_cats.Text = "Ни одна категория не выбрана";
+                flag_edit = true;
+            }
+            else {id_cat = tv.SelectedNode.Value.ToString(); }
             
+            //Получим ID Родительской категории
+            string id_parent_cat;
+            if (tb_parent_cat.Text == "")
+            { id_parent_cat = "0"; }
+            else
+            {
+                foreach (TreeNode n in tv.Nodes)
+                {
+                    if (n.Text == tb_parent_cat.Text)
+                    {
+                        Session["id_parent_cat"] = n.Value.ToString();
+                        break;
+                    }
+                    else
+                    {
+                        find_parent_cat(n, tb_parent_cat.Text);
+                        if (Session["id_parent_cat"] != null)
+                        { break; }
+                    }
+                }
+                id_parent_cat = (string)Session["id_parent_cat"];
+                Session["id_parent_cat"] = null;
+            }
+            if (l_cat.Text == "")
+            {
+                l_cat.Text = "Заполните поле \"Категория\"";
+                flag_edit = true;
+            }
+            if (id_parent_cat == null)
+            {
+                l_parent_cat.Text = "Укажите корректно родительскую категорию";
+                flag_edit = true;
+            }
+            //Сформируем запрос на изменение данных
+            string ex_edit = "update cats set name_cat = '" + tb_cat.Text + "', descript_cat = '" + tb_descript.Text + "', parent_id = " 
+                + id_parent_cat + " where id_cat = " + id_cat;
+            //вносим изменение данных
+            if (!flag_edit)
+            {
+                querry_execute(ex_edit);
+                System.Threading.Thread.Sleep(450);
+                Response.Redirect(Request.RawUrl);
+            }
+
         }
 
         protected void b_delete_Click(object sender, EventArgs e)
@@ -201,26 +255,6 @@ namespace temp_web1
 
         }
 
-        protected void b_save_Click(object sender, EventArgs e)
-        {
-            string id_cat = "";
-            string id_parent_cat = "";
-            if ((string)Session["flag_add_edit_cat"] == "a")//найдем параметры запроса в случае добавления
-            {
-                
-            }
-
-            if ((string)Session["flag_add_edit_cat"] == "e") // найдем параметры запроса в случае редактирования
-            {
-                //Получим ID категории
-                id_cat = tv.SelectedNode.Value.ToString();
-
-                
-            }
-
-            
-            
-        }
         OleDbDataReader my_query(string q)//Процедура запроса данных из БД
         {
             OleDbConnection ole_con = new OleDbConnection(con_str);
