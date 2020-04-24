@@ -23,20 +23,22 @@
                     <asp:Label ID="l_cats"  runat="server" Text="Категория"></asp:Label>
             </div>
         </div>
-        <asp:Panel CssClass="invis" ID="p_add_edit" runat="server">
+        <asp:Panel ID="p_add_edit" runat="server">
             <div class="onerow"> 
+                <asp:ImageButton ID="ib_show_hide" ImageUrl="img/checkbox.png" Width="20px" runat="server" OnClick="ib_show_hide_Click" />
+                <asp:Label ID="l_collapse" runat="server" Text="Развернуть все"></asp:Label><br />
                 <asp:TextBox ID="tb_parent_cat" runat="server"></asp:TextBox>
-                <asp:Label ID="l_parent_cat" runat="server" Text="Кликните по родительской категории или введите ее название здесь">
+                <asp:Label ID="l_parent_cat" runat="server" Text="Родительская категория">
                 </asp:Label>
                 <br />
                  <asp:TextBox ID="tb_cat" runat="server"></asp:TextBox>
-                <asp:Label ID="l_cat" runat="server" Text="Укажите название категории"></asp:Label>
+                <asp:Label ID="l_cat" runat="server" Text="Категория затрат"></asp:Label>
+                <br />
+                <asp:TextBox ID="tb_descript" runat="server" Height="72px" Width="119px"></asp:TextBox>
+                <asp:Label ID="l_descript" runat="server" Text="Описание"></asp:Label>
             </div>
             <div class=" mar10 onerow">
                 <asp:Button ID="b_save" runat="server" Text="Сохранить" OnClick="b_save_Click" />
-            </div>
-            <div id="div_add_edit" class=" mar10 onerow">
-                <asp:Button ID="b_cancel" runat="server" Text="Отменить" />
             </div>
         </asp:Panel>
        

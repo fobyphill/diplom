@@ -49,6 +49,24 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Panel p_add_edit;
         
         /// <summary>
+        /// ib_show_hide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ib_show_hide;
+        
+        /// <summary>
+        /// l_collapse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_collapse;
+        
+        /// <summary>
         /// tb_parent_cat control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,24 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_cat;
         
         /// <summary>
+        /// tb_descript control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_descript;
+        
+        /// <summary>
+        /// l_descript control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_descript;
+        
+        /// <summary>
         /// b_save control.
         /// </summary>
         /// <remarks>
@@ -92,15 +128,6 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button b_save;
-        
-        /// <summary>
-        /// b_cancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button b_cancel;
         
         /// <summary>
         /// b_add_cat control.
