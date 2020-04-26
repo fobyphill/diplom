@@ -106,6 +106,49 @@ namespace temp_web1
             { l_parent_cat.Text = "Укажите категорию корректно";
             flag_add = true;
             }
+
+            //Проверка дублей внутри на одном уровне
+            if (tv.SelectedNode == null)
+            {
+                foreach (TreeNode n in tv.Nodes)
+                {
+                    if (n.Text == tb_cat.Text)
+                    {
+                        flag_add = true;
+                        l_cat.Text = "На этом уровне уже есть категория с таким названием";
+                        l_cat.CssClass = "stress";
+                        break;
+                    }
+                }
+            }
+            else if (tv.SelectedNode.Parent == null)
+            {
+                foreach (TreeNode n in tv.Nodes)
+                {
+                    if (n.Text == tb_cat.Text)
+                    {
+                        flag_add = true;
+                        l_cat.Text = "На этом уровне уже есть категория с таким названием";
+                        l_cat.CssClass = "stress";
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                TreeNode nod = tv.SelectedNode.Parent;
+                foreach (TreeNode n in nod.ChildNodes)
+                {
+                    if (n.Text == tb_cat.Text)
+                    {
+                        flag_add = true;
+                        l_cat.Text = "На этом уровне уже есть категория с таким названием";
+                        l_cat.CssClass = "stress";
+                        break;
+                    }
+                }
+            }
+
             
             //запрос на добавление данных
             string ex_add = "INSERT INTO cats ( id_cat, name_cat, descript_cat, parent_id ) VALUES (" + id_cat + ", '" + tb_cat.Text + "', '"
@@ -121,15 +164,7 @@ namespace temp_web1
 
 
         }
-        void querry_execute(string q_e)
-        {
-            OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbCommand com = new OleDbCommand(q_e, ole_con);
-            com.CommandType = CommandType.Text;
-            com.ExecuteNonQuery();
-            ole_con.Close();
-        }
+        
 
         protected void b_change_Click(object sender, EventArgs e)
         {
@@ -198,6 +233,51 @@ namespace temp_web1
         {
 
         }
+
+        protected void tv_SelectedNodeChanged(object sender, EventArgs e)
+        {
+            //Указываем категорию
+                tb_cat.Text = tv.SelectedNode.Text;
+                l_cat.Text = "Категория затрат";
+                l_cat.CssClass = "norm";
+            //Выведем описание категории
+                string[,] descript_cats = (string[,])Session["descript_cats"];
+                for (int i = 0; i < descript_cats.Length; i++ )
+                {
+                    if (descript_cats[i, 0] == tv.SelectedNode.Value.ToString())
+                    {
+                        tb_descript.Text = descript_cats[i,1];
+                        break;
+                    }
+                }
+                //Указываем родительскую категорию
+                if (tv.SelectedNode.Parent == null)
+                {
+                    tb_parent_cat.Text = "";
+                }
+                else
+                {
+                    TreeNode pn = tv.SelectedNode.Parent;
+                    tb_parent_cat.Text = pn.Text;
+                }
+
+           
+        }
+
+        protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
+        {
+            if (l_collapse.Text == "Развернуть все")
+            {
+                tv.ExpandAll();
+                l_collapse.Text = "Свернуть все";
+            }
+            else
+            {
+                tv.CollapseAll();
+                l_collapse.Text = "Развернуть все";
+            }
+        }// конец процедуры поиска категории
+
         void find_child(TreeNode pn)
         {
             //соединились с БД
@@ -226,35 +306,6 @@ namespace temp_web1
 
         }
 
-        protected void tv_SelectedNodeChanged(object sender, EventArgs e)
-        {
-            //Указываем категорию
-                tb_cat.Text = tv.SelectedNode.Text;
-            //Выедем описание категории
-                string[,] descript_cats = (string[,])Session["descript_cats"];
-                for (int i = 0; i < descript_cats.Length; i++ )
-                {
-                    if (descript_cats[i, 0] == tv.SelectedNode.Value.ToString())
-                    {
-                        tb_descript.Text = descript_cats[i,1];
-                        break;
-                    }
-                }
-           // tb_descript.Text = 
-                if (tv.SelectedNode.Parent == null)
-                {
-                    tb_parent_cat.Text = "";
-                }
-                else
-                {
-                    TreeNode pn = tv.SelectedNode.Parent;
-                    tb_parent_cat.Text = pn.Text;
-                }
-
-            //Указываем описание
-
-        }
-
         OleDbDataReader my_query(string q)//Процедура запроса данных из БД
         {
             OleDbConnection ole_con = new OleDbConnection(con_str);
@@ -265,6 +316,7 @@ namespace temp_web1
             return dr;
 
         }
+
         void find_parent_cat(TreeNode n, string cat) //процедура нахождения категории
         {
             if (n.ChildNodes.Count > 0)
@@ -287,17 +339,14 @@ namespace temp_web1
             }
         }
 
-        protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
+    void querry_execute(string q_e)
         {
-            if (l_collapse.Text == "Развернуть все")
-            { tv.ExpandAll();
-            l_collapse.Text = "Свернуть все";
-            }
-            else
-            {
-                tv.CollapseAll();
-            l_collapse.Text = "Развернуть все";
-            }
-        }// конец процедуры поиска категории
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_e, ole_con);
+            com.CommandType = CommandType.Text;
+            com.ExecuteNonQuery();
+            ole_con.Close();
+        }
     }
 }
