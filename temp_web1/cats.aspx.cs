@@ -226,11 +226,58 @@ namespace temp_web1
 
         protected void b_delete_Click(object sender, EventArgs e)
         {
-
+            bool flag_del = false;
+            if (tv.SelectedNode == null)
+            {
+                l_cat.Text = "Не выбрана ни одна категория";
+                l_cat.CssClass = "stress";
+                flag_del = true;
+            }
+            else if (tv.SelectedNode.ChildNodes.Count != 0)
+            {
+                l_cat.Text = "Категория не может быть удалена, т.к. имеет дочерние категории";
+                l_cat.CssClass = "stress";
+                flag_del = true;
+            }
+            else
+            {
+                //Проверка, есть ли записи в выбранной на удаление категории
+                string q_count_cons = "select count(*) from consumptions where cat_con = " + tv.SelectedNode.Value.ToString();
+                OleDbDataReader dr = my_query(q_count_cons);
+                dr.Read();
+                int count_cons = Int32.Parse(dr[0].ToString());
+                dr.Close();
+                if (count_cons > 0)
+                {
+                    l_cat.Text = "В выбранной категории есть записи о расходах в количестве " + count_cons.ToString() + " шт.<br />";
+                    l_cat.CssClass = "stress";
+                    flag_del = true;
+                }
+                string q_count_plans = "SELECT count(*) from plans where cat_plan = " + tv.SelectedNode.Value.ToString();
+                dr = my_query(q_count_plans);
+                dr.Read();
+                count_cons = Int32.Parse(dr[0].ToString());
+                if (count_cons > 0)
+                {
+                    if (l_cat.Text == "Категория затрат")
+                    {l_cat.Text = "";}
+                    l_cat.Text += "В выбранной категории есть записи о планировании в количестве " + count_cons.ToString() + "шт.";
+                    l_cat.CssClass = "stress";
+                    flag_del = true;
+                }
+            }
+            if (!flag_del)
+            {
+                mpe.Show();
+            }
         }
 
         protected void b_yes_Click(object sender, EventArgs e)
         {
+            string ex_del_cat = "delete from cats where id_cat = " + tv.SelectedNode.Value.ToString();
+            querry_execute(ex_del_cat);
+            System.Threading.Thread.Sleep(450);
+            Response.Redirect(Request.RawUrl);
 
         }
 

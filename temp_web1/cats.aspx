@@ -13,7 +13,8 @@
         <div class="mar10">
             <div class="onerow border1">
                 <asp:Panel ID="p_tv" runat="server" ScrollBars="Vertical">
-                    <asp:TreeView ID="tv" Width="276px" Height="276px" runat="server" OnSelectedNodeChanged="tv_SelectedNodeChanged">
+                    <asp:TreeView ID="tv" Width="276px" Height="276px" runat="server" 
+                        OnSelectedNodeChanged="tv_SelectedNodeChanged">
                         <NodeStyle BorderColor="Black" ForeColor="Black" />
                         <SelectedNodeStyle BackColor="#16dbdb" />
                     </asp:TreeView>
@@ -58,7 +59,7 @@
 
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
-                Вы уверены, что желаете удалить запись о расходе?<br /><br />
+                Вы уверены, что желаете удалить категорию?<br /><br />
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>
