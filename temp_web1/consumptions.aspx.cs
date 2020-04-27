@@ -13,6 +13,9 @@ namespace temp_web1
     {
         string login_user, name_user, fam_user;
         char status_user; // переменные для данных пользователя
+        //строка подключения
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+            "C:\\Users\\phill\\documents\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,15 +30,7 @@ namespace temp_web1
             { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
-            {
-                
-
-                //Выведем пользователя на экран
-               // l_user.Text = name_user;
-                
-                //Создаем строку подключения
-                string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
+            {   
                 //СОздаем запрос к БД
                 string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
                     "consumptions.data_change, consumptions.value_con, cats.name_cat, bils.name_bil, " +

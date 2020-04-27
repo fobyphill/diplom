@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" 
-    AutoEventWireup="true" CodeBehind="consumptions.aspx.cs" Inherits="temp_web1.consumptions" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="plans.aspx.cs" Inherits="temp_web1.plans" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="mymenu">
@@ -18,8 +16,9 @@
             <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
             Text="Ни одна запись не была выбрана" Visible="False"></asp:Label>
             <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label></div>
-        <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+            Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label>
+        </div>
+        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="true" ButtonType="Image" 
@@ -28,44 +27,35 @@
 
 <HeaderStyle Width="25px" HorizontalAlign="Left"></HeaderStyle>    
                 </asp:CommandField>
-                <asp:BoundField DataField="id_con" HeaderText="№" >
+                <asp:BoundField DataField="id_plan" HeaderText="№" >
                     <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="15px" />
+                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="35px" />
                 </asp:BoundField>
-                 <asp:BoundField DataField="data_create" DataFormatString = "{0:dd/MM/yyyy}" 
-                     HeaderText="Дата внесения" >
+                 <asp:BoundField DataField="data_plan" DataFormatString = "{0:Y}" 
+                     HeaderText="Месяц" >
+                    <HeaderStyle HorizontalAlign="Left" />
+                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="120px"/>
+                </asp:BoundField>
+                <asp:BoundField DataField="value_plan" HeaderText="Значение" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="data_change" DataFormatString = "{0:dd/MM/yyyy}" 
-                    HeaderText="Дата изменения" >
+                <asp:BoundField DataField="name_cat" HeaderText="Категория" >
                     <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
-                </asp:BoundField>
-                <asp:BoundField DataField="value_con" HeaderText="Значение" >
-                    <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
-                </asp:BoundField>
-                <asp:BoundField DataField="cats.name_cat" HeaderText="Категория" >
-                    <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
+                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="120px"/>
                 </asp:BoundField>
                 <asp:BoundField DataField="name_bil" HeaderText="Счет" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="155px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="descript_con" HeaderText="Комментарий" >
+                <asp:BoundField DataField="descript_plan" HeaderText="Комментарий" >
                     <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="100px"/>
+                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="250px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="users.fam_user" HeaderText="Создал сотрудник">
-                    <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="50px" />
-                </asp:BoundField>
-                    <asp:BoundField DataField="users2.fam_user" HeaderText="Изменил сотрудник" >
+                <asp:BoundField DataField="fam_user" HeaderText="Изменил сотрудник" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="50px"/>
-                </asp:BoundField>
+                 </asp:BoundField>
             </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#26a9e0" Font-Bold="True" ForeColor="White" />
@@ -97,7 +87,7 @@
 
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
-                Вы уверены, что желаете удалить запись о расходе?<br /><br />
+                Вы уверены, что желаете удалить запись о планировании?<br /><br />
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>

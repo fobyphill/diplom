@@ -4,10 +4,11 @@
     <div class="mymenu">
        <div class="forlink"><a href="Default.aspx">Главная</a></div>
        <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
+        <div class="forlink"><a href="plans.aspx">Планирование затрат</a></div>
        <div class="forlink"> <a href="cats.aspx">Категории затрат</a></div>
-       <div class="forlink"> <a href="Default.aspx">Счета</a></div>
-       <div class="forlink"> <a href="Default.aspx">Пользователи</a></div>
-       <div class="forlink"> <a href="Default.aspx">Отчеты</a></div>
+       <div class="forlink"> <a href="bils.aspx">Счета</a></div>
+       <div class="forlink"> <a href="users.aspx">Пользователи</a></div>
+       <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
    </div>
     <div class="maincontent">
         <div class="mar10">
