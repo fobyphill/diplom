@@ -53,7 +53,7 @@ namespace temp_web1
 
         protected void b_add_con_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("add_plan.aspx");
         }
 
         protected void b_change_Click(object sender, EventArgs e)

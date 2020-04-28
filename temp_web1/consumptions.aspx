@@ -46,7 +46,7 @@
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="cats.name_cat" HeaderText="Категория" >
+                <asp:BoundField DataField="name_cat" HeaderText="Категория" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
                 </asp:BoundField>
@@ -58,11 +58,11 @@
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="100px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="users.fam_user" HeaderText="Создал сотрудник">
+                <asp:BoundField DataField="u_f" HeaderText="Создал сотрудник">
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="50px" />
                 </asp:BoundField>
-                    <asp:BoundField DataField="users2.fam_user" HeaderText="Изменил сотрудник" >
+                    <asp:BoundField DataField="u_f2" HeaderText="Изменил сотрудник" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="50px"/>
                 </asp:BoundField>

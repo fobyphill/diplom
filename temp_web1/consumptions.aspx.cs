@@ -26,15 +26,15 @@ namespace temp_web1
             
 
             //перебросим пользователя на экран авторизации по окончании сессии
-            if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }
+           /* if (login_user == null)
+            { Response.Redirect("autorise.aspx"); }*/
 
             if (!Page.IsPostBack)
             {   
                 //СОздаем запрос к БД
                 string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
                     "consumptions.data_change, consumptions.value_con, cats.name_cat, bils.name_bil, " +
-                    "consumptions.descript_con, users.fam_user, users2.fam_user " +
+                    "consumptions.descript_con, users.fam_user as u_f, users2.fam_user as u_f2 " +
                     "from ((((consumptions " +
                     "inner join users on " +
                     "consumptions.create_login = users.login_user) " +
