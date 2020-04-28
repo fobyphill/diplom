@@ -1,21 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="add_consumpt.aspx.cs" 
-    Inherits="temp_web1.add_consumpt" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Добавить расход</title>
-    <link href="/Content/mycss.css" rel="stylesheet"/>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-</head>
-<body>
-    <div class="myhead">
-            <div class="textcenter">
-                <h1 ><span class="logo1">Пла</span><span class="logo2">За</span></h1>
-            </div>
-        </div>
-    <form id="form1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" 
+    CodeBehind="add_consumpt.aspx.cs" Inherits="temp_web1.add_consumpt" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="mymenu">
        <div class="forlink"><a href="Default.aspx">Главная</a></div>
        <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
@@ -59,18 +44,4 @@
             OnClick="b_cancel_Click" />
         </div>
     </div>
-
-    
-     <footer class="myhead">
-                <div class="textcenter">
-                <p><span class="logo1">&copy;</span> 
-                    <span class="logo2"> <%: DateTime.Now.Year %></span> 
-                    <span class="logo1">Pla</span><span class="logo2">Za</span></p>
-                    <p>&nbsp;</p>
-                    </div>
-            </footer>
-
-    
-    </form>
-     </body>
-</html>
+</asp:Content>
