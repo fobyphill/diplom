@@ -11,6 +11,8 @@ namespace temp_web1
 {
     public partial class add_consumpt : System.Web.UI.Page
     {
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+               "C:\\Users\\phill\\documents\\plaza.accdb";
         string login_user;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,8 +22,7 @@ namespace temp_web1
             { Response.Redirect("autentific.aspx"); }
             if (!Page.IsPostBack)
             {
-                string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-               "C:\\Users\\phill\\documents\\plaza.accdb";
+                
                 string q_cat = "select * from cats";
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
@@ -82,6 +83,7 @@ namespace temp_web1
             //Получим текущую дату
             string dt = DateTime.Now.ToShortDateString();
             
+            
             //Получим значение
             bool flag = false;//если все данные ввели, флаг не включается
             float value;
@@ -137,18 +139,21 @@ namespace temp_web1
                 Response.Redirect("consumptions.aspx");
             }
         }
+
+        OleDbDataReader my_query(string q)
+        {
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q, ole_con);
+            com.CommandType = CommandType.Text;//тип команды - текст
+            OleDbDataReader dr = com.ExecuteReader();
+            return dr;
+        }
         void find_child(TreeNode pn)
         {
             //соединились с БД
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
-            OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
             string q_cat = "select * from cats";
-            OleDbCommand com = new OleDbCommand(q_cat, ole_con);
-            com.CommandType = CommandType.Text;
-            OleDbDataReader dr = com.ExecuteReader();
-
+            OleDbDataReader dr = my_query(q_cat);
             //Забираем данные с нода
             string p_i = pn.Value.ToString();
 
@@ -161,8 +166,7 @@ namespace temp_web1
                     pn.ChildNodes.Add(n);
                 }
             }
-            ole_con.Close();
-
         }
+        
     }
 }
