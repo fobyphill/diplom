@@ -35,14 +35,14 @@ namespace temp_web1
                     if (dr[3].ToString() == "0")
                     {
                         TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
-                        //string parent_id = dr[0].ToString();
                         find_child(node_cat);
                         tv.Nodes.Add(node_cat);
                     }
                 }
                 dr.Close();
 
-
+                //Заполним счета
+                ddl_bils.Items.Add(new ListItem("Выберите счет", "null"));
                 string q_bil = "select id_bil, name_bil from bils";
                 com = new OleDbCommand(q_bil, ole_con);
                 dr = com.ExecuteReader();
@@ -120,8 +120,18 @@ namespace temp_web1
             }
             //Добавим номер счета
             string bil = ddl_bils.SelectedValue.ToString();
-            if (ddl_bils.Items.Count == 0)
-            { flag = true; }
+            if (ddl_bils.Items.Count == 1)
+            {
+                flag = true;
+                l_bil.Text = "У Вас нет счетов. Добавьте их на странице \"Счет\"";
+                l_bil.Style.Add("color", "red");
+            }
+            else if (ddl_bils.SelectedValue == "null")
+            {
+                flag = true;
+                l_bil.Text = "Счет не выбран.";
+                l_bil.Style.Add("color", "red");
+            }
             //Заполним данными запрос
             string q_add = "insert into consumptions" +
             "(id_con, data_create, data_change, value_con, cat_con, bil_con, "+

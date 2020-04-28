@@ -38,6 +38,7 @@ namespace temp_web1
 
                 //Заполняем комбобокс со счетами
                 string q_bil = "select id_bil, name_bil from bils";
+                ddl_bils.Items.Add(new ListItem("Выберите счет", "null"));
                 dr = my_query(q_bil);
                 while (dr.Read())
                 {
@@ -94,6 +95,20 @@ namespace temp_web1
                     find_child(n);
                     pn.ChildNodes.Add(n);
                 }
+            }
+        }
+
+        protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
+        {
+            if (l_collapse.Text == "Развернуть все")
+            {
+                tv.ExpandAll();
+                l_collapse.Text = "Свернуть все";
+            }
+            else
+            {
+                tv.CollapseAll();
+                l_collapse.Text = "Развернуть все";
             }
         }
 

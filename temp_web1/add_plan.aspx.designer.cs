@@ -40,6 +40,24 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_cat;
         
         /// <summary>
+        /// ib_show_hide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ib_show_hide;
+        
+        /// <summary>
+        /// l_collapse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_collapse;
+        
+        /// <summary>
         /// tb_value control.
         /// </summary>
         /// <remarks>
