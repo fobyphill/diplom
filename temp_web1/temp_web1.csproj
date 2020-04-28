@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="add_consumpt.aspx" />
+    <Content Include="add_consumpt2.aspx" />
     <Content Include="add_plan.aspx" />
     <Content Include="App_Data\plaza.accdb" />
     <Content Include="autentific.aspx" />
@@ -211,6 +212,13 @@
     </Compile>
     <Compile Include="add_consumpt.aspx.designer.cs">
       <DependentUpon>add_consumpt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="add_consumpt2.aspx.cs">
+      <DependentUpon>add_consumpt2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="add_consumpt2.aspx.designer.cs">
+      <DependentUpon>add_consumpt2.aspx</DependentUpon>
     </Compile>
     <Compile Include="add_plan.aspx.cs">
       <DependentUpon>add_plan.aspx</DependentUpon>
