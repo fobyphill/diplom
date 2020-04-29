@@ -19,23 +19,14 @@ namespace temp_web1
 
         }
 
-        OleDbDataReader my_query(string q)//Процедура запроса данных из БД
-        {
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-               "C:\\Users\\phill\\documents\\plaza.accdb";
-            OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbCommand com = new OleDbCommand(q, ole_con);
-            com.CommandType = CommandType.Text;//тип команды - текст
-            OleDbDataReader dr = com.ExecuteReader();
-            return dr;
-
-        }
-
         protected void b_enter_Click(object sender, EventArgs e)
         {
+            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                "C:\\Users\\phill\\documents\\plaza.accdb";
             string q_autorize = "select * from users where login_user = '" + tb_login.Text + "' and pass_user = '" + tb_password.Text + "'";
-            OleDbDataReader dr = my_query(q_autorize);
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            OleDbCommand com = new OleDbCommand(q_autorize, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
             if (dr.Read())
             {
                 Session["login_user"] = dr[2].ToString();
@@ -45,8 +36,7 @@ namespace temp_web1
                 Response.Redirect("consumptions.aspx");
             }
             else { l_incorrect.Visible = true; }
+            dr.Close(); ole_con.Close();
         }
-
-
     }
 }

@@ -15,9 +15,11 @@ namespace temp_web1
         char status_user; // переменные для данных пользователя
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
+        
+        
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {   
             //Зададим параметры пользователя
             login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
@@ -35,20 +37,15 @@ namespace temp_web1
                     "inner join bils on plans.bil_plan = bils.id_bil) "+
                     "inner join users on plans.login_user = users.login_user) "+
                      "order by plans.id_plan";
-                OleDbDataReader dr = query_dr(q_tab);
-                gv.DataSource = dr;
-                gv.DataBind();
+                OleDbConnection ole_con = new OleDbConnection(con_str);
+                ole_con.Open();
+                OleDbCommand com = new OleDbCommand(q_tab, ole_con);
+                 OleDbDataReader dr = com.ExecuteReader();// открыть БД
+                gv.DataSource = dr;// прочесть данные
+                gv.DataBind();// выбросить в таблицу
+                dr.Close(); com.Dispose();ole_con.Close();// закрыть всех
             }
 
-        }
-        OleDbDataReader query_dr(string q)//Процедура запроса данных из БД
-        {
-            OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbCommand com = new OleDbCommand(q, ole_con);
-            com.CommandType = CommandType.Text;
-            OleDbDataReader dr = com.ExecuteReader();
-            return dr;
         }
 
         protected void b_add_con_Click(object sender, EventArgs e)
@@ -58,7 +55,7 @@ namespace temp_web1
 
         protected void b_change_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("edit_plan.aspx");
         }
 
         protected void b_delete_Click(object sender, EventArgs e)

@@ -34,7 +34,6 @@
         </div>
        <div class ="mar10">
            <asp:DropDownList ID="ddl_month" runat="server">
-               <asp:ListItem Value="0">Выберите месяц</asp:ListItem>
                <asp:ListItem Value="1">Январь</asp:ListItem>
                <asp:ListItem Value="2">Февраль</asp:ListItem>
                <asp:ListItem Value="3">Март</asp:ListItem>
@@ -49,7 +48,6 @@
                <asp:ListItem Value="12">Декабрь</asp:ListItem>
            </asp:DropDownList>
            <asp:DropDownList ID="ddl_year" runat="server">
-               <asp:ListItem Value="null">Укажите год</asp:ListItem>
            </asp:DropDownList>
            <asp:Label ID="l_period" runat="server" Text="Период планируемых затрат"></asp:Label>
        </div>

@@ -27,7 +27,6 @@ namespace temp_web1
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 OleDbCommand com = new OleDbCommand(q_con, ole_con);
-                com.CommandType = CommandType.Text;//тип команды - текст
                 OleDbDataReader dr = com.ExecuteReader();
                 dr.Read();
                 id_con = dr[0].ToString();//Заново получил ID расхода
@@ -70,7 +69,6 @@ namespace temp_web1
                     }
                     select_child(n, cat_id);
                 }
-                
                 tb_value.Text = value;//Выводим значения расхода
                 tb_descript.Text = descript;//Выводим комментарий
                 //заполняем поля счетов
@@ -89,6 +87,7 @@ namespace temp_web1
                     l_bil.CssClass = "hint stress";
                 }
                 //Итак. все значения вывели. 
+                ole_con.Close();
             }
         }
 
@@ -98,7 +97,6 @@ namespace temp_web1
             string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
             OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
             //Формируем запрос на изменение
             bool flag = false;// Флаг. Индикатор отсутствия ошибки
             //Получим дату изменения
@@ -135,12 +133,15 @@ namespace temp_web1
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
             ", bil_con="+bil+", descript_con = '" + tb_descript.Text + "', change_login = '" +
             login_user + "' where id_con = " + id_con;
-            OleDbCommand com = new OleDbCommand(q_update_con, ole_con);
+            
             if (!flag)
             {
+                ole_con.Open();
+                OleDbCommand com = new OleDbCommand(q_update_con, ole_con);
                 com.ExecuteNonQuery(); //Выполнить изменение данных в БД
                 com.Dispose();
-                System.Threading.Thread.Sleep(700);
+                ole_con.Close();
+                System.Threading.Thread.Sleep(450);
                 Response.Redirect("consumptions.aspx");
 
             }
@@ -159,7 +160,6 @@ namespace temp_web1
             ole_con.Open();
             string q_cat = "select * from cats";
             OleDbCommand com = new OleDbCommand(q_cat, ole_con);
-            com.CommandType = CommandType.Text;
             OleDbDataReader dr = com.ExecuteReader();
 
             //Забираем данные с нода

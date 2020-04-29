@@ -17,9 +17,10 @@ namespace temp_web1
         protected void Page_Load(object sender, EventArgs e)
         {
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
-            login_user = (string)Session["login_user"];
+            login_user = "admin";
+            /* login_user = (string)Session["login_user"];
             if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }
+            { Response.Redirect("autorise.aspx"); }*/
             if (!Page.IsPostBack)
             {
                 
@@ -27,7 +28,6 @@ namespace temp_web1
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 OleDbCommand com = new OleDbCommand(q_cat, ole_con);
-                com.CommandType = CommandType.Text;//тип команды - текст
                 OleDbDataReader dr = com.ExecuteReader();
                 //Заполним поля категорий
                 while (dr.Read())
@@ -55,6 +55,7 @@ namespace temp_web1
                 l_bil.Text = "Создайте счет на странице <a href='bils.aspx'>Управление счетами</a>";
                 l_bil.CssClass = "hint stress";
                 }
+                ole_con.Close();
             }
 
         }
@@ -74,15 +75,16 @@ namespace temp_web1
             OleDbConnection ole_con = new OleDbConnection(con_str);
             ole_con.Open();
             OleDbCommand com = new OleDbCommand(q_max_id, ole_con);
-            com.CommandType = CommandType.Text;
             OleDbDataReader dr = com.ExecuteReader();
             dr.Read();
             int id_max;
             if (!Int32.TryParse(dr[0].ToString(), out id_max))
             { id_max = 0; }
+            dr.Close();
+            com.Dispose();
+            ole_con.Close();
             //Получим текущую дату
             string dt = DateTime.Now.ToShortDateString();
-            
             
             //Получим значение
             bool flag = false;//если все данные ввели, флаг не включается
@@ -139,31 +141,26 @@ namespace temp_web1
             "values ("+((++id_max).ToString())+", '"+dt
             + "', '" + dt + "', " + value_str + ", " + num_cat+", "+bil+", '" + descript_con + "', '"
             +login_user+"', '"+login_user+"')";
-            OleDbCommand com3 = new OleDbCommand(q_add, ole_con);
+            ole_con.Open();
+            com = new OleDbCommand(q_add, ole_con);
             if (!flag)
             {
-                com3.ExecuteNonQuery(); //Выполнить изменение данных в БД
-                com3.Dispose();
+                com.ExecuteNonQuery(); //Выполнить изменение данных в БД
+                com.Dispose(); ole_con.Close();
                  System.Threading.Thread.Sleep(500);
        //         Response.Redirect(Request.RawUrl);
                 Response.Redirect("consumptions.aspx");
             }
         }
 
-        OleDbDataReader my_query(string q)
-        {
-            OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbCommand com = new OleDbCommand(q, ole_con);
-            com.CommandType = CommandType.Text;//тип команды - текст
-            OleDbDataReader dr = com.ExecuteReader();
-            return dr;
-        }
         void find_child(TreeNode pn)
         {
             //соединились с БД
             string q_cat = "select * from cats";
-            OleDbDataReader dr = my_query(q_cat);
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_cat, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
             //Забираем данные с нода
             string p_i = pn.Value.ToString();
 
@@ -176,6 +173,7 @@ namespace temp_web1
                     pn.ChildNodes.Add(n);
                 }
             }
+            dr.Close(); com.Dispose(); ole_con.Close();
         }
         
     }

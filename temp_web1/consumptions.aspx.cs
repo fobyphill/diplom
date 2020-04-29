@@ -48,7 +48,6 @@ namespace temp_web1
                 ole_con.Open();
                 //Выполняем запрос. Результат - массив в формате "Команда"
                 OleDbCommand ole_com = new OleDbCommand(q_table, ole_con);
-                ole_com.CommandType = CommandType.Text;//тип команды - текст
                 //Создаем формат массива - Дата Адаптер
                 //OleDbDataAdapter da = new OleDbDataAdapter(ole_com);
                 //Создаем формат запроса Дата Ридер и заполянем его данными
@@ -56,6 +55,7 @@ namespace temp_web1
                 //заполняем таблицу данными
                 gv1.DataSource = dr;
                 gv1.DataBind();
+                ole_con.Close();
                 //  gv1.Columns[1].ControlStyle.Width = 100;
             }
            
@@ -109,6 +109,7 @@ namespace temp_web1
               OleDbCommand com = new OleDbCommand(q_con, ole_con);
               com.ExecuteNonQuery();
               com.Dispose();
+              ole_con.Close();
               System.Threading.Thread.Sleep(500);
               Response.Redirect("consumptions.aspx");
         }
