@@ -113,7 +113,16 @@ namespace temp_web1
 
         protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
         {
-
+            if (l_collapse.Text == "Развернуть все")
+            {
+                tv.ExpandAll();
+                l_collapse.Text = "Свернуть все";
+            }
+            else
+            {
+                tv.CollapseAll();
+                l_collapse.Text = "Развернуть все";
+            }
         }
 
         protected void b_save_Click(object sender, EventArgs e)
@@ -173,7 +182,7 @@ namespace temp_web1
 
         protected void b_cancel_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("plans.aspx");
         }
         void find_child(TreeNode pn)
         {
