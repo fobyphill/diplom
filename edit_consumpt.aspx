@@ -1,6 +1,24 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="edit_consumpt2.aspx.cs" Inherits="temp_web1.edit_consumpt2" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="mymenu">
+﻿<%@ Page Language="C#" AutoEventWireup="true" 
+    CodeBehind="edit_consumpt.aspx.cs" Inherits="temp_web1.edit_consumpt" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Редактировать расход</title>
+     <link href="/Content/mycss.css" rel="stylesheet"/>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+    <div class="myhead">
+            <div class="textcenter">
+                <h1 ><span class="logo1">Пла</span><span class="logo2">За</span></h1>
+            </div>
+        </div>
+    <form id="form1" runat="server">
+        <div class="mymenu">
        <div class="forlink"><a href="Default.aspx">Главная</a></div>
        <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
        <div class="forlink"> <a href="Default.aspx">Категории затрат</a></div>
@@ -40,4 +58,15 @@
             <asp:Button ID="b_cancel" runat="server" Text="Отмена" OnClick="b_cancel_Click" />
         </div>
     </div>
-</asp:Content>
+
+    
+    </form>
+     <footer class="myhead">
+                <div class="textcenter">
+                <p><span class="logo1">&copy;</span> 
+                    <span class="logo2"> <%: DateTime.Now.Year %></span> 
+                    <span class="logo1">Pla</span><span class="logo2">Za</span></p>
+                    </div>
+            </footer>
+</body>
+</html>

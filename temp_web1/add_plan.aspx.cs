@@ -195,7 +195,7 @@ namespace temp_web1
 
         protected void b_cancel_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("plans.aspx");
         }
         /*void exe_query(string q, OleDbConnection oc)
         {

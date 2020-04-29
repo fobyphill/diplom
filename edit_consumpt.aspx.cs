@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Web;
@@ -8,14 +9,14 @@ using System.Web.UI.WebControls;
 
 namespace temp_web1
 {
-    public partial class edit_consumpt2 : System.Web.UI.Page
+    public partial class edit_consumpt : System.Web.UI.Page
     {
-        string login_user = "admin";
+        string login_user;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //login_user = (string)Session["login_user"];
-            /*if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            login_user = (string)Session["login_user"];
+            if (login_user == null)
+            { Response.Redirect("autentific.aspx"); }
             if (!Page.IsPostBack)// Запускаем эту программу только в первый раз
             {
                 string id_con = Request.QueryString["id_con"];
@@ -31,12 +32,12 @@ namespace temp_web1
                 id_con = dr[0].ToString();//Заново получил ID расхода
                 string value = dr[3].ToString();// Получили значение величины расхода
                 string cat_id = dr[4].ToString();// Получили номер категории расхода
-                string bil_con = dr[5].ToString();
                 string descript = "";// Получаем значение описания расхода
-                if (dr[6].ToString() != "")
+                if (dr[5].ToString() != "")
                 {
                     descript = dr[6].ToString();
                 }
+                string bil = dr[5].ToString();// Получили ID счета
                 dr.Close();
                 com.Dispose();
                 //Все необходимые данные расхода получены
@@ -44,6 +45,7 @@ namespace temp_web1
                 // Заполняем категории
                 string q_cat = "select * from cats";
                 com = new OleDbCommand(q_cat, ole_con);
+                com.CommandType = CommandType.Text;//тип команды - текст
                 dr = com.ExecuteReader();
                 //Заполняем категориями Дерево
                 while (dr.Read())
@@ -58,10 +60,10 @@ namespace temp_web1
                 }
                 dr.Close();
                 //выеделение текущей категории
-                foreach (TreeNode n in tv.Nodes)
+                foreach(TreeNode n in tv.Nodes)
                 {
                     if (n.Value.ToString() == cat_id)
-                    {
+                    { 
                         n.Select();
                         break;
                     }
@@ -77,14 +79,13 @@ namespace temp_web1
                 {
                     ddl_bils.Items.Add(new ListItem(dr[1].ToString(), dr[0].ToString()));
                 }
-                ddl_bils.SelectedValue = bil_con;// выводим текущий счет
+                ddl_bils.SelectedValue = bil;// выводим текущий счет
                 //Если счетов не задано, извещаем пользователя
                 if (ddl_bils.Items.Count == 0)
                 {
                     l_bil.Text = "Создайте счет на странице <a href='bils.aspx'>Управление счетами</a>";
                     l_bil.CssClass = "hint stress";
                 }
-
                 //Итак. все значения вывели. 
                 ole_con.Close();
             }
@@ -130,9 +131,9 @@ namespace temp_web1
             //Объединим данные в переменной запроса
             string q_update_con = "update consumptions set data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
-            ", bil_con=" + bil + ", descript_con = '" + tb_descript.Text + "', change_login = '" +
+            ", bil_con="+bil+", descript_con = '" + tb_descript.Text + "', change_login = '" +
             login_user + "' where id_con = " + id_con;
-
+            
             if (!flag)
             {
                 ole_con.Open();
@@ -188,20 +189,6 @@ namespace temp_web1
                     select_child(n_ch, cat);
                 }
             }
-        }
-
-        protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
-        {
-            if (l_collapse.Text == "Развернуть все")
-            {
-                tv.ExpandAll();
-                l_collapse.Text = "Свернуть все";
-            }
-            else
-            {
-                tv.CollapseAll();
-                l_collapse.Text = "Развернуть все";
-            }
-        }
+        }// конец процедуры выделения
     }
 }

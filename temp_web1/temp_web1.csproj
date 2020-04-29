@@ -117,7 +117,7 @@
     <Content Include="Content\mycss.css" />
     <Content Include="Content\Site.css" />
     <Content Include="edit_consumpt.aspx" />
-    <Content Include="edit_consumpt2.aspx" />
+    <Content Include="edit_plan.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -301,12 +301,12 @@
     <Compile Include="edit_consumpt.aspx.designer.cs">
       <DependentUpon>edit_consumpt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="edit_consumpt2.aspx.cs">
-      <DependentUpon>edit_consumpt2.aspx</DependentUpon>
+    <Compile Include="edit_plan.aspx.cs">
+      <DependentUpon>edit_plan.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="edit_consumpt2.aspx.designer.cs">
-      <DependentUpon>edit_consumpt2.aspx</DependentUpon>
+    <Compile Include="edit_plan.aspx.designer.cs">
+      <DependentUpon>edit_plan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -10,7 +10,7 @@
 namespace temp_web1 {
     
     
-    public partial class edit_consumpt2 {
+    public partial class edit_plan {
         
         /// <summary>
         /// p_tv control.
@@ -74,6 +74,33 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label l_value;
+        
+        /// <summary>
+        /// ddl_month control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_month;
+        
+        /// <summary>
+        /// ddl_year control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_year;
+        
+        /// <summary>
+        /// l_period control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_period;
         
         /// <summary>
         /// ddl_bils control.

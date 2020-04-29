@@ -71,7 +71,7 @@ namespace temp_web1
             if (gv1.SelectedIndex != -1)
             {
                 string id_con = gv1.Rows[gv1.SelectedIndex].Cells[1].Text;
-                Response.Redirect("edit_consumpt2.aspx?id_con=" + id_con);
+                Response.Redirect("edit_consumpt.aspx?id_con=" + id_con);
             }
             else
             {

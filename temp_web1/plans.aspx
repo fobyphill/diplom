@@ -18,7 +18,7 @@
             <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
             Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label>
         </div>
-        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" >
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="true" ButtonType="Image" 

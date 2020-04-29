@@ -15,6 +15,7 @@ namespace temp_web1
         char status_user; // переменные для данных пользователя
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
+        string id_plan = "";
         
         
 
@@ -55,7 +56,16 @@ namespace temp_web1
 
         protected void b_change_Click(object sender, EventArgs e)
         {
-            Response.Redirect("edit_plan.aspx");
+            if (gv.SelectedIndex != -1)
+            {
+                string id_plan = gv.Rows[gv.SelectedIndex].Cells[1].Text;
+                Response.Redirect("edit_plan.aspx?id_plan=" + id_plan);
+            }
+            else
+            {
+                l_hint_no_1.Visible = true;
+                l_hint_no_1.Text += "<br />";
+            }
         }
 
         protected void b_delete_Click(object sender, EventArgs e)
@@ -67,5 +77,7 @@ namespace temp_web1
         {
 
         }
+
+
     }
 }
