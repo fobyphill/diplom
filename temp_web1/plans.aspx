@@ -18,7 +18,7 @@
             <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
             Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label>
         </div>
-        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" >
+        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gv_SelectedIndexChanged" >
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:CommandField ShowSelectButton="true" ButtonType="Image" 
@@ -89,6 +89,6 @@
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
                 Вы уверены, что желаете удалить запись о планировании?<br /><br />
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
-                <asp:Button ID="b_no" runat="server" Text="Нет" />
+                <asp:Button ID="b_no" runat="server" Text="Нет" OnClick="b_no_Click" />
             </asp:Panel>
 </asp:Content>

@@ -70,12 +70,42 @@ namespace temp_web1
 
         protected void b_delete_Click(object sender, EventArgs e)
         {
+            if (gv.SelectedIndex != -1)
+            {
+                mpe.Show();
 
+            }
+            else
+            {
+                l_hint_no_1.Visible = true;
+                l_hint_no_1.Text += "<br />";
+            }
         }
 
         protected void b_yes_Click(object sender, EventArgs e)
         {
+            string id_plan = gv.Rows[gv.SelectedIndex].Cells[1].Text;//Получил ID выбранного расхода
+            string q_plan = "delete from plans where id_plan = " + id_plan;
+            //Создал запрос с нужным расходом.
 
+            //Соединяюсь с БД
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_plan, ole_con);
+            com.ExecuteNonQuery();
+            com.Dispose();
+            ole_con.Close();
+            System.Threading.Thread.Sleep(450);
+            Response.Redirect("plans.aspx");
+        }
+
+        protected void b_no_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void gv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            l_hint_no_1.Visible = false;
         }
 
 
