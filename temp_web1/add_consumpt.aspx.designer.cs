@@ -40,6 +40,24 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_cat;
         
         /// <summary>
+        /// tb_data control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_data;
+        
+        /// <summary>
+        /// l_data control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_data;
+        
+        /// <summary>
         /// tb_value control.
         /// </summary>
         /// <remarks>

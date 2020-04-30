@@ -27,6 +27,10 @@
            <asp:ImageButton ID="ib_show_hide" ImageUrl="img/checkbox.png" Width="20px" runat="server" OnClick="ib_show_hide_Click" />
                 <asp:Label ID="l_collapse" runat="server" Text="Свернуть все"></asp:Label>
        </div>
+       <div class ="mar10">
+           <asp:TextBox ID="tb_data" runat="server" TextMode="Date"></asp:TextBox>
+           <asp:Label ID="l_data" runat="server" Text="Дата расхода"></asp:Label>
+       </div>
         <div class="mar10">
             <asp:TextBox ID="tb_value" CssClass="border1" runat="server" Width="292px"></asp:TextBox>
             <asp:Label ID="l_value" runat="server" Text="Cумма"></asp:Label>

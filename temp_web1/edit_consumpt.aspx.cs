@@ -29,6 +29,7 @@ namespace temp_web1
                 OleDbDataReader dr = com.ExecuteReader();
                 dr.Read();
                 id_con = dr[0].ToString();//Заново получил ID расхода
+                string data_create = dr[1].ToString(); //Получили дату создания расхода
                 string value = dr[3].ToString();// Получили значение величины расхода
                 string cat_id = dr[4].ToString();// Получили номер категории расхода
                 string bil_con = dr[5].ToString();
@@ -67,6 +68,9 @@ namespace temp_web1
                     }
                     select_child(n, cat_id);
                 }
+
+                tb_data.Text = DateTime.Parse(data_create).ToString("yyyy-MM-dd");
+
                 tb_value.Text = value;//Выводим значения расхода
                 tb_descript.Text = descript;//Выводим комментарий
                 //заполняем поля счетов
@@ -118,6 +122,8 @@ namespace temp_web1
             }
             else
             { num_cat = tv.SelectedValue.ToString(); }
+            //Получим измененную дату создания заказа
+            string data_create = tb_data.Text;
 
             //Получим значение расхода
             float value;
@@ -136,7 +142,7 @@ namespace temp_web1
             string bil = ddl_bils.SelectedItem.Text;
 
             //Объединим данные в переменной запроса
-            string q_update_con = "update consumptions set data_change ='" +
+            string q_update_con = "update consumptions set data_create='"+ data_create +"', data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
             ", bil_con='" + bil + "', descript_con = '" + tb_descript.Text + "', change_login = '" +
             login_user + "' where id_con = " + id_con;

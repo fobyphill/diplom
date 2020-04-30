@@ -56,6 +56,7 @@ namespace temp_web1
                 l_bil.CssClass = "hint stress";
                 }
                 ole_con.Close();
+                tb_data.Text = DateTime.Now.ToString("yyyy-MM-dd");//Укажем дату
             }
 
         }
@@ -84,7 +85,7 @@ namespace temp_web1
             com.Dispose();
             ole_con.Close();
             //Получим текущую дату
-            string dt = DateTime.Now.ToShortDateString();
+            string dt = tb_data.Text;
             
             //Получим значение
             bool flag = false;//если все данные ввели, флаг не включается

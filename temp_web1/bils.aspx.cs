@@ -88,12 +88,22 @@ namespace temp_web1
 
         protected void b_delete_Click(object sender, EventArgs e)
         {
-
+            if (lb_bils.SelectedIndex == -1)
+            {
+                l_hint_no_1.Visible = true;
+            }
+            else
+            {
+                mpe.Show();
+            }
         }
 
         protected void b_yes_Click(object sender, EventArgs e)
         {
-
+            string q_del = "delete from bils where name_bil = '" + lb_bils.SelectedItem.Text + "'";
+            exe_query(q_del);
+            System.Threading.Thread.Sleep(450);
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void b_no_Click(object sender, EventArgs e)
