@@ -19,7 +19,7 @@
             Text="Выберите счет из списка"></asp:Label>
         </div>
             <div class="mar10 onerow">
-            <asp:ListBox ID="lb_bils" runat="server" Height="180px" style="margin-top: 0px" Width="192px"></asp:ListBox>
+            <asp:ListBox ID="lb_bils" runat="server" Height="180px" style="margin-top: 0px" Width="192px" AutoPostBack="True" OnSelectedIndexChanged="lb_bils_SelectedIndexChanged"></asp:ListBox>
             <asp:Label ID="l_bils" runat="server" Text="счета"></asp:Label>
             </div>
             <div class="onerow">
@@ -32,7 +32,7 @@
             <asp:Label ID="l_num" runat="server" Text="Номер счета"></asp:Label>
                 </div>
                 <div class="mar10">
-            <asp:TextBox ID="tb_descript" runat="server" Height="119px" TextMode="DateTime"></asp:TextBox>
+            <asp:TextBox ID="tb_descript" runat="server" Height="119px" TextMode="MultiLine"></asp:TextBox>
             <asp:Label ID="l_desript" runat="server" Text="Описание счета"></asp:Label>
                </div>
             </div>
