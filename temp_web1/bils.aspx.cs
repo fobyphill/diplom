@@ -72,7 +72,18 @@ namespace temp_web1
 
         protected void b_change_Click(object sender, EventArgs e)
         {
-
+            if (lb_bils.SelectedIndex == -1)
+            {
+                l_hint_no_1.Visible = true;
+            }
+            else
+            {
+                string q_edit = "update bils set name_bil = '" + tb_name.Text + "', num_bil = '" + tb_num.Text + "', descript_bil = '" + tb_descript.Text + "'"+
+                    "where name_bil = '"+lb_bils.SelectedItem.Text+"'";
+                exe_query(q_edit);
+                System.Threading.Thread.Sleep(450);
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
         protected void b_delete_Click(object sender, EventArgs e)
@@ -92,6 +103,7 @@ namespace temp_web1
 
         protected void lb_bils_SelectedIndexChanged(object sender, EventArgs e)
         {
+            l_hint_no_1.Visible = false;
             l_name.CssClass = "norm";
             l_name.Text = "Название счета";
             l_num.CssClass = "norm";

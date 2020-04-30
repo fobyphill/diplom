@@ -14,7 +14,7 @@
         
         <div class="divhint">
             <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Ни одна запись не была выбрана" Visible="False"></asp:Label>
+            Text="Счет не выбран. " Visible="False"></asp:Label>
             <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
             Text="Выберите счет из списка"></asp:Label>
         </div>
