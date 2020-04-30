@@ -42,15 +42,15 @@ namespace temp_web1
                 dr.Close();
 
                 //Заполним счета
-                ddl_bils.Items.Add(new ListItem("Выберите счет", "null"));
-                string q_bil = "select id_bil, name_bil from bils";
+                ddl_bils.Items.Add("Выберите счет");
+                string q_bil = "select name_bil from bils";
                 com = new OleDbCommand(q_bil, ole_con);
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    ddl_bils.Items.Add(new ListItem(dr[1].ToString(), dr[0].ToString()));
+                    ddl_bils.Items.Add(dr[0].ToString());
                 }
-                if (ddl_bils.Items.Count == 0)
+                if (ddl_bils.Items.Count == 1)
                 {
                 l_bil.Text = "Создайте счет на странице <a href='bils.aspx'>Управление счетами</a>";
                 l_bil.CssClass = "hint stress";
@@ -121,14 +121,12 @@ namespace temp_web1
 
             }
             //Добавим номер счета
-            string bil = ddl_bils.SelectedValue.ToString();
+            string bil = ddl_bils.SelectedItem.Text;
             if (ddl_bils.Items.Count == 1)
             {
                 flag = true;
-                l_bil.Text = "У Вас нет счетов. Добавьте их на странице \"Счет\"";
-                l_bil.Style.Add("color", "red");
             }
-            else if (ddl_bils.SelectedValue == "null")
+            else if (ddl_bils.SelectedItem.Text == "Выберите счет")
             {
                 flag = true;
                 l_bil.Text = "Счет не выбран.";
@@ -139,7 +137,7 @@ namespace temp_web1
             "(id_con, data_create, data_change, value_con, cat_con, bil_con, "+
             "descript_con, create_login, change_login)" +
             "values ("+((++id_max).ToString())+", '"+dt
-            + "', '" + dt + "', " + value_str + ", " + num_cat+", "+bil+", '" + descript_con + "', '"
+            + "', '" + dt + "', " + value_str + ", " + num_cat+", '"+bil+"', '" + descript_con + "', '"
             +login_user+"', '"+login_user+"')";
             ole_con.Open();
             com = new OleDbCommand(q_add, ole_con);

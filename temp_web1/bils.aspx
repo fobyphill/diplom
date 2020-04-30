@@ -38,14 +38,18 @@
             </div>
         <div>
         <div class="onerow mar10">
-        <asp:Button  ID="b_add_con" runat="server" Text="Добавить" 
-            OnClick="b_add_con_Click" />
+        <asp:Button  ID="b_add" runat="server" Text="Добавить" 
+            OnClick="b_add_Click" />
             </div>
        <div class="onerow mar10">
             <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
            </div>
         <div class="onerow mar10">
                     <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
+            
+            </div>
+            <div class="onerow mar10">
+                    <asp:Button ID="b_clear" runat="server" Text="Очистить" OnClick="b_clear_Click" />
             
             </div>
             </div>

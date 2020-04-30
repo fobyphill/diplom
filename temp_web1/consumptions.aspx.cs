@@ -33,30 +33,25 @@ namespace temp_web1
             {   
                 //СОздаем запрос к БД
                 string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
-                    "consumptions.data_change, consumptions.value_con, cats.name_cat, bils.name_bil, " +
+                    "consumptions.data_change, consumptions.value_con, cats.name_cat, consumptions.bil_con, " +
                     "consumptions.descript_con, users.fam_user as u_f, users2.fam_user as u_f2 " +
-                    "from ((((consumptions " +
+                    "from (((consumptions " +
                     "inner join users on " +
                     "consumptions.create_login = users.login_user) " +
                     "inner join users2 on " +
                     "consumptions.change_login = users2.login_user) " +
                     "inner join cats on consumptions.cat_con = cats.id_cat) " +
-                    "inner join bils on consumptions.bil_con = bils.id_bil)"+
                     "order by consumptions.id_con";
                 //СОздаем объект Оле - соединение с БД
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 //Выполняем запрос. Результат - массив в формате "Команда"
                 OleDbCommand ole_com = new OleDbCommand(q_table, ole_con);
-                //Создаем формат массива - Дата Адаптер
-                //OleDbDataAdapter da = new OleDbDataAdapter(ole_com);
-                //Создаем формат запроса Дата Ридер и заполянем его данными
                 OleDbDataReader dr = ole_com.ExecuteReader();
                 //заполняем таблицу данными
                 gv1.DataSource = dr;
                 gv1.DataBind();
                 ole_con.Close();
-                //  gv1.Columns[1].ControlStyle.Width = 100;
             }
            
         }

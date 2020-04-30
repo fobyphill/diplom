@@ -70,12 +70,12 @@ namespace temp_web1
                 }
 
                 //Заполняем комбобокс со счетами
-                string q_bil = "select id_bil, name_bil from bils";
+                string q_bil = "select name_bil from bils";
                 com = new OleDbCommand(q_bil, ole_con);
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    ddl_bils.Items.Add(new ListItem(dr[1].ToString(), dr[0].ToString()));
+                    ddl_bils.Items.Add(dr[0].ToString());
                 }
                 if (ddl_bils.Items.Count == 0)
                 {
@@ -86,7 +86,15 @@ namespace temp_web1
                 ole_con.Close();
                 com.Dispose();
 
-                ddl_bils.SelectedValue = bil_plan;//выводим текущий счет
+                for (int i = 0; i< ddl_bils.Items.Count; i++)
+                {
+                    if (ddl_bils.Items[i].Text == bil_plan)
+                    {
+                        ddl_bils.SelectedIndex = i;
+                        break;
+                    }
+                }
+                //ddl_bils.SelectedItem.Text = bil_plan;//выводим текущий счет
                 tb_value.Text = value_plan;//выводим значение в поле
                 tb_descript.Text = descript_plan;//выводим комментарий
 
@@ -161,12 +169,12 @@ namespace temp_web1
                 tb_value.Text = value_plan.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
             }
             
-            string bil_plan = ddl_bils.SelectedValue;//Получим значение счета
+            string bil_plan = ddl_bils.SelectedItem.Text;//Получим значение счета
             string descript_plan = tb_descript.Text;//описание плана
 
             //Объединим данные в переменной запроса
             string q_update_plan = "update plans set  data_plan ='" + data_plan + "', value_plan = "+value_plan+", cat_plan = "+cat_plan+
-                ", bil_plan = "+bil_plan+", descript_plan = '"+ descript_plan+"', login_user = '"+login_user+"' where id_plan = "+id_plan;
+                ", bil_plan = '"+bil_plan+"', descript_plan = '"+ descript_plan+"', login_user = '"+login_user+"' where id_plan = "+id_plan;
             if (!flag)
             {
                 ole_con.Open();

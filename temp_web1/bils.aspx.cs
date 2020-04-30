@@ -105,5 +105,24 @@ namespace temp_web1
             }
 
         }
+
+        protected void b_clear_Click(object sender, EventArgs e)
+        {
+            tb_descript.Text = "";
+            tb_name.Text = "";
+            tb_num.Text = "";
+        }
+
+        protected void b_add_Click(object sender, EventArgs e)
+        {
+            string q_add = "";
+        }
+        void exe_query(string q)
+        {
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            OleDbCommand com = new OleDbCommand(q, ole_con);
+            com.ExecuteNonQuery();
+            ole_con.Close();
+        }
     }
 }

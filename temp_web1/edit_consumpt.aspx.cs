@@ -70,14 +70,22 @@ namespace temp_web1
                 tb_value.Text = value;//Выводим значения расхода
                 tb_descript.Text = descript;//Выводим комментарий
                 //заполняем поля счетов
-                string q_bil = "select id_bil, name_bil from bils";
+                string q_bil = "select name_bil from bils";
                 com = new OleDbCommand(q_bil, ole_con);
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    ddl_bils.Items.Add(new ListItem(dr[1].ToString(), dr[0].ToString()));
+                    ddl_bils.Items.Add(dr[0].ToString());
                 }
-                ddl_bils.SelectedValue = bil_con;// выводим текущий счет
+                //выделим счет данного расхода
+                for (int i = 0; i < ddl_bils.Items.Count; i++ )
+                {
+                    if (ddl_bils.Items[i].Text == bil_con)
+                    {
+                        ddl_bils.SelectedIndex = i;
+                        break;
+                    }
+                }
                 //Если счетов не задано, извещаем пользователя
                 if (ddl_bils.Items.Count == 0)
                 {
@@ -125,12 +133,12 @@ namespace temp_web1
                 tb_value.Text = value.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
             }
             //Получим значение счета
-            string bil = ddl_bils.SelectedValue;
+            string bil = ddl_bils.SelectedItem.Text;
 
             //Объединим данные в переменной запроса
             string q_update_con = "update consumptions set data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
-            ", bil_con=" + bil + ", descript_con = '" + tb_descript.Text + "', change_login = '" +
+            ", bil_con='" + bil + "', descript_con = '" + tb_descript.Text + "', change_login = '" +
             login_user + "' where id_con = " + id_con;
 
             if (!flag)

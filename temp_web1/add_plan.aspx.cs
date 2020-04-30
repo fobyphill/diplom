@@ -49,17 +49,17 @@ namespace temp_web1
                 com.Dispose();
 
                 //Заполняем комбобокс со счетами
-                string q_bil = "select id_bil, name_bil from bils";
-                ddl_bils.Items.Add(new ListItem("Выберите счет", "null"));
+                string q_bil = "select name_bil from bils";
+                ddl_bils.Items.Add("Выберите счет");
                 ole_con.Open();
                 com = new OleDbCommand(q_bil, ole_con);
                 com.CommandType = CommandType.Text;
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
-                    ddl_bils.Items.Add(new ListItem(dr[1].ToString(), dr[0].ToString()));
+                    ddl_bils.Items.Add(dr[0].ToString());
                 }
-                if (ddl_bils.Items.Count == 0)
+                if (ddl_bils.Items.Count == 1)
                 {
                     l_bil.Text = "Создайте счет на странице <a href='bils.aspx'>Управление счетами</a>";
                     l_bil.CssClass = "hint stress";
@@ -164,14 +164,14 @@ namespace temp_web1
             }
 
             //Добавим номер счета
-            string bil = ddl_bils.SelectedValue.ToString();
+            string bil = ddl_bils.SelectedItem.Text;
             if (ddl_bils.Items.Count == 1)
             {
                 flag_add = true;
                 l_bil.Text = "У Вас нет счетов. Добавьте их на странице \"Счет\"";
                 l_bil.Style.Add("color", "red");
             }
-            else if (ddl_bils.SelectedValue == "null")
+            else if (ddl_bils.SelectedItem.Text == "Выберите счет")
             {
                 flag_add = true;
                 l_bil.Text = "Счет не выбран.";
@@ -180,7 +180,7 @@ namespace temp_web1
 
             //Соберем запрос
             string q_add_plan = "INSERT INTO plans ( id_plan, data_plan, value_plan, cat_plan, bil_plan, descript_plan, login_user ) "+
-            "VALUES ("+id_plan.ToString()+", '"+data_plan+"', "+value+", "+num_cat+", "+bil+", '"+descript_plan+"', '"+login_user+"')";
+            "VALUES ("+id_plan.ToString()+", '"+data_plan+"', "+value+", "+num_cat+", '"+bil+"', '"+descript_plan+"', '"+login_user+"')";
             if (!flag_add)
             {
                 ole_con.Open();

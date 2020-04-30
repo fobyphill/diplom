@@ -32,10 +32,9 @@ namespace temp_web1
             { Response.Redirect("autorise.aspx"); }*/
             if (!Page.IsPostBack)
             {
-                string q_tab = "SELECT plans.id_plan, plans.data_plan, plans.value_plan, cats.name_cat, bils.name_bil,"+
-                    "plans.descript_plan, users.fam_user from (((plans "+
+                string q_tab = "SELECT plans.id_plan, plans.data_plan, plans.value_plan, cats.name_cat, plans.bil_plan,"+
+                    "plans.descript_plan, users.fam_user from ((plans "+
                     "inner join cats on plans.cat_plan = cats.id_cat) "+
-                    "inner join bils on plans.bil_plan = bils.id_bil) "+
                     "inner join users on plans.login_user = users.login_user) "+
                      "order by plans.id_plan";
                 OleDbConnection ole_con = new OleDbConnection(con_str);

@@ -50,7 +50,7 @@
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="60px"/>
                 </asp:BoundField>
-                <asp:BoundField DataField="name_bil" HeaderText="Счет" >
+                <asp:BoundField DataField="bil_con" HeaderText="Счет" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="155px"/>
                 </asp:BoundField>

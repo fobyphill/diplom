@@ -103,13 +103,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_desript;
         
         /// <summary>
-        /// b_add_con control.
+        /// b_add control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button b_add_con;
+        protected global::System.Web.UI.WebControls.Button b_add;
         
         /// <summary>
         /// b_change control.
@@ -128,6 +128,15 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button b_delete;
+        
+        /// <summary>
+        /// b_clear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button b_clear;
         
         /// <summary>
         /// mpe control.
