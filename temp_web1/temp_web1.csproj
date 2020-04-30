@@ -109,6 +109,7 @@
     <Content Include="App_Data\plaza.accdb" />
     <Content Include="autentific.aspx" />
     <Content Include="autorise.aspx" />
+    <Content Include="bils.aspx" />
     <Content Include="cats.aspx" />
     <Content Include="consumptions.aspx" />
     <Content Include="Contact.aspx" />
@@ -250,6 +251,13 @@
     </Compile>
     <Compile Include="autorise.aspx.designer.cs">
       <DependentUpon>autorise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bils.aspx.cs">
+      <DependentUpon>bils.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bils.aspx.designer.cs">
+      <DependentUpon>bils.aspx</DependentUpon>
     </Compile>
     <Compile Include="cats.aspx.cs">
       <DependentUpon>cats.aspx</DependentUpon>

@@ -66,6 +66,7 @@ h1{
 .onerow
 {
     display:inline-block;
+    vertical-align:top;
 }
 .mybutton {
     background-color: #26a9e0;
