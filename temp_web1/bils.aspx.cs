@@ -192,6 +192,7 @@ namespace temp_web1
                 Response.Redirect(Request.RawUrl);
             }
         }
+
         void exe_query(string q)
         {
             OleDbConnection ole_con = new OleDbConnection(con_str);
