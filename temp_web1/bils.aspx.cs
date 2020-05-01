@@ -94,7 +94,36 @@ namespace temp_web1
             }
             else
             {
-                mpe.Show();
+                //Проверка, есть ли затраты или планирования, привязанные к указанному счету.
+                string q_ver_con = "select count(*) from consumptions where bil_con = '" + lb_bils.SelectedItem.Text+"'";
+                string q_ver_plan = "select count(*) from plans where bil_plan = '" + lb_bils.SelectedItem.Text + "'";
+                OleDbConnection ole_con = new OleDbConnection(con_str);
+                ole_con.Open();
+                OleDbCommand com = new OleDbCommand(q_ver_con, ole_con);
+                OleDbDataReader dr = com.ExecuteReader();
+                dr.Read();
+                string kol_con = dr[0].ToString();
+                dr.Close(); com.Dispose();
+                com = new OleDbCommand(q_ver_plan, ole_con);
+                dr = com.ExecuteReader();
+                dr.Read();
+                string kol_plan = dr[0].ToString();
+                if (kol_con != "0")
+                { l_click_left.Text = "Невозможно удалить счет. К нему привязаны записи о затратах в количестве "+kol_con+
+             ". Перед удаланием счета удалите или перенесите затраты на странице \"<a href='consumptions.aspx'>Управление затратами</a>\".";}
+                if (kol_con != "0" && kol_plan != "0")
+                {
+                    l_click_left.Text += "<br />";
+                    l_click_left.Text += "Невозможно удалить счет. К нему привязаны записи о планировании в количестве " + kol_plan +
+          ". Перед удаланием счета удалите или перенесите затраты на странице \"<a href='plans.aspx'>Планирование затрат</a>\".";
+                }
+                else if (kol_plan != "0")
+                {
+                    l_click_left.Text = "Невозможно удалить счет. К нему привязаны записи о планировании в количестве " + kol_plan +
+          ". Перед удаланием счета удалите или перенесите затраты на странице \"<a href='plans.aspx'>Планирование затрат</a>\".";
+                }
+                if (kol_plan =="0" && kol_con == "0")
+                { mpe.Show(); }
             }
         }
 
@@ -113,6 +142,7 @@ namespace temp_web1
 
         protected void lb_bils_SelectedIndexChanged(object sender, EventArgs e)
         {
+            l_click_left.Text = "Выберите счет из списка";
             l_hint_no_1.Visible = false;
             l_name.CssClass = "norm";
             l_name.Text = "Название счета";
