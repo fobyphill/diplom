@@ -11,21 +11,24 @@ namespace temp_web1
     public partial class edit_consumpt2 : System.Web.UI.Page
     {
         string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                "C:\\Users\\phill\\documents\\plaza.accdb";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
             status_user = (string)Session["status_user"];
-            if (status_user != "a")
+            if (login_user == null)
             { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)// Запускаем эту программу только в первый раз
             {
                 string id_con = Request.QueryString["id_con"];
+                if (status_user == "u" &&  !ver_user(id_con))//защита от попыток юзера исправить чужую запись
+                { Response.Redirect("autorise.aspx"); }
                 //Получим данные расхода
                 string q_con = "select * from consumptions where id_con = " + id_con;
-                string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                "C:\\Users\\phill\\documents\\plaza.accdb";
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 OleDbCommand com = new OleDbCommand(q_con, ole_con);
@@ -108,8 +111,6 @@ namespace temp_web1
         protected void b_save_Click(object sender, EventArgs e)
         {
             string id_con = Request.QueryString["id_con"];
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
             OleDbConnection ole_con = new OleDbConnection(con_str);
             //Формируем запрос на изменение
             bool flag = false;// Флаг. Индикатор отсутствия ошибки
@@ -158,14 +159,20 @@ namespace temp_web1
                 com.Dispose();
                 ole_con.Close();
                 System.Threading.Thread.Sleep(450);
-                Response.Redirect("consumptions.aspx");
+                if (status_user == "a")
+                { Response.Redirect("consumptions.aspx"); }
+                else
+                { Response.Redirect("cons_user.aspx"); }
 
             }
         }
 
         protected void b_cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("consumptions.aspx");
+            if (status_user == "a")
+            { Response.Redirect("consumptions.aspx"); }
+            else
+            { Response.Redirect("cons_user.aspx"); }
         }
         void find_child(TreeNode pn)
         {
@@ -220,6 +227,23 @@ namespace temp_web1
                 tv.CollapseAll();
                 l_collapse.Text = "Развернуть все";
             }
+        }
+
+        bool ver_user(string id)// проверка пользователя и даты заказа
+        {
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            string q = "select create_login, data_change from consumptions where id_con = " + id;
+            OleDbCommand com = new OleDbCommand(q, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
+            if (dr.Read())
+            {
+                string dt = DateTime.Now.ToShortDateString();
+                if (dr[0].ToString() == login_user && DateTime.Parse(dr[1].ToString()) == DateTime.Parse(dt))
+                { return true; }
+            }
+            return false;
+
         }
     }
 }

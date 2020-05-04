@@ -112,6 +112,7 @@
     <Content Include="bils.aspx" />
     <Content Include="cats.aspx" />
     <Content Include="consumptions.aspx" />
+    <Content Include="cons_user.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -273,6 +274,13 @@
     </Compile>
     <Compile Include="consumptions.aspx.designer.cs">
       <DependentUpon>consumptions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cons_user.aspx.cs">
+      <DependentUpon>cons_user.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cons_user.aspx.designer.cs">
+      <DependentUpon>cons_user.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

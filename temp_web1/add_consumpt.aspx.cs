@@ -13,15 +13,13 @@ namespace temp_web1
     {
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                "C:\\Users\\phill\\documents\\plaza.accdb";
-        string login_user, name_user, fam_user, status_user;
+        string login_user, status_user;
         protected void Page_Load(object sender, EventArgs e)
         {
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
             login_user = (string)Session["login_user"];
-            name_user = (string)Session["name_user"];
-            fam_user = (string)Session["fam_user"];
             status_user = (string)Session["status_user"];
-            if (status_user != "a")
+            if (login_user == null)
             { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)
             {
@@ -65,7 +63,10 @@ namespace temp_web1
 
         protected void b_cancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("consumptions.aspx");
+            if ((string)Session["user_status"] == "a")
+            { Response.Redirect("consumptions.aspx"); }
+            else
+            { Response.Redirect("cons_user.aspx"); }
         }
 
         protected void b_save_Click(object sender, EventArgs e)
@@ -86,8 +87,8 @@ namespace temp_web1
             dr.Close();
             com.Dispose();
             ole_con.Close();
-            //Получим текущую дату
-            string dt = tb_data.Text;
+            string dt_cr = tb_data.Text;//Получим дату создания заказа
+            string dt_ch = DateTime.Now.ToShortDateString();
             
             //Получим значение
             bool flag = false;//если все данные ввели, флаг не включается
@@ -139,8 +140,8 @@ namespace temp_web1
             string q_add = "insert into consumptions" +
             "(id_con, data_create, data_change, value_con, cat_con, bil_con, "+
             "descript_con, create_login, change_login)" +
-            "values ("+((++id_max).ToString())+", '"+dt
-            + "', '" + dt + "', " + value_str + ", " + num_cat+", '"+bil+"', '" + descript_con + "', '"
+            "values ("+((++id_max).ToString())+", '"+dt_cr
+            + "', '" + dt_ch + "', " + value_str + ", " + num_cat+", '"+bil+"', '" + descript_con + "', '"
             +login_user+"', '"+login_user+"')";
             ole_con.Open();
             com = new OleDbCommand(q_add, ole_con);
@@ -148,9 +149,11 @@ namespace temp_web1
             {
                 com.ExecuteNonQuery(); //Выполнить изменение данных в БД
                 com.Dispose(); ole_con.Close();
-                 System.Threading.Thread.Sleep(500);
-       //         Response.Redirect(Request.RawUrl);
-                Response.Redirect("consumptions.aspx");
+                 System.Threading.Thread.Sleep(450);
+                 if ((string)Session["user_status"] == "a")
+                 { Response.Redirect("consumptions.aspx"); }
+                else
+                 { Response.Redirect("cons_user.aspx"); }
             }
         }
 

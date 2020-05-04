@@ -34,8 +34,10 @@ namespace temp_web1
                 Session["name_user"] = dr[0].ToString();
                 Session["fam_user"] = dr[1].ToString();
                 Session["status_user"] = dr[4].ToString();
-                //Session["status_user"] = char.Parse(dr[4].ToString());
-                Response.Redirect("consumptions.aspx");
+                if ((string)Session["status_user"] == "a")
+                { Response.Redirect("consumptions.aspx"); }
+                else { Response.Redirect("cons_user.aspx"); }
+                
             }
             else { l_incorrect.Visible = true; }
             dr.Close(); ole_con.Close();
