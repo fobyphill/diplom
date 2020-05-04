@@ -150,7 +150,7 @@ namespace temp_web1
                 com.ExecuteNonQuery(); //Выполнить изменение данных в БД
                 com.Dispose(); ole_con.Close();
                  System.Threading.Thread.Sleep(450);
-                 if ((string)Session["user_status"] == "a")
+                 if ((string)Session["status_user"] == "a")
                  { Response.Redirect("consumptions.aspx"); }
                 else
                  { Response.Redirect("cons_user.aspx"); }
