@@ -11,8 +11,7 @@ namespace temp_web1
 {
     public partial class plans : System.Web.UI.Page
     {
-        string login_user, name_user, fam_user;
-        char status_user; // переменные для данных пользователя
+        string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
         string id_plan = "";
@@ -25,11 +24,10 @@ namespace temp_web1
             login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
+            status_user = (string)Session["status_user"];
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
 
-
-            //перебросим пользователя на экран авторизации по окончании сессии
-            /*if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
             if (!Page.IsPostBack)
             {
                 string q_tab = "SELECT plans.id_plan, plans.data_plan, plans.value_plan, cats.name_cat, plans.bil_plan,"+

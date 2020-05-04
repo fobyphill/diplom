@@ -25,6 +25,7 @@ namespace temp_web1
                 "C:\\Users\\phill\\documents\\plaza.accdb";
             string q_autorize = "select * from users where login_user = '" + tb_login.Text + "' and pass_user = '" + tb_password.Text + "'";
             OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
             OleDbCommand com = new OleDbCommand(q_autorize, ole_con);
             OleDbDataReader dr = com.ExecuteReader();
             if (dr.Read())
@@ -32,7 +33,8 @@ namespace temp_web1
                 Session["login_user"] = dr[2].ToString();
                 Session["name_user"] = dr[0].ToString();
                 Session["fam_user"] = dr[1].ToString();
-                Session["status_user"] = char.Parse(dr[4].ToString());
+                Session["status_user"] = dr[4].ToString();
+                //Session["status_user"] = char.Parse(dr[4].ToString());
                 Response.Redirect("consumptions.aspx");
             }
             else { l_incorrect.Visible = true; }

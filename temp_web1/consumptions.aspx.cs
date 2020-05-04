@@ -11,8 +11,7 @@ namespace temp_web1
 {
     public partial class consumptions : System.Web.UI.Page
     {
-        string login_user, name_user, fam_user;
-        char status_user; // переменные для данных пользователя
+        string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
         //строка подключения
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
@@ -23,11 +22,9 @@ namespace temp_web1
             login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
-            
-
-            //перебросим пользователя на экран авторизации по окончании сессии
-           /* if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            status_user = (string)Session["status_user"];
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
             {   

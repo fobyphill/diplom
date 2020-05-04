@@ -11,22 +11,20 @@ namespace temp_web1
 {
     public partial class bils : System.Web.UI.Page
     {
-        string login_user, name_user, fam_user;
-        char status_user; // переменные для данных пользователя
+        string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //Зададим параметры пользователя
-            login_user = "admin";
-            /*login_user = (string)Session["login_user"];
+            //login_user = "administrator";
+            login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
-            fam_user = (string)Session["fam_user"];*/
-
-            //перебросим пользователя на экран авторизации по окончании сессии
-            /*if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            fam_user = (string)Session["fam_user"];
+            status_user = (string)Session["status_user"];
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
             {
@@ -63,11 +61,6 @@ namespace temp_web1
                 }
                 com.Dispose(); ole_con.Close();// закрыть всех
             }
-        }
-
-        protected void b_add_con_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void b_change_Click(object sender, EventArgs e)

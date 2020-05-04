@@ -10,12 +10,15 @@ namespace temp_web1
 {
     public partial class edit_consumpt2 : System.Web.UI.Page
     {
-        string login_user = "admin";
+        string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
         protected void Page_Load(object sender, EventArgs e)
         {
-            //login_user = (string)Session["login_user"];
-            /*if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            login_user = (string)Session["login_user"];
+            name_user = (string)Session["name_user"];
+            fam_user = (string)Session["fam_user"];
+            status_user = (string)Session["status_user"];
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)// Запускаем эту программу только в первый раз
             {
                 string id_con = Request.QueryString["id_con"];

@@ -12,8 +12,7 @@ namespace temp_web1
 {
     public partial class cats : System.Web.UI.Page
     {
-        string login_user, name_user, fam_user;
-        char status_user; // переменные для данных пользователя
+        string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
 
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                "C:\\Users\\phill\\documents\\plaza.accdb";
@@ -22,8 +21,11 @@ namespace temp_web1
         {
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
             login_user = (string)Session["login_user"];
-           /* if (login_user == null)
-            { Response.Redirect("autentific.aspx"); }*/
+            name_user = (string)Session["name_user"];
+            fam_user = (string)Session["fam_user"];
+            status_user = (string)Session["status_user"];
+           if (status_user !="a")
+            { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)
             {
                 //создадим массив из айди категорий и описаний

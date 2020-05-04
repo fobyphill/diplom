@@ -19,7 +19,7 @@ namespace temp_web1
         {
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
             //login_user = (string)Session["login_user"];
-            login_user = "admin";
+            login_user = "administrator";
            /* if (login_user == null)
             { Response.Redirect("autorise.aspx"); }*/
             

@@ -12,21 +12,21 @@ namespace temp_web1
     public partial class users : System.Web.UI.Page
     {
         string login_user, name_user, fam_user;
-        char status_user; // переменные для данных пользователя
+        string status_user; // переменные для данных пользователя
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             "C:\\Users\\phill\\documents\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //Зададим параметры пользователя
-            login_user = "admin";
-            /*login_user = (string)Session["login_user"];
+            login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
-            fam_user = (string)Session["fam_user"];*/
+            fam_user = (string)Session["fam_user"];
+            status_user = (string)Session["status_user"];
 
             //перебросим пользователя на экран авторизации по окончании сессии
-            /*if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
             {
@@ -68,25 +68,111 @@ namespace temp_web1
 
         protected void b_add_Click(object sender, EventArgs e)
         {
+            bool flag = false;
+            flag = verify_user();//Проверка полей
+            //Проверка логина
+            for (int i = 0; i < lb_users.Items.Count; i++ )
+            {
+                if (tb_login.Text == lb_users.Items[i].Text)
+                {
+                    flag = true;
+                    l_login.Text = "Указанный логин уже существует в системе";
+                    l_login.CssClass = "stress";
+                }
+            }
+            //Проверка пароля
+            if (tb_password.Text != tb_pass2.Text)
+            {
+                l_password.Text = "Пароли не совпадают";
+                l_password.CssClass = "stress";
+                flag = true;
+            }
+            //Формируем и выполняем запрос на добавление
+                if (!flag)
+                {
+                    string q_add = "INSERT INTO users ( name_user, fam_user, login_user, pass_user, status_user ) VALUES ('" + tb_name.Text + "', '"
+                        + tb_fam.Text + "', '" + tb_login.Text + "', '" + tb_password.Text + "', '" + rbl_status.SelectedValue.ToString() + "')";
+                    exe_query(q_add);
+                    System.Threading.Thread.Sleep(450);
+                    Response.Redirect(Request.RawUrl);
+                }
         }
 
         protected void b_change_Click(object sender, EventArgs e)
         {
-            
+            bool flag = false;
+            flag = ver_select_user();
+            flag = verify_user();//Проверка полей
+            //Проверка пароля
+            if (tb_password.Text != tb_pass2.Text)
+            {
+                l_password.Text = "Пароли не совпадают";
+                l_password.CssClass = "stress";
+                flag = true;
+            }
+            //Формируем запрос на изменение и выполняем
+            if (!flag)
+            {
+                string q_edit = "update users set name_user = '" + tb_name.Text + "', fam_user = '" + tb_fam.Text + "', login_user = '" + tb_login.Text +
+                    "', pass_user = '" + tb_password.Text + "', status_user = '" + rbl_status.SelectedValue.ToString() + "' where login_user = '" +
+                    lb_users.SelectedItem.Text+"'";
+                exe_query(q_edit);
+                System.Threading.Thread.Sleep(450);
+                Response.Redirect(Request.RawUrl);
+
+            }
         }
 
         protected void b_delete_Click(object sender, EventArgs e)
         {
-
+            if (ver_select_user())
+            {
+                mpe.Show();
+            }
         }
 
         protected void b_clear_Click(object sender, EventArgs e)
         {
-
+            tb_fam.Text = "";
+            tb_login.Text = "";
+            tb_name.Text = "";
+            tb_password.Text = "";
+            lb_users.SelectedIndex = -1;
+            rbl_status.SelectedIndex = -1;
         }
 
         protected void b_yes_Click(object sender, EventArgs e)
         {
+            //Проверка, не администратора ли удаляем
+            if (lb_users.SelectedItem.Text != "administrator")
+            {
+                //Перенаправляем планрования на administrarora
+                string q_move_plans_admin = "update plans set login_user = 'administrator' where login_user = '"
+                    + lb_users.SelectedItem.Text + "'";
+                exe_query(q_move_plans_admin);
+
+                //Перенаправляем затраты, созданные этим пользователем на администратора
+                string q_move_cons_create_admin = "update consumptions set create_login = 'administrator' where create_login = '"
+                + lb_users.SelectedItem.Text + "'";
+                exe_query(q_move_cons_create_admin);
+
+                //Перенаправляем затраты, отредактированные этим пользователем
+                string q_move_cons_change_admin = "update consumptions set change_login = 'administrator' where change_login = '"
+                + lb_users.SelectedItem.Text + "'";
+                exe_query(q_move_cons_change_admin);
+
+                //Создаем запрос и удаляем пользователя
+                string q_del_user = "delete from users where login_user = '" + lb_users.SelectedItem.Text + "'";
+                exe_query(q_del_user);
+                System.Threading.Thread.Sleep(450);
+                Response.Redirect(Request.RawUrl);
+            }
+            else
+            {
+                l_login.Text = "Невозможно удалить пользователя \"administrator\"";
+                l_login.CssClass = "stress";
+            }
+
 
         }
 
@@ -97,8 +183,24 @@ namespace temp_web1
 
         protected void lb_users_SelectedIndexChanged(object sender, EventArgs e)
         {
+            label_norm();
+            //проверка полей на администратора
+            if (lb_users.SelectedItem.Text == "administrator")
+            {
+                tb_name.Text = " ";
+                tb_fam.Enabled = false;
+                tb_login.Enabled = false;
+                tb_name.Enabled = false;
+                rbl_status.Enabled = false;
+            }
+            else
+            {
+                tb_fam.Enabled = true;
+                tb_login.Enabled = true;
+                tb_name.Enabled = true;
+                rbl_status.Enabled = true;
+            }
             string[,] users_data = (string[,])Session["users_data[,]"];
-
             for (int i = 0; i < users_data.GetLength(0); i++)
             {
                 if (users_data[i, 4] == "a") //перекрашиваем поля листбокса
@@ -109,6 +211,7 @@ namespace temp_web1
                     tb_name.Text = users_data[i, 0];
                     tb_fam.Text = users_data[i, 1];
                     tb_password.Text = users_data[i, 3];
+                    tb_pass2.Text = users_data[i, 3];
                     rbl_status.SelectedValue = users_data[i, 4];
                 }
             }
@@ -118,5 +221,91 @@ namespace temp_web1
             }
             else { rbl_status.SelectedValue = "u"; }*/
         }
+                
+        void exe_query(string q)
+        {
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q, ole_con);
+            com.ExecuteNonQuery();
+            ole_con.Close();
+        }
+
+        bool verify_user()
+                {
+                    bool flag = false;
+                    if (tb_name.Text == "")
+                    {
+                        flag = true;
+                        l_name.Text = "Не указано имя пользователя";
+                        l_name.CssClass = "stress";
+                    }
+                    if (tb_fam.Text == "")
+                    {
+                        flag = true;
+                        l_fam.Text = "Не указана фамилия пользователя";
+                        l_fam.CssClass = "stress";
+                    }
+                    if (tb_login.Text == "")
+                    {
+                        flag = true;
+                        l_login.Text = "Не указан логин пользователя";
+                        l_login.CssClass = "stress";
+                    }
+                    if (tb_password.Text == "")
+                    {
+                        flag = true;
+                        l_password.Text = "Не указан пароль пользователя";
+                        l_password.CssClass = "stress";
+                    }
+                    if (rbl_status.SelectedIndex == -1)
+                    {
+                        flag = true;
+                        l_status.Text = "Не указан статус пользователя";
+                        l_status.CssClass = "stress";
+                    }
+                    return flag;
+                }
+
+        bool ver_select_user()
+                {
+                    if (lb_users.SelectedIndex == -1)
+                    {
+                        l_hint_no_1.Visible = true;
+                        return false;
+                    }
+                    else { return true; }
+                }
+
+        void label_norm()
+        {
+            l_login.Text = "Логин пользователя";
+            l_login.CssClass = "norm";
+            l_name.Text = "Имя пользователя";
+            l_name.CssClass = "norm";
+            l_password.Text = "Пароль пользователя";
+            l_password.CssClass = "norm";
+            l_status.Text = "Права пользователя";
+            l_status.CssClass = "norm";
+            l_fam.Text = "Фамилия пользователя";
+            l_fam.CssClass = "norm";
+            l_hint_no_1.Visible = false;
+        }
+
+        protected void ib_show_hide_pass_Click(object sender, ImageClickEventArgs e)
+        {
+            if (tb_password.TextMode == TextBoxMode.Password)
+            {
+                tb_password.TextMode = TextBoxMode.SingleLine;
+                l_collapse.Text = "Скрыть пароли";
+            }
+            else
+            {
+                tb_password.TextMode = TextBoxMode.Password;
+                l_collapse.Text = "Показать пароли";
+
+            }
+        }
+
     }
 }

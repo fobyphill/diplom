@@ -13,14 +13,16 @@ namespace temp_web1
     {
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                "C:\\Users\\phill\\documents\\plaza.accdb";
-        string login_user;
+        string login_user, name_user, fam_user, status_user;
         protected void Page_Load(object sender, EventArgs e)
         {
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
-            login_user = "admin";
-            /* login_user = (string)Session["login_user"];
-            if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            login_user = (string)Session["login_user"];
+            name_user = (string)Session["name_user"];
+            fam_user = (string)Session["fam_user"];
+            status_user = (string)Session["status_user"];
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)
             {
                 
