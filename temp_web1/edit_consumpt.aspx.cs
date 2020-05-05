@@ -24,6 +24,11 @@ namespace temp_web1
             { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)// Запускаем эту программу только в первый раз
             {
+                if (status_user == "u")
+                { 
+                    p_menu.Visible = false;
+                    p_main.CssClass = "maincontent_user";
+                }
                 string id_con = Request.QueryString["id_con"];
                 if (status_user == "u" &&  !ver_user(id_con))//защита от попыток юзера исправить чужую запись
                 { Response.Redirect("autorise.aspx"); }

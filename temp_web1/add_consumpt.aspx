@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" 
     CodeBehind="add_consumpt.aspx.cs" Inherits="temp_web1.add_consumpt" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        <div class="mymenu">
+<asp:Panel CssClass="mymenu" ID="p_vis" runat="server">
        <div class="forlink"><a href="Default.aspx">Главная</a></div>
        <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
         <div class="forlink"><a href="plans.aspx">Планирование затрат</a></div>
@@ -9,8 +9,8 @@
        <div class="forlink"> <a href="bils.aspx">Счета</a></div>
        <div class="forlink"> <a href="users.aspx">Пользователи</a></div>
        <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
-   </div>
-   <div class="maincontent">
+</asp:Panel>
+    <asp:Panel CssClass="maincontent" ID="p_main" runat="server">
        <div class="mar10">
         <div class="onerow "><div class="border1">
             <asp:Panel ID="p_tv" runat="server" ScrollBars="Vertical">
@@ -48,5 +48,5 @@
             <asp:Button ID="b_cancel" runat="server" Text="Отмена" 
             OnClick="b_cancel_Click" />
         </div>
-    </div>
+    </asp:Panel>
 </asp:Content>

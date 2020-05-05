@@ -58,6 +58,14 @@ h1{
     vertical-align: top;
     margin-left: 10px;
 }
+.maincontent_user
+{
+    width:1170px;
+    background-color: white;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px 70px;
+}
 
 .mar10
 {

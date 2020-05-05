@@ -13,6 +13,24 @@ namespace temp_web1 {
     public partial class edit_consumpt2 {
         
         /// <summary>
+        /// p_menu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_menu;
+        
+        /// <summary>
+        /// p_main control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_main;
+        
+        /// <summary>
         /// p_tv control.
         /// </summary>
         /// <remarks>

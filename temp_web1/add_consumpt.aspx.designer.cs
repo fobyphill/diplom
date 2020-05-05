@@ -13,6 +13,24 @@ namespace temp_web1 {
     public partial class add_consumpt {
         
         /// <summary>
+        /// p_vis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_vis;
+        
+        /// <summary>
+        /// p_main control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_main;
+        
+        /// <summary>
         /// p_tv control.
         /// </summary>
         /// <remarks>

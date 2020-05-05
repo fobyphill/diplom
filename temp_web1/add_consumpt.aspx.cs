@@ -23,6 +23,11 @@ namespace temp_web1
             { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)
             {
+                if (status_user == "u")
+                { 
+                    p_vis.Visible = false;
+                    p_main.CssClass = "maincontent_user";
+                }
                 
                 string q_cat = "select * from cats";
                 OleDbConnection ole_con = new OleDbConnection(con_str);
