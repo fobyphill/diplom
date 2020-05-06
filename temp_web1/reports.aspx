@@ -26,7 +26,7 @@
         <div>
         <div class="onerow mar10">
         <asp:Button  ID="b_print" runat="server" Text="Вывести" 
-            OnClick="b_add_Click" />
+            OnClick="b_add_Click" OnClientClick="SetTarget();" />
             </div>
        <div class="onerow mar10">
             <asp:Button ID="b_change" runat="server" Text="Изменить" />
@@ -52,4 +52,12 @@
                 <asp:Button ID="b_yes" runat="server" Text="Да" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>
+   
+    <script type = "text/javascript">
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
+</script>
 </asp:Content>
+
+

@@ -13,8 +13,7 @@ namespace temp_web1
     {
         string login_user, name_user, fam_user;
         string status_user; // переменные для данных пользователя
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {

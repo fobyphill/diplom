@@ -13,8 +13,7 @@ namespace temp_web1
     {
         string login_user, status_user; // переменные для данных пользователя
         //строка подключения
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -92,8 +91,7 @@ namespace temp_web1
               //Создал запрос с нужным расходом.
 
               //Соединяюсь с БД
-              string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                  "C:\\Users\\phill\\documents\\plaza.accdb";
+              string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
               OleDbConnection ole_con = new OleDbConnection(con_str);
               ole_con.Open();
               OleDbCommand com = new OleDbCommand(q_con, ole_con);

@@ -75,7 +75,7 @@
             <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
            </div>
         <div class="mar10 onerow">
-                    <asp:Button ID="b_delete" runat="server" Text="Удалить"/>
+                    <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
             
             </div>
             <ajaxtoolkit:modalpopupextender TargetControlID="b_inv" PopupControlID="p_modal_confirm" 
@@ -87,7 +87,7 @@
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
                 Вы уверены, что желаете удалить запись о расходе?<br /><br />
-                <asp:Button ID="b_yes" runat="server" Text="Да" />
+                <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>
 </asp:Content>

@@ -25,7 +25,10 @@
             <asp:Label ID="l_cat" runat="server" Text="Категория"></asp:Label>
         </div>
     </div>
-       
+       <div class="mar10">
+        <asp:ImageButton ID="ib_show_hide" ImageUrl="img/checkbox.png" Width="20px" runat="server" OnClick="ib_show_hide_Click" />
+                <asp:Label ID="l_collapse" runat="server" Text="Свернуть все"></asp:Label>
+    </div>
        <div class="mar10">
            <asp:TextBox ID="tb_data" runat="server" TextMode="Date"></asp:TextBox>
            <asp:Label ID="l_data" runat="server" Text="дата"></asp:Label>

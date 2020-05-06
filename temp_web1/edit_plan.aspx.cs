@@ -11,8 +11,7 @@ namespace temp_web1
 {
     public partial class edit_plan : System.Web.UI.Page
     {
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-               "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
         string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
 
         protected void Page_Load(object sender, EventArgs e)

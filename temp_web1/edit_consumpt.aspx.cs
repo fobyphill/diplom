@@ -11,8 +11,7 @@ namespace temp_web1
     public partial class edit_consumpt2 : System.Web.UI.Page
     {
         string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -182,8 +181,7 @@ namespace temp_web1
         void find_child(TreeNode pn)
         {
             //соединились с БД
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
+            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
             OleDbConnection ole_con = new OleDbConnection(con_str);
             ole_con.Open();
             string q_cat = "select * from cats";

@@ -12,8 +12,7 @@ namespace temp_web1
 	{
         string login_user, fam_user, status_user; // переменные для данных пользователя
         //строка подключения
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -58,6 +57,38 @@ namespace temp_web1
                 l_hint_no_1.Visible = true;
                 l_hint_no_1.Text += "<br />";
             }
+        }
+
+        protected void b_delete_Click(object sender, EventArgs e)
+        {
+            if (gv1.SelectedIndex != -1)
+            {
+                mpe.Show();
+
+            }
+            else
+            {
+                l_hint_no_1.Visible = true;
+                l_hint_no_1.Text += "<br />";
+            }
+        }
+
+        protected void b_yes_Click(object sender, EventArgs e)
+        {
+            string id_con = gv1.Rows[gv1.SelectedIndex].Cells[1].Text;//Получил ID выбранного расхода
+            string q_con = "delete from consumptions where id_con = " + id_con;
+            //Создал запрос с нужным расходом.
+
+            //Соединяюсь с БД
+            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_con, ole_con);
+            com.ExecuteNonQuery();
+            com.Dispose();
+            ole_con.Close();
+            System.Threading.Thread.Sleep(500);
+            Response.Redirect(Request.RawUrl);
         }
 	}
 }

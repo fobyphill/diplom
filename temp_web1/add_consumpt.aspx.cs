@@ -11,8 +11,7 @@ namespace temp_web1
 {
     public partial class add_consumpt : System.Web.UI.Page
     {
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-               "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
         string login_user, status_user;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -76,9 +75,8 @@ namespace temp_web1
 
         protected void b_save_Click(object sender, EventArgs e)
         {
-            
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-        "C:\\Users\\phill\\documents\\plaza.accdb";
+
+            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
             string q_max_id = "SELECT max(id_con) from consumptions";// Запрос наибольшего айди
             //выполняем, получаем в переменную наибольший айди
             OleDbConnection ole_con = new OleDbConnection(con_str);
@@ -183,6 +181,20 @@ namespace temp_web1
                 }
             }
             dr.Close(); com.Dispose(); ole_con.Close();
+        }
+
+        protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
+        {
+            if (l_collapse.Text == "Развернуть все")
+            {
+                tv.ExpandAll();
+                l_collapse.Text = "Свернуть все";
+            }
+            else
+            {
+                tv.CollapseAll();
+                l_collapse.Text = "Развернуть все";
+            }
         }
         
     }

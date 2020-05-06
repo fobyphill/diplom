@@ -25,8 +25,7 @@ namespace temp_web1
                 "FROM consumptions INNER JOIN cats ON consumptions.cat_con=cats.id_cat " +
                 "WHERE month(consumptions.data_create)=month(date()) " +
                 "GROUP BY cats.name_cat";
-                string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                    "C:\\Users\\phill\\documents\\plaza.accdb";
+                string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 OleDbDataAdapter da = new OleDbDataAdapter(q, ole_con);

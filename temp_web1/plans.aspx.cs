@@ -12,8 +12,7 @@ namespace temp_web1
     public partial class plans : System.Web.UI.Page
     {
         string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            "C:\\Users\\phill\\documents\\plaza.accdb";
+        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
         string id_plan = "";
         
         
