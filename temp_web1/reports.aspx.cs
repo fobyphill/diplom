@@ -16,7 +16,7 @@ namespace temp_web1
 
         protected void b_add_Click(object sender, EventArgs e)
         {
-            Response.Redirect("report.aspx");
+            Response.Redirect("rept.aspx");
         }
     }
 }

@@ -43,6 +43,7 @@
       <HintPath>..\..\..\..\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -158,9 +159,32 @@
     <Content Include="ds3.xss">
       <DependentUpon>ds3.xsd</DependentUpon>
     </Content>
+    <Content Include="ds_test.xsc">
+      <DependentUpon>ds_test.xsd</DependentUpon>
+    </Content>
+    <Content Include="ds_full.xsc">
+      <DependentUpon>ds_full.xsd</DependentUpon>
+    </Content>
+    <None Include="ds_full.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_full.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ds_full.xss">
+      <DependentUpon>ds_full.xsd</DependentUpon>
+    </Content>
+    <None Include="ds_test.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_test.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="ds_test.xss">
+      <DependentUpon>ds_test.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plans.aspx" />
     <Content Include="reports.aspx" />
+    <Content Include="rept.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -312,6 +336,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds3.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ds_full.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_full.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ds_test.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_test.xsd</DependentUpon>
+    </Compile>
     <Compile Include="edit_consumpt.aspx.cs">
       <DependentUpon>edit_consumpt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -344,6 +378,13 @@
     <Compile Include="reports.aspx.designer.cs">
       <DependentUpon>reports.aspx</DependentUpon>
     </Compile>
+    <Compile Include="rept.aspx.cs">
+      <DependentUpon>rept.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rept.aspx.designer.cs">
+      <DependentUpon>rept.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -373,7 +414,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="rep_test.rdlc" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

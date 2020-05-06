@@ -15,42 +15,28 @@
         
         <div class="divhint">
             <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Счет не выбран. " Visible="False"></asp:Label>
+            Text="Отчет не выбран. " Visible="False"></asp:Label>
             <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Выберите счет из списка"></asp:Label>
+            Text="Выберите параметры отчета"></asp:Label>
         </div>
             <div class="mar10 onerow">
-            <asp:ListBox ID="lb_bils" runat="server" Height="180px" style="margin-top: 0px" Width="192px" AutoPostBack="True" OnSelectedIndexChanged="lb_bils_SelectedIndexChanged"></asp:ListBox>
-            <asp:Label ID="l_bils" runat="server" Text="счета"></asp:Label>
             </div>
             <div class="onerow">
-                <div class="mar10">
-            <asp:TextBox ID="tb_name" runat="server"></asp:TextBox>
-            <asp:Label ID="l_name" runat="server" Text="Название счета"></asp:Label>
-                </div>
-                <div class="mar10">
-            <asp:TextBox ID="tb_num" runat="server"></asp:TextBox>
-            <asp:Label ID="l_num" runat="server" Text="Номер счета"></asp:Label>
-                </div>
-                <div class="mar10">
-            <asp:TextBox ID="tb_descript" runat="server" Height="119px" TextMode="MultiLine"></asp:TextBox>
-            <asp:Label ID="l_desript" runat="server" Text="Описание счета"></asp:Label>
-               </div>
             </div>
         <div>
         <div class="onerow mar10">
-        <asp:Button  ID="b_add" runat="server" Text="Добавить" 
+        <asp:Button  ID="b_print" runat="server" Text="Вывести" 
             OnClick="b_add_Click" />
             </div>
        <div class="onerow mar10">
-            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
+            <asp:Button ID="b_change" runat="server" Text="Изменить" />
            </div>
         <div class="onerow mar10">
-                    <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
+                    <asp:Button ID="b_delete" runat="server" Text="Удалить"/>
             
             </div>
             <div class="onerow mar10">
-                    <asp:Button ID="b_clear" runat="server" Text="Очистить" OnClick="b_clear_Click" />
+                    <asp:Button ID="b_clear" runat="server" Text="Очистить" />
             
             </div>
             </div>
@@ -63,7 +49,7 @@
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
                 Вы уверены, что желаете удалить запись о планировании?<br /><br />
-                <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
-                <asp:Button ID="b_no" runat="server" Text="Нет" OnClick="b_no_Click" />
+                <asp:Button ID="b_yes" runat="server" Text="Да" />
+                <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>
 </asp:Content>
