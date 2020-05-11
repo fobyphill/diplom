@@ -13,12 +13,35 @@
        <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
    </div>
     <div class="maincontent">
-        
+        <asp:Panel ID="Panel1" runat="server">
+            <asp:TextBox ID="tb_date_create_begin" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
+            <asp:TextBox ID="tb_date_create_end" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
+            <asp:Label ID="l_date_create" runat="server" Text="Период затрат   "></asp:Label>
+            <asp:TextBox ID="tb_date_change_begin" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
+            <asp:TextBox ID="tb_date_change_end" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
+            <asp:Label ID="l_date_change" runat="server" Text="Период изменения затрат"></asp:Label>
+            <br />
+            <asp:TextBox ID="tb_value_bottom" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tb_value_top" runat="server"></asp:TextBox>
+            <asp:Label ID="l_value" runat="server" Text="Диапазон значений"></asp:Label>
+            <asp:TextBox ID="tb_cats" runat="server"></asp:TextBox>
+            <asp:Button ID="b_show_tree" runat="server" Text="Показать дерево" />
+            <asp:Label ID="l_cats" runat="server" Text="Категории"></asp:Label>
+            <asp:DropDownList ID="ddl_bils" runat="server">
+            </asp:DropDownList>
+            <asp:Label ID="l_bils" runat="server" Text="Счета"></asp:Label><br />
+            <asp:TextBox ID="tb_search" runat="server" Width="253px"></asp:TextBox>
+            <asp:Label ID="L_search" runat="server" Text="Поиск по номеру или комментарию"></asp:Label>
+            <asp:DropDownList ID="ddl_user" runat="server">
+            </asp:DropDownList>
+            <asp:Label ID="l_user" runat="server" Text="Пользователь"></asp:Label>
+            <asp:Button ID="b_search" runat="server" Text="Найти" OnClick="b_search_Click" />
+        </asp:Panel>
         <div class="divhint">
             <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
             Text="Ни одна запись не была выбрана" Visible="False"></asp:Label>
             <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label></div>
+            Text="Показаны последние 10 записей.<br />Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label></div>
         <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>

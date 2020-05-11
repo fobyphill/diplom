@@ -105,7 +105,6 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="add_consumpt.aspx" />
-    <Content Include="add_consumpt2.aspx" />
     <Content Include="add_plan.aspx" />
     <Content Include="App_Data\plaza.accdb" />
     <Content Include="autorise.aspx" />
@@ -240,13 +239,6 @@
     </Compile>
     <Compile Include="add_consumpt.aspx.designer.cs">
       <DependentUpon>add_consumpt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="add_consumpt2.aspx.cs">
-      <DependentUpon>add_consumpt2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="add_consumpt2.aspx.designer.cs">
-      <DependentUpon>add_consumpt2.aspx</DependentUpon>
     </Compile>
     <Compile Include="add_plan.aspx.cs">
       <DependentUpon>add_plan.aspx</DependentUpon>
@@ -407,7 +399,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="rep_test.rdlc" />
+    <EmbeddedResource Include="rep_fast.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

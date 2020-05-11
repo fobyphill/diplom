@@ -12,6 +12,7 @@ namespace temp_web1
     public partial class add_consumpt : System.Web.UI.Page
     {
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+        string sql_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
         string login_user, status_user;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,7 +30,7 @@ namespace temp_web1
                 }
                 
                 string q_cat = "select * from cats";
-                OleDbConnection ole_con = new OleDbConnection(con_str);
+                OleDbConnection ole_con = new OleDbConnection(sql_str);
                 ole_con.Open();
                 OleDbCommand com = new OleDbCommand(q_cat, ole_con);
                 OleDbDataReader dr = com.ExecuteReader();
@@ -75,11 +76,11 @@ namespace temp_web1
 
         protected void b_save_Click(object sender, EventArgs e)
         {
-
             string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+            string sql_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
             string q_max_id = "SELECT max(id_con) from consumptions";// Запрос наибольшего айди
             //выполняем, получаем в переменную наибольший айди
-            OleDbConnection ole_con = new OleDbConnection(con_str);
+            OleDbConnection ole_con = new OleDbConnection(sql_str);
             ole_con.Open();
             OleDbCommand com = new OleDbCommand(q_max_id, ole_con);
             OleDbDataReader dr = com.ExecuteReader();
@@ -164,7 +165,7 @@ namespace temp_web1
         {
             //соединились с БД
             string q_cat = "select * from cats";
-            OleDbConnection ole_con = new OleDbConnection(con_str);
+            OleDbConnection ole_con = new OleDbConnection(sql_str);
             ole_con.Open();
             OleDbCommand com = new OleDbCommand(q_cat, ole_con);
             OleDbDataReader dr = com.ExecuteReader();

@@ -26,7 +26,7 @@ namespace temp_web1
             if (!Page.IsPostBack)
             {
                 //СОздаем запрос к БД
-                string q_table = "SELECT * from cons_output where u_f = '" + fam_user + "' and data_change = Date()";
+                string q_table = "SELECT top 10 * from cons_output where u_f = '" + fam_user + "' and data_change = Date() order by data_create desc";
                 //СОздаем объект Оле - соединение с БД
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();

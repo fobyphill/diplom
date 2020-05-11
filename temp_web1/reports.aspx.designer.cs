@@ -31,6 +31,15 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_click_left;
         
         /// <summary>
+        /// ddl_month control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_month;
+        
+        /// <summary>
         /// b_print control.
         /// </summary>
         /// <remarks>

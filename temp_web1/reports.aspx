@@ -20,6 +20,20 @@
             Text="Выберите параметры отчета"></asp:Label>
         </div>
             <div class="mar10 onerow">
+                <asp:DropDownList ID="ddl_month" runat="server">
+                    <asp:ListItem>Январь</asp:ListItem>
+                    <asp:ListItem>Февраль</asp:ListItem>
+                    <asp:ListItem>Март</asp:ListItem>
+                    <asp:ListItem>Апрель</asp:ListItem>
+                    <asp:ListItem>Май</asp:ListItem>
+                    <asp:ListItem>Июнь</asp:ListItem>
+                    <asp:ListItem>Июль</asp:ListItem>
+                    <asp:ListItem>Август</asp:ListItem>
+                    <asp:ListItem>Сентябрь</asp:ListItem>
+                    <asp:ListItem>Октябрь</asp:ListItem>
+                    <asp:ListItem>Ноябрь</asp:ListItem>
+                    <asp:ListItem>Декабрь</asp:ListItem>
+                </asp:DropDownList>
             </div>
             <div class="onerow">
             </div>
@@ -29,7 +43,7 @@
             OnClick="b_add_Click" OnClientClick="SetTarget();" />
             </div>
        <div class="onerow mar10">
-            <asp:Button ID="b_change" runat="server" Text="Изменить" />
+            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
            </div>
         <div class="onerow mar10">
                     <asp:Button ID="b_delete" runat="server" Text="Удалить"/>

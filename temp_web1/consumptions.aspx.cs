@@ -14,19 +14,20 @@ namespace temp_web1
         string login_user, status_user; // переменные для данных пользователя
         //строка подключения
         string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+        string sql_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //Зададим параметры пользователя
             login_user = (string)Session["login_user"];
             status_user = (string)Session["status_user"];
-            if (status_user != "a")
-            { Response.Redirect("autorise.aspx"); }
+            /*if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }*/
 
             if (!Page.IsPostBack)
             {   
                 //СОздаем запрос к БД
-                string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
+                /*string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
                     "consumptions.data_change, consumptions.value_con, cats.name_cat, consumptions.bil_con, " +
                     "consumptions.descript_con, users.fam_user as u_f, users2.fam_user as u_f2 " +
                     "from (((consumptions " +
@@ -35,9 +36,10 @@ namespace temp_web1
                     "inner join users2 on " +
                     "consumptions.change_login = users2.login_user) " +
                     "inner join cats on consumptions.cat_con = cats.id_cat) " +
-                    "order by consumptions.id_con";
+                    "order by consumptions.data_create desc";*/
+                string q_table = "select top 10 * from cons_output order by data_create desc";
                 //СОздаем объект Оле - соединение с БД
-                OleDbConnection ole_con = new OleDbConnection(con_str);
+                OleDbConnection ole_con = new OleDbConnection(sql_str);
                 ole_con.Open();
                 //Выполняем запрос. Результат - массив в формате "Команда"
                 OleDbCommand ole_com = new OleDbCommand(q_table, ole_con);
@@ -91,8 +93,8 @@ namespace temp_web1
               //Создал запрос с нужным расходом.
 
               //Соединяюсь с БД
-              string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
-              OleDbConnection ole_con = new OleDbConnection(con_str);
+              //string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+              OleDbConnection ole_con = new OleDbConnection(sql_str);
               ole_con.Open();
               OleDbCommand com = new OleDbCommand(q_con, ole_con);
               com.ExecuteNonQuery();
@@ -100,6 +102,11 @@ namespace temp_web1
               ole_con.Close();
               System.Threading.Thread.Sleep(500);
               Response.Redirect("consumptions.aspx");
+        }
+
+        protected void b_search_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
