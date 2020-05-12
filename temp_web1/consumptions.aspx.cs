@@ -21,8 +21,8 @@ namespace temp_web1
             //Зададим параметры пользователя
             login_user = (string)Session["login_user"];
             status_user = (string)Session["status_user"];
-            /*if (status_user != "a")
-            { Response.Redirect("autorise.aspx"); }*/
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
             {   

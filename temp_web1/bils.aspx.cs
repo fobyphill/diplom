@@ -12,7 +12,8 @@ namespace temp_web1
     public partial class bils : System.Web.UI.Page
     {
         string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+        string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
+            //"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {

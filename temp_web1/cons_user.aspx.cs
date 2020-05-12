@@ -12,7 +12,8 @@ namespace temp_web1
 	{
         string login_user, fam_user, status_user; // переменные для данных пользователя
         //строка подключения
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+        string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
+            //"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -26,7 +27,8 @@ namespace temp_web1
             if (!Page.IsPostBack)
             {
                 //СОздаем запрос к БД
-                string q_table = "SELECT top 10 * from cons_output where u_f = '" + fam_user + "' and data_change = Date() order by data_create desc";
+                string q_table = "SELECT * from cons_output where u_f = '" + fam_user + 
+                    "' and data_change = convert(date, GETDATE()) order by data_create desc";
                 //СОздаем объект Оле - соединение с БД
                 OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
@@ -80,7 +82,7 @@ namespace temp_web1
             //Создал запрос с нужным расходом.
 
             //Соединяюсь с БД
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+            //string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
             OleDbConnection ole_con = new OleDbConnection(con_str);
             ole_con.Open();
             OleDbCommand com = new OleDbCommand(q_con, ole_con);

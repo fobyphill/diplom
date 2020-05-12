@@ -11,7 +11,8 @@ namespace temp_web1
     public partial class edit_consumpt2 : System.Web.UI.Page
     {
         string login_user, name_user, fam_user, status_user; // переменные для данных пользователя
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+        string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
+            //"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -131,7 +132,9 @@ namespace temp_web1
             else
             { num_cat = tv.SelectedValue.ToString(); }
             //Получим измененную дату создания заказа
-            string data_create = tb_data.Text;
+            DateTime dt = new DateTime();
+            dt = DateTime.Parse(tb_data.Text);
+            string data_create = dt.ToShortDateString();
 
             //Получим значение расхода
             float value;
@@ -150,7 +153,7 @@ namespace temp_web1
             string bil = ddl_bils.SelectedItem.Text;
 
             //Объединим данные в переменной запроса
-            string q_update_con = "update consumptions set data_create='"+ data_create +"', data_change ='" +
+            string q_update_con = "update consumptions set data_create='" + data_create + "', data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
             ", bil_con='" + bil + "', descript_con = '" + tb_descript.Text + "', change_login = '" +
             login_user + "' where id_con = " + id_con;
@@ -181,7 +184,7 @@ namespace temp_web1
         void find_child(TreeNode pn)
         {
             //соединились с БД
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+           // string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
             OleDbConnection ole_con = new OleDbConnection(con_str);
             ole_con.Open();
             string q_cat = "select * from cats";

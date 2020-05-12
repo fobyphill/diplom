@@ -91,7 +91,9 @@ namespace temp_web1
             dr.Close();
             com.Dispose();
             ole_con.Close();
-            string dt_cr = tb_data.Text;//Получим дату создания заказа
+            DateTime dt = new DateTime();
+            dt = DateTime.Parse(tb_data.Text);
+            string dt_cr = dt.ToShortDateString();//Получим дату создания заказа
             string dt_ch = DateTime.Now.ToShortDateString();
             
             //Получим значение
@@ -141,9 +143,9 @@ namespace temp_web1
                 l_bil.Style.Add("color", "red");
             }
             //Заполним данными запрос
-            string q_add = "insert into consumptions" +
+            string q_add = "insert into consumptions " +
             "(id_con, data_create, data_change, value_con, cat_con, bil_con, "+
-            "descript_con, create_login, change_login)" +
+            "descript_con, create_login, change_login) " +
             "values ("+((++id_max).ToString())+", '"+dt_cr
             + "', '" + dt_ch + "', " + value_str + ", " + num_cat+", '"+bil+"', '" + descript_con + "', '"
             +login_user+"', '"+login_user+"')";
@@ -193,7 +195,7 @@ namespace temp_web1
             }
             else
             {
-                tv.CollapseAll();
+                tv.CollapseAll(); 
                 l_collapse.Text = "Развернуть все";
             }
         }

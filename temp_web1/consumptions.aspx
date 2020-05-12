@@ -100,6 +100,7 @@
             <SortedAscendingHeaderStyle BackColor="#246B61" />
             <SortedDescendingCellStyle BackColor="#e4e9eb" />
             <SortedDescendingHeaderStyle BackColor="#15524A" />
+            
         </asp:GridView>
         <div class="mar10 onerow">
         <asp:Button  ID="b_add_con" runat="server" Text="Добавить" 
