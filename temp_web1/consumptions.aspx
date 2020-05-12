@@ -14,6 +14,7 @@
    </div>
     <div class="maincontent">
         <asp:Panel ID="Panel1" runat="server">
+            
             <asp:TextBox ID="tb_date_create_begin" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
             <asp:TextBox ID="tb_date_create_end" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
             <asp:Label ID="l_date_create" runat="server" Text="Период затрат   "></asp:Label>

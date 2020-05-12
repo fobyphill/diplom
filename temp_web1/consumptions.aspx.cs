@@ -13,16 +13,17 @@ namespace temp_web1
     {
         string login_user, status_user; // переменные для данных пользователя
         //строка подключения
-        string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
-        string sql_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
+        string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
+            //"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //Зададим параметры пользователя
             login_user = (string)Session["login_user"];
             status_user = (string)Session["status_user"];
-            if (status_user != "a")
-            { Response.Redirect("autorise.aspx"); }
+            /*if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }*/
 
             if (!Page.IsPostBack)
             {   
@@ -39,7 +40,7 @@ namespace temp_web1
                     "order by consumptions.data_create desc";*/
                 string q_table = "select top 10 * from cons_output order by data_create desc";
                 //СОздаем объект Оле - соединение с БД
-                OleDbConnection ole_con = new OleDbConnection(sql_str);
+                OleDbConnection ole_con = new OleDbConnection(con_str);
                 ole_con.Open();
                 //Выполняем запрос. Результат - массив в формате "Команда"
                 OleDbCommand ole_com = new OleDbCommand(q_table, ole_con);
@@ -94,7 +95,7 @@ namespace temp_web1
 
               //Соединяюсь с БД
               //string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
-              OleDbConnection ole_con = new OleDbConnection(sql_str);
+              OleDbConnection ole_con = new OleDbConnection(con_str);
               ole_con.Open();
               OleDbCommand com = new OleDbCommand(q_con, ole_con);
               com.ExecuteNonQuery();
@@ -106,7 +107,45 @@ namespace temp_web1
 
         protected void b_search_Click(object sender, EventArgs e)
         {
+            string q_find_cons = "select * from cons_output";
+            bool flag = false;
+            //Начало блока всех условий
+            if (tb_date_create_begin.Text == "" && tb_date_create_end.Text != "")
+            {
+                flag = true;
+                DateTime dt = new DateTime();
+                dt = DateTime.Parse(tb_date_create_end.Text);
+                q_find_cons += " where data_create <= '" + dt.ToShortDateString() + "'";
+            }
+            if (tb_date_create_begin.Text != "" && tb_date_create_end.Text == "")
+            {
+                flag = true;
+                DateTime dtb = new DateTime();
+                dtb = DateTime.Parse(tb_date_create_begin.Text);
+                q_find_cons += " where data_create between '" + dtb.ToShortDateString() + "' and '" + DateTime.Now.ToShortDateString() + "'";
 
+            }
+            if (tb_date_create_begin.Text !="" && tb_date_create_end.Text !="")
+            {
+                flag = true;
+                DateTime dtb = new DateTime();
+                dtb = DateTime.Parse(tb_date_create_begin.Text);
+                DateTime dte = new DateTime();
+                dte = DateTime.Parse(tb_date_create_end.Text);
+                q_find_cons += " where data_create between '" + dtb.ToShortDateString() + "' and '" + dte.ToShortDateString() + "'";
+
+            }
+            //Конец блока всех условий
+            //вывод таблицы
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_find_cons, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
+            gv1.DataSource = null;
+            gv1.DataBind();
+            gv1.DataSource = dr;
+            gv1.DataBind();
+            ole_con.Close();
         }
 
     }
