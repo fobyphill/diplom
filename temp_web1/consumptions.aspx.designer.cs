@@ -139,6 +139,15 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.DropDownList ddl_bils;
         
         /// <summary>
+        /// dset_sql control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource dset_sql;
+        
+        /// <summary>
         /// l_bils control.
         /// </summary>
         /// <remarks>
@@ -191,6 +200,15 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button b_search;
+        
+        /// <summary>
+        /// b_clear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button b_clear;
         
         /// <summary>
         /// l_hint_no_1 control.
