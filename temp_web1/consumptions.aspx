@@ -1,40 +1,43 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" 
+﻿<%@ Page Title="Управление затратами" Language="C#" MasterPageFile="~/Site.Master" 
     AutoEventWireup="true" CodeBehind="consumptions.aspx.cs" Inherits="temp_web1.consumptions" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mymenu">
-       <div class="forlink"><a href="Default.aspx">Главная</a></div>
-       <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
-        <div class="forlink"><a href="plans.aspx">Планирование затрат</a></div>
-       <div class="forlink"> <a href="cats.aspx">Категории затрат</a></div>
-       <div class="forlink"> <a href="bils.aspx">Счета</a></div>
-       <div class="forlink"> <a href="users.aspx">Пользователи</a></div>
-       <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
+    <div class="maindiv">
+    <div class= "onerow mymenu">
+       <div class="mar10ver"><a href="Default.aspx">Главная</a></div>
+       <div class="mar10ver"><a href="consumptions.aspx">Управление затратами</a></div>
+        <div class="mar10ver"><a href="plans.aspx">Планирование затрат</a></div>
+       <div class="mar10ver"> <a href="cats.aspx">Категории затрат</a></div>
+       <div class="mar10ver"> <a href="bils.aspx">Счета</a></div>
+       <div class="mar10ver"> <a href="users.aspx">Пользователи</a></div>
+       <div class="mar10ver"> <a href="reports.aspx">Отчеты</a></div>
    </div>
-    <div class="maincontent">
-        <asp:Panel ID="Panel1" runat="server">
-            
-            <asp:TextBox ID="tb_date_create_begin" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
-            <asp:TextBox ID="tb_date_create_end" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
-            <asp:Label ID="l_date_create" runat="server" Text="Период затрат   "></asp:Label>
-            <asp:TextBox ID="tb_date_change_begin" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
-            <asp:TextBox ID="tb_date_change_end" runat="server" TextMode="Date" Width="122px"></asp:TextBox>
-            <asp:Label ID="l_date_change" runat="server" Text="Период изменения затрат"></asp:Label>
-            <br />
-            <asp:TextBox ID="tb_value_bottom" runat="server"></asp:TextBox>
-            <asp:TextBox ID="tb_value_top" runat="server"></asp:TextBox>
-            <asp:Label ID="l_value" runat="server" Text="Диапазон значений"></asp:Label>
-            <asp:TextBox ID="tb_cats" runat="server"></asp:TextBox>
+    <div class="onerow maincontent">
+        <asp:Panel ID="p_search" runat="server">
+             <asp:Label ID="l_date_create" runat="server" Text="Дата создания затрат от "></asp:Label>
+            <asp:TextBox ID="tb_date_create_begin" runat="server" TextMode="Date" Width="125px"></asp:TextBox><span> до </span>
+            <asp:TextBox ID="tb_date_create_end" runat="server" TextMode="Date" Width="125px"></asp:TextBox>
+           <asp:Label CssClass="mar40left" ID="l_date_change" runat="server" Text="Дата изменения затрат от"></asp:Label>
+            <asp:TextBox ID="tb_date_change_begin" runat="server" TextMode="Date" Width="125px"></asp:TextBox>
+            <span> до </span>
+            <asp:TextBox ID="tb_date_change_end" runat="server" TextMode="Date" Width="125px"></asp:TextBox>
+            <p class="mar5ver" />
+            <asp:Label ID="l_value" runat="server" Text="Диапазон значений от"></asp:Label>
+            <asp:TextBox ID="tb_value_bottom" width="70px" runat="server"></asp:TextBox><span> до </span>
+            <asp:TextBox ID="tb_value_top" width="70px" runat="server"></asp:TextBox>
+            <asp:Label CssClass="mar40left" ID="l_cats" runat="server" Text="Категория"></asp:Label>
+            <asp:TextBox ID="tb_cats" Width="100px" runat="server"></asp:TextBox>
             <asp:Button ID="b_show_tree" runat="server" Text="Показать дерево" />
-            <asp:Label ID="l_cats" runat="server" Text="Категории"></asp:Label>
-            <asp:DropDownList ID="ddl_bils" runat="server">
+            <p class="mar5ver" />
+            <asp:Label ID="l_bils" runat="server" Text="Счета "></asp:Label>
+            <asp:DropDownList ID="ddl_bils" Width="200px" runat="server">
                 <asp:ListItem>Все счета</asp:ListItem>
             </asp:DropDownList>
-            <asp:SqlDataSource ID="dset_sql" runat="server" ConnectionString="<%$ ConnectionStrings:con_str_sql %>" SelectCommand="SELECT [name_bil] FROM [bils]"></asp:SqlDataSource>
-            <asp:Label ID="l_bils" runat="server" Text="Счета"></asp:Label><br />
-            <asp:TextBox ID="tb_search" runat="server" Width="253px"></asp:TextBox>
-            <asp:Label ID="L_search" runat="server" Text="Поиск по номеру или комментарию"></asp:Label>
+            <asp:Label CssClass="mar40left" ID="L_search" runat="server" Text="Номер записи или комментарий"></asp:Label>
+            <asp:TextBox ID="tb_search" runat="server" Width="440px"></asp:TextBox>
+            
+            <p class="mar5ver" />
             <asp:DropDownList ID="ddl_user" runat="server">
                 <asp:ListItem>Все пользователи</asp:ListItem>
             </asp:DropDownList>
@@ -124,6 +127,7 @@
         <div class="invis"><asp:Button ID="b_inv" runat="server" Text="Невидимка" /></div>
         
 
+    </div>
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
                 Вы уверены, что желаете удалить запись о расходе?<br /><br />

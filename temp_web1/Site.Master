@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -40,16 +40,17 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="myhead">
-            <div class="textcenter ">
-                <div class="onerow">
-                    <h1 ><span class="logo1">Пла</span><span class="logo2">За</span></h1>
+        <div class="maindiv myhead">
+                <div class="onerow mymenu">
+                    <h1 ><span class="logo1">Pla</span><span class="logo2">Za</span></h1>
                 </div>
-                <div class="onerow textright">
-                     <asp:Label ID="l_user" runat="server" Text="Авторизуйтесь пожалуйста"></asp:Label>
-                    <asp:Button ID="b_exit" runat="server" Text="Выход" OnClick="b_exit_Click" Visible="False" />
-                </div>
+            <div class="onerow mar7">
+                <asp:Label style="font:100% sans-serif; margin:7px 10px;" ID="l_title" runat="server" Text=""><%: Page.Title %></asp:Label>
             </div>
+                <div class="textright mar7">
+                     <asp:Label ID="l_user" runat="server" Text="Войдите в систему, пожалуйста"></asp:Label>
+                    <asp:Button ID="b_exit" CssClass="mybutton" runat="server" Text="Выход" OnClick="b_exit_Click" Visible="False" />
+                </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">

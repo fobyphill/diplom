@@ -9,15 +9,29 @@ p
 h1{
     margin:0;
 }
-.forlink {
-    margin: 10px;
+a
+{
+    color:black;
+    font:85% sans-serif;
+    text-decoration:none;
+}
+
+.mar10ver {
+    margin: 10px 0;
+}
+.mar5ver 
+{
+    margin: 5px 0;
 }
 
 .myhead
 {
     width:1170px;
-    height:70px;
+    height:35px;
     background-color: white;
+}
+.maindiv
+{
     margin: 10px 70px;
 }
 .auten
@@ -36,7 +50,6 @@ h1{
 .mymenu
 {
       width: 200px;
-      margin-left: 70px;
       display: inline-block;
       vertical-align: top;
 }
@@ -44,16 +57,18 @@ h1{
 .logo1
 {
     color: #26a9e0;
+    font: 100% sans-serif;
 }
 .logo2
 {
     color: #16dbdb;
+    font: 100% sans-serif;
 }
 
 .maincontent
 {
     width:955px;
-    background-color: white;
+    //background-color: white;
     display: inline-block;
     vertical-align: top;
     margin-left: 10px;
@@ -71,10 +86,21 @@ h1{
 {
     margin: 10px;
 }
+.mar7 
+{
+    margin: 7px;
+}
+.mar10hor
+{
+    margin: 0px 10px;
+}
+.mar40left
+{
+    margin-left:40px;
+}
 .onerow
 {
     display:inline-block;
-    vertical-align:top;
 }
 .mybutton {
     background-color: #26a9e0;
@@ -135,4 +161,5 @@ h1{
 .textright
 {
     float: right;
+    font: 100% sans-serif;
 }

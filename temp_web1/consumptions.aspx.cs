@@ -26,18 +26,7 @@ namespace temp_web1
             { Response.Redirect("autorise.aspx"); }*/
 
             if (!Page.IsPostBack)
-            {   
-                //СОздаем запрос к БД
-                /*string q_table = "SELECT consumptions.id_con, consumptions.data_create, " +
-                    "consumptions.data_change, consumptions.value_con, cats.name_cat, consumptions.bil_con, " +
-                    "consumptions.descript_con, users.fam_user as u_f, users2.fam_user as u_f2 " +
-                    "from (((consumptions " +
-                    "inner join users on " +
-                    "consumptions.create_login = users.login_user) " +
-                    "inner join users2 on " +
-                    "consumptions.change_login = users2.login_user) " +
-                    "inner join cats on consumptions.cat_con = cats.id_cat) " +
-                    "order by consumptions.data_create desc";*/
+            {
                 string q_table = "select top 10 * from cons_output order by data_create desc";
                 string q_bils = "select name_bil from bils";
                 string q_users = "select login_user, status_user from users";

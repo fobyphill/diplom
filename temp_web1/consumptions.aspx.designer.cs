@@ -13,13 +13,22 @@ namespace temp_web1 {
     public partial class consumptions {
         
         /// <summary>
-        /// Panel1 control.
+        /// p_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel p_search;
+        
+        /// <summary>
+        /// l_date_create control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_date_create;
         
         /// <summary>
         /// tb_date_create_begin control.
@@ -40,13 +49,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.TextBox tb_date_create_end;
         
         /// <summary>
-        /// l_date_create control.
+        /// l_date_change control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_date_create;
+        protected global::System.Web.UI.WebControls.Label l_date_change;
         
         /// <summary>
         /// tb_date_change_begin control.
@@ -67,13 +76,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.TextBox tb_date_change_end;
         
         /// <summary>
-        /// l_date_change control.
+        /// l_value control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_date_change;
+        protected global::System.Web.UI.WebControls.Label l_value;
         
         /// <summary>
         /// tb_value_bottom control.
@@ -94,13 +103,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.TextBox tb_value_top;
         
         /// <summary>
-        /// l_value control.
+        /// l_cats control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_value;
+        protected global::System.Web.UI.WebControls.Label l_cats;
         
         /// <summary>
         /// tb_cats control.
@@ -121,13 +130,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Button b_show_tree;
         
         /// <summary>
-        /// l_cats control.
+        /// l_bils control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_cats;
+        protected global::System.Web.UI.WebControls.Label l_bils;
         
         /// <summary>
         /// ddl_bils control.
@@ -139,22 +148,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.DropDownList ddl_bils;
         
         /// <summary>
-        /// dset_sql control.
+        /// L_search control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource dset_sql;
-        
-        /// <summary>
-        /// l_bils control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_bils;
+        protected global::System.Web.UI.WebControls.Label L_search;
         
         /// <summary>
         /// tb_search control.
@@ -164,15 +164,6 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tb_search;
-        
-        /// <summary>
-        /// L_search control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label L_search;
         
         /// <summary>
         /// ddl_user control.
