@@ -151,6 +151,7 @@ namespace temp_web1
 
         protected void chb_table_CheckedChanged(object sender, EventArgs e)
         {
+            p_error.Visible = false;
             for (int i = 0; i < gv.Rows.Count; i++)
             {
                 CheckBox chb = (CheckBox)gv.Rows[i].FindControl("chb_table");

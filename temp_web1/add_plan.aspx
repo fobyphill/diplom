@@ -34,22 +34,7 @@
             <asp:Label ID="l_value" runat="server" Text="Cумма"></asp:Label>
         </div>
        <div class ="mar10ver">
-           <asp:DropDownList CssClass="border1" ID="ddl_month" runat="server">
-               <asp:ListItem Value="1">Январь</asp:ListItem>
-               <asp:ListItem Value="2">Февраль</asp:ListItem>
-               <asp:ListItem Value="3">Март</asp:ListItem>
-               <asp:ListItem Value="4">Апрель</asp:ListItem>
-               <asp:ListItem Value="5">Май</asp:ListItem>
-               <asp:ListItem Value="6">Июнь</asp:ListItem>
-               <asp:ListItem Value="7">Июль</asp:ListItem>
-               <asp:ListItem Value="8">Август</asp:ListItem>
-               <asp:ListItem Value="9">Сентябрь</asp:ListItem>
-               <asp:ListItem Value="10">Октябрь</asp:ListItem>
-               <asp:ListItem Value="11">Ноябрь</asp:ListItem>
-               <asp:ListItem Value="12">Декабрь</asp:ListItem>
-           </asp:DropDownList>
-           <asp:DropDownList CssClass="border1" ID="ddl_year" runat="server">
-           </asp:DropDownList>
+           <asp:TextBox CssClass="border1" ID="tb_data_plan" runat="server" TextMode="Month" Width="310px"></asp:TextBox>
            <asp:Label ID="l_period" runat="server" Text="Период планируемых затрат"></asp:Label>
        </div>
        <div class="mar10ver">

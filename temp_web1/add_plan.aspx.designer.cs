@@ -76,22 +76,13 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_value;
         
         /// <summary>
-        /// ddl_month control.
+        /// tb_data_plan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_month;
-        
-        /// <summary>
-        /// ddl_year control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_year;
+        protected global::System.Web.UI.WebControls.TextBox tb_data_plan;
         
         /// <summary>
         /// l_period control.

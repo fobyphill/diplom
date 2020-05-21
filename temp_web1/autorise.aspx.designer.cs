@@ -7,10 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace temp_web1 {
+namespace temp_web1.Content {
     
     
-    public partial class autorise {
+    public partial class temp_auto {
+        
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// l_enter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_enter;
         
         /// <summary>
         /// tb_login control.
@@ -22,13 +40,40 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.TextBox tb_login;
         
         /// <summary>
-        /// tb_password control.
+        /// l_login control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_password;
+        protected global::System.Web.UI.WebControls.Label l_login;
+        
+        /// <summary>
+        /// tb_pass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_pass;
+        
+        /// <summary>
+        /// l_pass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_pass;
+        
+        /// <summary>
+        /// ib_show_hide_search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ib_show_hide_search;
         
         /// <summary>
         /// b_enter control.
@@ -40,12 +85,21 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Button b_enter;
         
         /// <summary>
-        /// l_incorrect control.
+        /// p_error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_incorrect;
+        protected global::System.Web.UI.WebControls.Panel p_error;
+        
+        /// <summary>
+        /// l_error control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_error;
     }
 }

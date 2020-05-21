@@ -27,7 +27,7 @@ namespace temp_web1
                 if (status_user == "u")
                 { 
                     p_vis.Visible = false;
-                    p_main.CssClass = "maincontent_user";
+                    p_main.CssClass = "maindiv";
                 }
                 
                 string q_cat = "select * from cats";

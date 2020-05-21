@@ -52,13 +52,10 @@ namespace temp_web1
             if (gv1.SelectedIndex != -1)
             {
                 string id_con = gv1.Rows[gv1.SelectedIndex].Cells[1].Text;
-                Response.Redirect("edit_consumpt.aspx?id_con=" + id_con);
+                Response.Redirect("edit_consumpt.aspx?id_con=" + id_con+"&count_rec=1");
             }
             else
-            {
-                l_hint_no_1.Visible = true;
-                l_hint_no_1.Text += "<br />";
-            }
+            {p_error.Visible = true;}
         }
 
         protected void b_delete_Click(object sender, EventArgs e)
@@ -68,11 +65,7 @@ namespace temp_web1
                 mpe.Show();
 
             }
-            else
-            {
-                l_hint_no_1.Visible = true;
-                l_hint_no_1.Text += "<br />";
-            }
+            else { p_error.Visible = true; }
         }
 
         protected void b_yes_Click(object sender, EventArgs e)

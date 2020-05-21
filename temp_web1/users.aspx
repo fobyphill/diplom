@@ -1,54 +1,48 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="users.aspx.cs" Inherits="temp_web1.users" %>
+﻿<%@ Page Title="Пользователи" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="users.aspx.cs" Inherits="temp_web1.users" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mymenu">
-       <div class="forlink"><a href="Default.aspx">Главная</a></div>
-       <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
-        <div class="forlink"><a href="plans.aspx">Планирование затрат</a></div>
-       <div class="forlink"> <a href="cats.aspx">Категории затрат</a></div>
-       <div class="forlink"> <a href="bils.aspx">Счета</a></div>
-       <div class="forlink"> <a href="users.aspx">Пользователи</a></div>
-       <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
+    <div class="maindiv">
+    <div class="onerow mymenu">
+       <div class="mar10ver"><a href="Default.aspx">Главная</a></div>
+       <div class="mar10ver"><a href="consumptions.aspx">Управление затратами</a></div>
+        <div class="mar10ver"><a href="plans.aspx">Планирование затрат</a></div>
+       <div class="mar10ver"> <a href="cats.aspx">Категории затрат</a></div>
+       <div class="mar10ver"> <a href="bils.aspx">Счета</a></div>
+       <div class="mar10ver"> <a href="users.aspx">Пользователи</a></div>
+       <div class="mar10ver"> <a href="reports.aspx">Отчеты</a></div>
    </div>
-    <div class="maincontent">
-        
-        <div class="divhint">
-            <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Пользователь не выбран. " Visible="False"></asp:Label>
-            <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Выберите пользователя из списка"></asp:Label>
-        </div>
-            <div class="mar10 onerow">
-            <asp:ListBox ID="lb_users" runat="server" Height="225px" style="margin-top: 0px" Width="192px" AutoPostBack="True" 
+    <div class="onerow maincontent">
+        <asp:Panel ID="p_error" CssClass="diverror" Visible="false" runat="server">
+            <asp:Label ID="l_error" runat="server" Text="Пользователь не выбран" ForeColor="White"></asp:Label>
+        </asp:Panel>
+            <div class="mar10ver onerow">
+            <asp:ListBox CssClass="border1" ID="lb_users" runat="server" Height="205px" style="margin-top: 0px" Width="192px" AutoPostBack="True" 
                 OnSelectedIndexChanged="lb_users_SelectedIndexChanged"></asp:ListBox>
             <asp:Label ID="l_users" runat="server" Text="Пользователи"></asp:Label>
-                <br />
-                <asp:ImageButton ID="ib_show_hide_pass" ImageUrl="img/checkbox.png" Width="20px" runat="server" OnClick="ib_show_hide_pass_Click" />
-                <asp:Label ID="l_collapse" runat="server" Text="Показать пароли"></asp:Label>
             </div>
-            <div class="onerow">
-                <div class="mar10">
-            <asp:TextBox ID="tb_name" runat="server"></asp:TextBox>
+            <div class="onerow mar10hor">
+                <div class="mar10ver">
+            <asp:TextBox CssClass="border1" ID="tb_name" runat="server"></asp:TextBox>
             <asp:Label ID="l_name" runat="server" Text="Имя пользователя"></asp:Label>
                 </div>
-                <div class="mar10">
-            <asp:TextBox ID="tb_fam" runat="server"></asp:TextBox>
+                <div class="mar10ver">
+            <asp:TextBox CssClass="border1" ID="tb_fam" runat="server"></asp:TextBox>
             <asp:Label ID="l_fam" runat="server" Text="Фамилия пользователя"></asp:Label>
                 </div>
-                <div class="mar10">
-            <asp:TextBox ID="tb_login" runat="server" Height="16px"></asp:TextBox>
+                <div class="mar10ver">
+            <asp:TextBox CssClass="border1" ID="tb_login" runat="server" Height="16px"></asp:TextBox>
             <asp:Label ID="l_login" runat="server" Text="Логин пользователя"></asp:Label>
                </div>
-                <div class="mar10">
-            <asp:TextBox ID="tb_password" runat="server" Height="16px" TextMode="Password"></asp:TextBox>
+                <div class="mar10ver">
+            <asp:TextBox CssClass="border1" ID="tb_password" runat="server" Height="16px" TextMode="Password"></asp:TextBox>
             <asp:Label ID="l_password" runat="server" Text="Пароль пользователя"></asp:Label>
                </div>
-                <div class="mar10">
-            <asp:TextBox ID="tb_pass2" runat="server" Height="16px" TextMode="Password"></asp:TextBox>
+                <div class="mar10ver">
+            <asp:TextBox CssClass="border1" ID="tb_pass2" runat="server" Height="16px" TextMode="Password"></asp:TextBox>
             <asp:Label ID="Label1" runat="server" Text="Повторите пароль"></asp:Label>
                </div>
-                <div class="mar10">
-                    <div class="onerow"><asp:RadioButtonList ID="rbl_status" runat="server" Width="172px">
+                <div class="mar10ver">
+                    <div class="onerow"><asp:RadioButtonList CssClass="border1" ID="rbl_status" runat="server" Width="172px">
                         <asp:ListItem Value="a">Администратор</asp:ListItem>
                         <asp:ListItem Value="u">Сотрудник</asp:ListItem>
 
@@ -59,19 +53,23 @@
                 </div>
             </div>
         <div>
-        <div class="onerow mar10">
-        <asp:Button  ID="b_add" runat="server" Text="Добавить" 
+            <asp:ImageButton CssClass="checkbox_uncheck" ID="ib_show_hide_pass" ImageUrl="img/double_checkbox_blue.png" Width="20px" runat="server" OnClick="ib_show_hide_pass_Click" />
+                <asp:Label ID="l_collapse" runat="server" Text="Показать пароли"></asp:Label>
+        </div>
+        <div>
+        <div class="onerow mar10ver">
+        <asp:Button CssClass="bluebutton mar10right" Height="30px"  ID="b_add" runat="server" Text="Добавить" 
             OnClick="b_add_Click" />
             </div>
-       <div class="onerow mar10">
-            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
+       <div class="onerow mar10ver">
+            <asp:Button ID="b_change" CssClass="greenbutton mar10hor" Height="30" runat="server" Text="Изменить" OnClick="b_change_Click" />
            </div>
-        <div class="onerow mar10">
-                    <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
+        <div class="onerow mar10ver">
+                    <asp:Button ID="b_delete" CssClass="redbutton mar10hor" Height="30px" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
             
             </div>
-            <div class="onerow mar10">
-                    <asp:Button ID="b_clear" runat="server" Text="Очистить" OnClick="b_clear_Click" />
+            <div class="onerow mar10ver">
+                    <asp:Button ID="b_clear" CssClass="redbutton mar10hor" Height="30" runat="server" Text="Очистить" OnClick="b_clear_Click" />
             
             </div>
             </div>
@@ -89,4 +87,5 @@
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" OnClick="b_no_Click" />
             </asp:Panel>
+        </div>
 </asp:Content>

@@ -13,22 +13,22 @@ namespace temp_web1 {
     public partial class bils {
         
         /// <summary>
-        /// l_hint_no_1 control.
+        /// p_error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_hint_no_1;
+        protected global::System.Web.UI.WebControls.Panel p_error;
         
         /// <summary>
-        /// l_click_left control.
+        /// l_error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_click_left;
+        protected global::System.Web.UI.WebControls.Label l_error;
         
         /// <summary>
         /// lb_bils control.

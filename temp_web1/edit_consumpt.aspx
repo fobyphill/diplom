@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Редактирование записей о затратах" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="edit_consumpt.aspx.cs" Inherits="temp_web1.edit_consumpt2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
- <div class="maindiv">
+    <div class="maindiv">
     <asp:Panel ID="p_menu" CssClass="onerow mymenu" runat="server">
        <div class="mar10ver"><a href="Default.aspx">Главная</a></div>
        <div class="mar10ver"><a href="consumptions.aspx">Управление затратами</a></div>
@@ -30,8 +30,8 @@
                 <asp:Label ID="l_collapse" runat="server" Text="Свернуть все"></asp:Label>
        </div>
        <div class ="mar10ver">
-           <asp:TextBox CssClass="border1" ID="tb_data" runat="server" TextMode="Date"></asp:TextBox>
-           <asp:Label ID="l_data" runat="server" Text="Дата расхода"></asp:Label>
+           <asp:TextBox CssClass="border1" ID="tb_data" runat="server" TextMode="Date" Width="292px"></asp:TextBox>
+           <asp:Label ID="l_data" runat="server" Text="Дата затрат"></asp:Label>
        </div>
         <div class="mar10ver">
             <asp:TextBox ID="tb_value" CssClass="border1" runat="server" Width="292px"></asp:TextBox>

@@ -107,7 +107,7 @@
     <Content Include="add_consumpt.aspx" />
     <Content Include="add_plan.aspx" />
     <Content Include="App_Data\plaza.accdb" />
-    <Content Include="autorise.aspx" />
+    <Content Include="autorise2.aspx" />
     <Content Include="bils.aspx" />
     <Content Include="cats.aspx" />
     <Content Include="consumptions.aspx" />
@@ -117,6 +117,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\mycss.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="autorise.aspx" />
     <Content Include="edit_consumpt.aspx" />
     <Content Include="edit_plan.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -257,12 +258,12 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="autorise.aspx.cs">
-      <DependentUpon>autorise.aspx</DependentUpon>
+    <Compile Include="autorise2.aspx.cs">
+      <DependentUpon>autorise2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="autorise.aspx.designer.cs">
-      <DependentUpon>autorise.aspx</DependentUpon>
+    <Compile Include="autorise2.aspx.designer.cs">
+      <DependentUpon>autorise2.aspx</DependentUpon>
     </Compile>
     <Compile Include="bils.aspx.cs">
       <DependentUpon>bils.aspx</DependentUpon>
@@ -298,6 +299,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="autorise.aspx.cs">
+      <DependentUpon>autorise.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="autorise.aspx.designer.cs">
+      <DependentUpon>autorise.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

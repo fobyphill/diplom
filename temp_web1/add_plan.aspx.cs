@@ -18,10 +18,10 @@ namespace temp_web1
         protected void Page_Load(object sender, EventArgs e)
         {
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
-            //login_user = (string)Session["login_user"];
-            login_user = "administrator";
-           /* if (login_user == null)
-            { Response.Redirect("autorise.aspx"); }*/
+            login_user = (string)Session["login_user"];
+            
+           if (login_user == null)
+            { Response.Redirect("autorise.aspx"); }
             
             if (!Page.IsPostBack)
             {
@@ -68,21 +68,10 @@ namespace temp_web1
                 ole_con.Close();
                 com.Dispose();
 
-                //заполним комбобокс с годами
-                int year_now = DateTime.Now.Year;
-                ddl_year.Items.Add(year_now.ToString());
-                year_now--;
-                ddl_year.Items.Add(year_now.ToString());
-                year_now += 2;
-                for (int i = 0; i<4; i++)
-                {
-                    ddl_year.Items.Add(year_now.ToString());
-                    year_now++;
-                }
-
-                //Выведем текущий месяц
-                ddl_month.SelectedValue = DateTime.Now.Month.ToString();
-
+                //заполним комбобокс с месяцем
+                DateTime dt = new DateTime();
+                dt = DateTime.Now;
+                tb_data_plan.Text = dt.ToString("yyyy-MM");
             }
         }
         protected void b_save_Click(object sender, EventArgs e)
@@ -105,30 +94,18 @@ namespace temp_web1
             
 
             //Получим дату плана
-            if (ddl_month.SelectedValue.ToString() == "null")//Проверка месяца
+            string data_plan = "";
+            if (tb_data_plan.Text == "")//Проверка месяца
             {
                 flag_add = true;
                 l_period.Style.Add("color", "red");
                 l_period.Text = "Не указан месяц";
             }
-            if (ddl_year.SelectedValue.ToString() == "null")// проверка года
-            {
-                if (flag_add == true)
-                {
-                    l_period.Text += ", не указан год.";
-                    l_period.Style.Add("color", "red");
-                }
-                else
-                {
-                    l_period.Text = "Не указан год";
-                    l_period.Style.Add("color", "red");
-                    flag_add = true;
-                }
-            }
-            string data_plan = "";
             if (!flag_add)
             {
-                data_plan = new DateTime(Int32.Parse(ddl_year.SelectedItem.Text), Int32.Parse(ddl_month.SelectedValue), 1).ToShortDateString();
+                DateTime dt = new DateTime();
+                dt = DateTime.Parse(tb_data_plan.Text);
+                data_plan = dt.ToShortDateString();
             }
 
             //Получим значение
@@ -162,7 +139,6 @@ namespace temp_web1
             {
                 descript_plan = tb_descript.Text;
             }
-
             //Добавим номер счета
             string bil = ddl_bils.SelectedItem.Text;
             if (ddl_bils.Items.Count == 1)

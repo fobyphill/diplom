@@ -18,7 +18,6 @@ namespace temp_web1
         protected void Page_Load(object sender, EventArgs e)
         {
             //Зададим параметры пользователя
-            //login_user = "administrator";
             login_user = (string)Session["login_user"];
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
@@ -67,7 +66,7 @@ namespace temp_web1
         {
             if (lb_bils.SelectedIndex == -1)
             {
-                l_hint_no_1.Visible = true;
+                p_error.Visible = true;
             }
             else
             {
@@ -83,7 +82,7 @@ namespace temp_web1
         {
             if (lb_bils.SelectedIndex == -1)
             {
-                l_hint_no_1.Visible = true;
+                p_error.Visible = true;
             }
             else
             {
@@ -102,17 +101,21 @@ namespace temp_web1
                 dr.Read();
                 string kol_plan = dr[0].ToString();
                 if (kol_con != "0")
-                { l_click_left.Text = "Невозможно удалить счет. К нему привязаны записи о затратах в количестве "+kol_con+
+                { 
+                    p_error.Visible=true;
+                    l_error.Text = "Невозможно удалить счет. К нему привязаны записи о затратах в количестве "+kol_con+
              ". Перед удаланием счета удалите или перенесите записи о затратах на странице \"<a href='consumptions.aspx'>Управление затратами</a>\".";}
                 if (kol_con != "0" && kol_plan != "0")
                 {
-                    l_click_left.Text += "<br />";
-                    l_click_left.Text += "Невозможно удалить счет. К нему привязаны записи о планировании в количестве " + kol_plan +
+                    p_error.Visible = true;
+                    l_error.Text += "<br />";
+                    l_error.Text += "Невозможно удалить счет. К нему привязаны записи о планировании в количестве " + kol_plan +
           ". Перед удаланием счета удалите или перенесите записи о планировании затрат на странице \"<a href='plans.aspx'>Планирование затрат</a>\".";
                 }
                 else if (kol_plan != "0")
                 {
-                    l_click_left.Text = "Невозможно удалить счет. К нему привязаны записи о планировании в количестве " + kol_plan +
+                    p_error.Visible = true;
+                   l_error.Text = "Невозможно удалить счет. К нему привязаны записи о планировании в количестве " + kol_plan +
           ". Перед удаланием счета удалите или перенесите затраты на странице \"<a href='plans.aspx'>Планирование затрат</a>\".";
                 }
                 if (kol_plan =="0" && kol_con == "0")
@@ -135,8 +138,7 @@ namespace temp_web1
 
         protected void lb_bils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            l_click_left.Text = "Выберите счет из списка";
-            l_hint_no_1.Visible = false;
+            p_error.Visible = false;
             l_name.CssClass = "norm";
             l_name.Text = "Название счета";
             l_num.CssClass = "norm";

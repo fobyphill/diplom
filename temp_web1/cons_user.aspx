@@ -1,14 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cons_user.aspx.cs" 
+﻿<%@ Page Title="Управление затратами" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cons_user.aspx.cs" 
     Inherits="temp_web1.cons_user" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="auten">
-        
-        <div class="divhint">
-            <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Ни одна запись не была выбрана" Visible="False"></asp:Label>
-            <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label></div>
+    <div class="maindiv">
+        <asp:Panel ID="p_error" CssClass="diverror" Visible="false" runat="server">
+            <asp:Label ID="l_error" runat="server" ForeColor="White" Text="Запись не выбрана"></asp:Label>
+        </asp:Panel>
         <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>

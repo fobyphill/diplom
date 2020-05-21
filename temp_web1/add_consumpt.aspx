@@ -32,20 +32,21 @@
                 <asp:Label ID="l_collapse" runat="server" Text="Свернуть все"></asp:Label>
     </div>
        <div class="mar10ver">
-           <asp:TextBox CssClass="border1" ID="tb_data" runat="server" TextMode="Date"></asp:TextBox>
-           <asp:Label ID="l_data" runat="server" Text="дата"></asp:Label>
+           <asp:TextBox CssClass="border1" Width="292px" ID="tb_data" runat="server" TextMode="Date"></asp:TextBox>
+           <asp:Label ID="l_data" runat="server" Text="Дата"></asp:Label>
        </div>
         <div class="mar10ver">
             <asp:TextBox ID="tb_value" CssClass="border1" runat="server" Width="292px"></asp:TextBox>
             <asp:Label ID="l_value" runat="server" Text="Cумма"></asp:Label>
         </div>
        <div class="mar10ver">
-           <asp:DropDownList class="border1" ID="ddl_bils" runat="server" Width="296px">
+           <asp:DropDownList class="border1" ID="ddl_bils" runat="server" Width="294px">
            </asp:DropDownList>
            <asp:Label ID="l_bil" runat="server" Text="Cчет"></asp:Label>
        </div>
         <div class="mar10ver">
-            <asp:TextBox ID="tb_descript" CssClass="border1" TextMode="MultiLine" runat="server" Height="55px" Width="292px"></asp:TextBox> 
+            <asp:TextBox ID="tb_descript" CssClass="border1" TextMode="MultiLine" runat="server" Height="55px" 
+                Width="292px"></asp:TextBox> 
             <asp:Label ID="l_descript" runat="server" Text="Комментарий"></asp:Label>
         </div>
        <div class="mar10ver">

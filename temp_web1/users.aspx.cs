@@ -23,7 +23,6 @@ namespace temp_web1
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
             status_user = (string)Session["status_user"];
-
             //перебросим пользователя на экран авторизации по окончании сессии
             if (status_user != "a")
             { Response.Redirect("autorise.aspx"); }
@@ -58,7 +57,7 @@ namespace temp_web1
                 {
                     lb_users.Items.Add(dr["login_user"].ToString());
                     if (dr[4].ToString() == "a")
-                    { lb_users.Items[i].Attributes.Add("style", "background-color:Yellow"); }
+                    { lb_users.Items[i].Attributes.Add("style", "background-color:#16dbdb"); }
                     i++;
                 }
                 
@@ -204,7 +203,7 @@ namespace temp_web1
             for (int i = 0; i < users_data.GetLength(0); i++)
             {
                 if (users_data[i, 4] == "a") //перекрашиваем поля листбокса
-                { lb_users.Items[i].Attributes.Add("style", "background-color:Yellow"); }
+                { lb_users.Items[i].Attributes.Add("style", "background-color:#16dbdb"); }
                 if (lb_users.SelectedItem.Text == users_data[i,2]) // выводим выделенного пользователя
                 {
                     tb_login.Text = users_data[i,2];
@@ -271,7 +270,7 @@ namespace temp_web1
                 {
                     if (lb_users.SelectedIndex == -1)
                     {
-                        l_hint_no_1.Visible = true;
+                        p_error.Visible = true;
                         return false;
                     }
                     else { return true; }
@@ -289,7 +288,7 @@ namespace temp_web1
             l_status.CssClass = "norm";
             l_fam.Text = "Фамилия пользователя";
             l_fam.CssClass = "norm";
-            l_hint_no_1.Visible = false;
+            p_error.Visible = false;
         }
 
         protected void ib_show_hide_pass_Click(object sender, ImageClickEventArgs e)
@@ -298,11 +297,13 @@ namespace temp_web1
             {
                 tb_password.TextMode = TextBoxMode.SingleLine;
                 l_collapse.Text = "Скрыть пароли";
+                ib_show_hide_pass.CssClass = "checkbox_checked";
             }
             else
             {
                 tb_password.TextMode = TextBoxMode.Password;
                 l_collapse.Text = "Показать пароли";
+                ib_show_hide_pass.CssClass = "checkbox_unckeck";
 
             }
         }
