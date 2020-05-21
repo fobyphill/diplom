@@ -64,11 +64,30 @@ namespace temp_web1
 
         protected void b_change_Click(object sender, EventArgs e)
         {
-            if (lb_bils.SelectedIndex == -1)
+            bool flag = false;// Проверка на повторение названий
+            if (double_bil())
+            { flag = true; }
+
+            if (lb_bils.SelectedIndex == -1)// проверка, есть ли выделенный счет
             {
                 p_error.Visible = true;
+                flag = true;
             }
-            else
+            if (tb_name.Text == "")
+            {
+                flag = true;
+                l_name.Text = "Укажите название счета";
+                l_name.CssClass = "stress";
+            }
+            if (tb_num.Text == "")
+            {
+                flag = true;
+                l_num.Text = "Укажите номер счета";
+                l_num.CssClass = "stress";
+            }
+            
+
+            if (!flag)
             {
                 string q_edit = "update bils set name_bil = '" + tb_name.Text + "', num_bil = '" + tb_num.Text + "', descript_bil = '" + tb_descript.Text + "'"+
                     "where name_bil = '"+lb_bils.SelectedItem.Text+"'";
@@ -166,7 +185,7 @@ namespace temp_web1
 
         protected void b_add_Click(object sender, EventArgs e)
         {
-            bool flag = false;
+            bool flag = false;// флаг ошибки
             if (tb_name.Text == "")
             { 
                 flag = true;
@@ -179,6 +198,10 @@ namespace temp_web1
                 l_num.Text = "Не указан номер счета";
                 l_num.CssClass = "stress";
             }
+            //проверка счета на дубли
+            if (double_bil())
+            { flag = true; }
+            
             if (!flag)
             {
                 string q_add = "INSERT INTO bils ( name_bil, num_bil, descript_bil ) VALUES ('" + tb_name.Text + "', '" + tb_num.Text + "', '" + tb_descript.Text + "')";
@@ -195,6 +218,27 @@ namespace temp_web1
             OleDbCommand com = new OleDbCommand(q, ole_con);
             com.ExecuteNonQuery();
             ole_con.Close();
+        }
+
+        bool double_bil()
+        {
+            string q_list_bils = "select name_bil from bils";
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_list_bils, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
+            bool rez = false;
+            while (dr.Read())
+            {
+                if (dr[0].ToString() == tb_name.Text)
+                {
+                    rez = true;
+                    l_name.Text = "Счет с таким именем уже есть в системе";
+                    l_name.CssClass = "stress";
+                    break;
+                }
+            }
+            return rez;
         }
     }
 }
