@@ -1,32 +1,68 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="plans.aspx.cs" Inherits="temp_web1.plans" %>
+﻿<%@ Page Title="Планирование затрат" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="plans.aspx.cs" Inherits="temp_web1.plans" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mymenu">
-       <div class="forlink"><a href="Default.aspx">Главная</a></div>
-       <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
-        <div class="forlink"><a href="plans.aspx">Планирование затрат</a></div>
-       <div class="forlink"> <a href="cats.aspx">Категории затрат</a></div>
-       <div class="forlink"> <a href="bils.aspx">Счета</a></div>
-       <div class="forlink"> <a href="users.aspx">Пользователи</a></div>
-       <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
+    <div class="maindiv">
+    <div class="onerow mymenu">
+       <div class="mar10ver"><a href="Default.aspx">Главная</a></div>
+       <div class="mar10ver"><a href="consumptions.aspx">Управление затратами</a></div>
+        <div class="mar10ver"><a href="plans.aspx">Планирование затрат</a></div>
+       <div class="mar10ver"> <a href="cats.aspx">Категории затрат</a></div>
+       <div class="mar10ver"> <a href="bils.aspx">Счета</a></div>
+       <div class="mar10ver"> <a href="users.aspx">Пользователи</a></div>
+       <div class="mar10ver"> <a href="reports.aspx">Отчеты</a></div>
    </div>
-    <div class="maincontent">
-        
+    <div class=" onerow maincontent">
+        <asp:Panel ID="p_search" runat="server">
+             <asp:Label ID="l_date_create" runat="server" Text="Месяц планирования затрат от "></asp:Label>
+            <asp:TextBox ID="tb_date_create_begin" runat="server" TextMode="Month" Width="135px"></asp:TextBox><span> до </span>
+            <asp:TextBox ID="tb_date_create_end" runat="server" TextMode="Month" Width="135px"></asp:TextBox>
+            <p class="mar5ver" />
+            <asp:Label ID="l_value" runat="server" Text="Диапазон значений от"></asp:Label>
+            <asp:TextBox ID="tb_value_bottom" width="70px" runat="server"></asp:TextBox><span> до </span>
+            <asp:TextBox ID="tb_value_top" width="70px" runat="server"></asp:TextBox>
+            <asp:Label CssClass="mar40left" ID="l_cats" runat="server" Text="Категория"></asp:Label>
+            <asp:TextBox ID="tb_cats" Width="100px" runat="server"></asp:TextBox>
+            <asp:Button CssClass="bluebutton" ID="b_show_tree" runat="server" Text="Показать дерево" />
+            <p class="mar5ver" />
+            <asp:Label ID="l_bils" runat="server" Text="Счета "></asp:Label>
+            <asp:DropDownList ID="ddl_bils" Width="200px" runat="server">
+                <asp:ListItem>Все счета</asp:ListItem>
+            </asp:DropDownList>
+            <asp:Label CssClass="mar40left" ID="L_search" runat="server" Text="Номер записи или комментарий"></asp:Label>
+            <asp:TextBox ID="tb_search" runat="server" Width="440px"></asp:TextBox>
+            
+            <p class="mar5ver" />
+            <asp:DropDownList ID="ddl_user" runat="server">
+                <asp:ListItem>Все пользователи</asp:ListItem>
+            </asp:DropDownList>
+            <asp:Label ID="l_user" runat="server" Text="Пользователь"></asp:Label>
+            <asp:Button CssClass="greenbutton" Width="166px" ID="b_search" runat="server" Text="Найти" OnClick="b_search_Click"  />
+            <asp:Button CssClass="redbutton" ID="b_clear" runat="server" Text="Очистить поиск" OnClick="b_clear_Click" />
+        </asp:Panel>
+        <asp:ImageButton ID="ib_show_hide_search" CssClass="checkbox_checked" ImageUrl="img/double_checkbox.png" 
+                    runat="server" OnClick="ib_show_hide_search_Click" />
+        <asp:Label ID="l_collapse" runat="server" Text="Скрыть поиск"></asp:Label>
+        <asp:Panel Visible="false"  CssClass="diverror" ID="p_error" runat="server">
+            <asp:Label ForeColor="White" ID="l_hint_no_1" runat="server" 
+            Text="Ни одна запись не была выбрана" Visible="true"></asp:Label>
+        </asp:Panel>
         <div class="divhint">
-            <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Ни одна запись не была выбрана" Visible="False"></asp:Label>
-            <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label>
+            
+            <asp:Label ID="l_click_left" runat="server" 
+            Text="Показаны последние 10 записей"></asp:Label>
         </div>
-        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gv_SelectedIndexChanged" >
+        <asp:GridView ID="gv" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gv_SelectedIndexChanged" Font-Names="Arial" Font-Size="Small" Width="955px" >
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowSelectButton="true" ButtonType="Image" 
-                    SelectImageUrl="checkbox.png" HeaderStyle-Width="25px" ControlStyle-Width="20px" Visible="True">
-<ControlStyle Width="20px"></ControlStyle>
-
-<HeaderStyle Width="25px" HorizontalAlign="Left"></HeaderStyle>    
-                </asp:CommandField>
+                <asp:TemplateField>
+                    <HeaderTemplate>
+                        <asp:CheckBox ID="chb_header" runat="server" AutoPostBack="True" OnCheckedChanged="chb_header_CheckedChanged" />
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chb_table" runat="server" AutoPostBack="True" OnCheckedChanged="chb_table_CheckedChanged" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" Width="20px" />
+                </asp:TemplateField>
                 <asp:BoundField DataField="id_plan" HeaderText="№" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="35px" />
@@ -46,11 +82,11 @@
                 </asp:BoundField>
                 <asp:BoundField DataField="bil_plan" HeaderText="Счет" >
                     <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="155px"/>
+                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="130px"/>
                 </asp:BoundField>
                 <asp:BoundField DataField="descript_plan" HeaderText="Комментарий" >
                     <HeaderStyle HorizontalAlign="Left" />
-                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="250px"/>
+                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="265px"/>
                 </asp:BoundField>
                 <asp:BoundField DataField="fam_user" HeaderText="Изменил сотрудник" >
                     <HeaderStyle HorizontalAlign="Left" />
@@ -69,14 +105,14 @@
             <SortedDescendingHeaderStyle BackColor="#15524A" />
         </asp:GridView>
         <div class="mar10 onerow">
-        <asp:Button  ID="b_add_con" runat="server" Text="Добавить" 
+        <asp:Button CssClass="bluebutton"  ID="b_add_con" runat="server" Height="30px" Text="Добавить" 
             OnClick="b_add_con_Click" />
             </div>
        <div class="mar10 onerow">
-            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
+            <asp:Button CssClass="greenbutton" ID="b_change" runat="server" Height="30px" Text="Изменить" OnClick="b_change_Click" />
            </div>
         <div class="mar10 onerow">
-                    <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
+                    <asp:Button CssClass="redbutton" ID="b_delete" runat="server" Height="30px" Text="Удалить" OnClick="b_delete_Click"/>
             
             </div>
             <ajaxToolkit:ModalPopupExtender TargetControlID="b_inv" PopupControlID="p_modal_confirm" 
@@ -87,8 +123,11 @@
 
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
-                Вы уверены, что желаете удалить запись о планировании?<br /><br />
+                Вы уверены, что желаете удалить записи о планировании в количестве
+                <asp:Label ID="l_count_of_plans" runat="server" Text="Label"></asp:Label>
+                &nbsp;шт?<br /><br />
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" OnClick="b_no_Click" />
             </asp:Panel>
+        </div>
 </asp:Content>

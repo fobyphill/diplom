@@ -28,7 +28,7 @@
             <asp:TextBox ID="tb_value_top" width="70px" runat="server"></asp:TextBox>
             <asp:Label CssClass="mar40left" ID="l_cats" runat="server" Text="Категория"></asp:Label>
             <asp:TextBox ID="tb_cats" Width="100px" runat="server"></asp:TextBox>
-            <asp:Button ID="b_show_tree" runat="server" Text="Показать дерево" />
+            <asp:Button CssClass="bluebutton" ID="b_show_tree" runat="server" Text="Показать дерево" />
             <p class="mar5ver" />
             <asp:Label ID="l_bils" runat="server" Text="Счета "></asp:Label>
             <asp:DropDownList ID="ddl_bils" Width="200px" runat="server">
@@ -42,23 +42,33 @@
                 <asp:ListItem>Все пользователи</asp:ListItem>
             </asp:DropDownList>
             <asp:Label ID="l_user" runat="server" Text="Пользователь"></asp:Label>
-            <asp:Button ID="b_search" runat="server" Text="Найти" OnClick="b_search_Click" />
-            <asp:Button ID="b_clear" runat="server" Text="Очистить поиск" OnClick="b_clear_Click" />
+            <asp:Button CssClass="greenbutton" Width="166px" ID="b_search" runat="server" Text="Найти" OnClick="b_search_Click" />
+            <asp:Button CssClass="redbutton" ID="b_clear" runat="server" Text="Очистить поиск" OnClick="b_clear_Click" />
+        </asp:Panel>
+                <asp:ImageButton ID="ib_show_hide_search" CssClass="checkbox_checked" ImageUrl="img/double_checkbox.png" 
+                    runat="server" OnClick="ib_show_hide_search_Click" />
+                <asp:Label ID="l_collapse" runat="server" Text="Скрыть поиск"></asp:Label>
+        <asp:Panel Visible="false"  CssClass="diverror" ID="p_error" runat="server">
+            <asp:Label ForeColor="White" ID="l_hint_no_1" runat="server" 
+            Text="Ни одна запись не была выбрана" Visible="true"></asp:Label>
         </asp:Panel>
         <div class="divhint">
-            <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Ни одна запись не была выбрана" Visible="False"></asp:Label>
-            <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Показаны последние 10 записей.<br />Для отметки записи кликните мышью по левому столбцу таблицы"></asp:Label></div>
-        <asp:GridView ID="gv1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
-            <AlternatingRowStyle BackColor="White" />
+            
+            <asp:Label ID="l_click_left" runat="server" 
+            Text="Показаны последние 10 записей"></asp:Label>
+        </div>
+        <asp:GridView ID="gv1" Width="955px" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="gv1_SelectedIndexChanged" OnSelectedIndexChanging="gv1_SelectedIndexChanging" Font-Names="Arial" Font-Size="Small">
+            
             <Columns>
-                <asp:CommandField ShowSelectButton="true" ButtonType="Image" 
-                    SelectImageUrl="checkbox.png" HeaderStyle-Width="25px" ControlStyle-Width="20px" Visible="True">
-<ControlStyle Width="20px"></ControlStyle>
-
-<HeaderStyle Width="25px" HorizontalAlign="Left"></HeaderStyle>    
-                </asp:CommandField>
+                <asp:TemplateField>
+                    <HeaderTemplate>
+                        <asp:CheckBox ID="chb_all" runat="server" AutoPostBack="True" OnCheckedChanged="chb_all_CheckedChanged" />
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chb_table" runat="server" AutoPostBack="True" OnCheckedChanged="chb_table_CheckedChanged" Width="20px" />
+                    </ItemTemplate>
+                    <ItemStyle Width="25px" HorizontalAlign="Center" VerticalAlign="Middle" />
+                </asp:TemplateField>
                 <asp:BoundField DataField="id_con" HeaderText="№" >
                     <HeaderStyle HorizontalAlign="Left" />
                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Width="15px" />
@@ -103,8 +113,9 @@
             <HeaderStyle BackColor="#26a9e0" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
             <RowStyle BackColor="#E3EAEB" />
+            <AlternatingRowStyle BackColor="White" />
             <SelectedRowStyle BackColor="#16dbdb" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F8FAFA" />
+            <SortedAscendingCellStyle  BackColor="#F8FAFA" />
             <SortedAscendingHeaderStyle BackColor="#246B61" />
             <SortedDescendingCellStyle BackColor="#e4e9eb" />
             <SortedDescendingHeaderStyle BackColor="#15524A" />
@@ -112,14 +123,13 @@
         </asp:GridView>
         <div class="mar10 onerow">
         <asp:Button  ID="b_add_con" runat="server" Text="Добавить" 
-            OnClick="b_add_con_Click" />
+            OnClick="b_add_con_Click" CssClass="bluebutton" Height="30px" />
             </div>
        <div class="mar10 onerow">
-            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
+            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" CssClass="greenbutton" Height="30px" />
            </div>
-        <div class="mar10 onerow">
-                    <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click"/>
-            
+        <div class="onerow">
+                    <asp:Button ID="b_delete" runat="server" Text="Удалить" OnClick="b_delete_Click" CssClass="redbutton" Height="30px"/>
             </div>
             <ajaxToolkit:ModalPopupExtender TargetControlID="b_inv" PopupControlID="p_modal_confirm" 
                 ID="mpe" runat="server" DropShadow="True"></ajaxToolkit:ModalPopupExtender>
@@ -130,7 +140,9 @@
     </div>
 </div>
     <asp:Panel CssClass="modalwin" ID="p_modal_confirm" runat="server">
-                Вы уверены, что желаете удалить запись о расходе?<br /><br />
+                Вы уверены, что желаете удалить записи о затратах в количестве <asp:Label ID="l_count_of_cons" 
+                    runat="server" Text=""></asp:Label>
+        <br /><br />
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>

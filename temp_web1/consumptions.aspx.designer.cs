@@ -202,6 +202,33 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Button b_clear;
         
         /// <summary>
+        /// ib_show_hide_search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ib_show_hide_search;
+        
+        /// <summary>
+        /// l_collapse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_collapse;
+        
+        /// <summary>
+        /// p_error control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_error;
+        
+        /// <summary>
         /// l_hint_no_1 control.
         /// </summary>
         /// <remarks>
@@ -281,6 +308,15 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel p_modal_confirm;
+        
+        /// <summary>
+        /// l_count_of_cons control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_count_of_cons;
         
         /// <summary>
         /// b_yes control.

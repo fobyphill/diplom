@@ -246,11 +246,13 @@ namespace temp_web1
             {
                 tv.ExpandAll();
                 l_collapse.Text = "Свернуть все";
+                ib_show_hide.CssClass = "checkbox_checked";
             }
             else
             {
                 tv.CollapseAll();
                 l_collapse.Text = "Развернуть все";
+                ib_show_hide.CssClass = "checkbox_uncheck";
             }
         }
 

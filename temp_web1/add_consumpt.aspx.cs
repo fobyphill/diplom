@@ -19,6 +19,7 @@ namespace temp_web1
             //Получение данных из сессии и возврат на страницу авторизации при окончании сессии
             login_user = (string)Session["login_user"];
             status_user = (string)Session["status_user"];
+  
             if (login_user == null)
             { Response.Redirect("autorise.aspx"); }
             if (!Page.IsPostBack)
@@ -68,9 +69,9 @@ namespace temp_web1
 
         protected void b_cancel_Click(object sender, EventArgs e)
         {
-            if ((string)Session["user_status"] == "a")
+            if ((string)Session["status_user"] == "a")
             { Response.Redirect("consumptions.aspx"); }
-            else
+            else 
             { Response.Redirect("cons_user.aspx"); }
         }
 
@@ -192,11 +193,13 @@ namespace temp_web1
             {
                 tv.ExpandAll();
                 l_collapse.Text = "Свернуть все";
+                ib_show_hide.CssClass = "checkbox_checked";
             }
             else
             {
                 tv.CollapseAll(); 
                 l_collapse.Text = "Развернуть все";
+                ib_show_hide.CssClass = "checkbox_uncheck";
             }
         }
         

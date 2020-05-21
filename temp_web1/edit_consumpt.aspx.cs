@@ -25,141 +25,176 @@ namespace temp_web1
             if (!Page.IsPostBack)// Запускаем эту программу только в первый раз
             {
                 if (status_user == "u")
-                { 
+                {
                     p_menu.Visible = false;
                     p_main.CssClass = "maincontent_user";
                 }
                 string id_con = Request.QueryString["id_con"];
-                if (status_user == "u" &&  !ver_user(id_con))//защита от попыток юзера исправить чужую запись
+                string cat_id = "", data_create = "", value = "", bil_con = "", descript = "";
+                int count_rec = Int32.Parse(Request.QueryString["count_rec"]);
+                if (status_user == "u" && !ver_user(id_con))//защита от попыток юзера исправить чужую запись
                 { Response.Redirect("autorise.aspx"); }
                 //Получим данные расхода
-                string q_con = "select * from consumptions where id_con = " + id_con;
                 OleDbConnection ole_con = new OleDbConnection(con_str);
-                ole_con.Open();
-                OleDbCommand com = new OleDbCommand(q_con, ole_con);
-                OleDbDataReader dr = com.ExecuteReader();
-                dr.Read();
-                id_con = dr[0].ToString();//Заново получил ID расхода
-                string data_create = dr[1].ToString(); //Получили дату создания расхода
-                string value = dr[3].ToString();// Получили значение величины расхода
-                string cat_id = dr[4].ToString();// Получили номер категории расхода
-                string bil_con = dr[5].ToString();
-                string descript = "";// Получаем значение описания расхода
-                if (dr[6].ToString() != "")
+                if (count_rec == 1)
                 {
-                    descript = dr[6].ToString();
-                }
-                dr.Close();
-                com.Dispose();
-                //Все необходимые данные расхода получены
-
-                // Заполняем категории
-                string q_cat = "select * from cats";
-                com = new OleDbCommand(q_cat, ole_con);
-                dr = com.ExecuteReader();
-                //Заполняем категориями Дерево
-                while (dr.Read())
-                {
-                    if (dr[3].ToString() == "0")
+                    string q_con = "select * from consumptions where id_con = " + id_con;
+                    ole_con.Open();
+                    OleDbCommand com = new OleDbCommand(q_con, ole_con);
+                    OleDbDataReader dr = com.ExecuteReader();
+                    dr.Read();
+                    id_con = dr[0].ToString();//Заново получил ID расхода
+                    data_create = dr[1].ToString(); //Получили дату создания расхода
+                    value = dr[3].ToString();// Получили значение величины расхода
+                    cat_id = dr[4].ToString();// Получили номер категории расхода
+                    bil_con = dr[5].ToString();
+                    descript = "";// Получаем значение описания расхода
+                    if (dr[6].ToString() != "")
                     {
-                        TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
-                        //string parent_id = dr[0].ToString();
-                        find_child(node_cat);
-                        tv.Nodes.Add(node_cat);
+                        descript = dr[6].ToString();
                     }
+                    dr.Close();
+                    com.Dispose();
+                    ole_con.Close();
                 }
-                dr.Close();
-                //выеделение текущей категории
-                foreach (TreeNode n in tv.Nodes)
-                {
-                    if (n.Value.ToString() == cat_id)
+                    //Все необходимые данные расхода получены
+
+                    // Заполняем категории
+                    string q_cat = "select * from cats";
+                    ole_con.Open();
+                    OleDbCommand com2 = new OleDbCommand(q_cat, ole_con);
+                    OleDbDataReader dr2 = com2.ExecuteReader();
+                    //Заполняем категориями Дерево
+                    while (dr2.Read())
                     {
-                        n.Select();
-                        break;
+                        if (dr2[3].ToString() == "0")
+                        {
+                            TreeNode node_cat = new TreeNode(dr2[1].ToString(), dr2[0].ToString());
+                            //string parent_id = dr[0].ToString();
+                            find_child(node_cat);
+                            tv.Nodes.Add(node_cat);
+                        }
                     }
-                    select_child(n, cat_id);
-                }
-
-                tb_data.Text = DateTime.Parse(data_create).ToString("yyyy-MM-dd");
-
-                tb_value.Text = value;//Выводим значения расхода
-                tb_descript.Text = descript;//Выводим комментарий
-                //заполняем поля счетов
-                string q_bil = "select name_bil from bils";
-                com = new OleDbCommand(q_bil, ole_con);
-                dr = com.ExecuteReader();
-                while (dr.Read())
-                {
-                    ddl_bils.Items.Add(dr[0].ToString());
-                }
-                //выделим счет данного расхода
-                for (int i = 0; i < ddl_bils.Items.Count; i++ )
-                {
-                    if (ddl_bils.Items[i].Text == bil_con)
+                    dr2.Close();
+                    //выеделение текущей категории
+                    if (count_rec == 1)
                     {
-                        ddl_bils.SelectedIndex = i;
-                        break;
-                    }
-                }
-                //Если счетов не задано, извещаем пользователя
-                if (ddl_bils.Items.Count == 0)
-                {
-                    l_bil.Text = "Создайте счет на странице <a href='bils.aspx'>Управление счетами</a>";
-                    l_bil.CssClass = "hint stress";
-                }
+                        foreach (TreeNode n in tv.Nodes)
+                        {
+                            if (n.Value.ToString() == cat_id)
+                            {
+                                n.Select();
+                                break;
+                            }
+                            select_child(n, cat_id);
+                        }
 
-                //Итак. все значения вывели. 
-                ole_con.Close();
-            }
+                        tb_data.Text = DateTime.Parse(data_create).ToString("yyyy-MM-dd");
+
+                        tb_value.Text = value;//Выводим значения расхода
+                        tb_descript.Text = descript;//Выводим комментарий
+                    }
+                    //заполняем поля счетов
+                    string q_bil = "select name_bil from bils";
+                    com2 = new OleDbCommand(q_bil, ole_con);
+                    dr2 = com2.ExecuteReader();
+                    ddl_bils.Items.Add("Выберите счет");
+                    while (dr2.Read())
+                    {
+                        ddl_bils.Items.Add(dr2[0].ToString());
+                    }
+                    //выделим счет данного расхода
+                    if (count_rec == 1)
+                    {
+                        for (int i = 0; i < ddl_bils.Items.Count; i++)
+                        {
+                            if (ddl_bils.Items[i].Text == bil_con)
+                            {
+                                ddl_bils.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                    //Если счетов не задано, извещаем пользователя
+                    if (ddl_bils.Items.Count == 0)
+                    {
+                        l_bil.Text = "Создайте счет на странице <a href='bils.aspx'>Управление счетами</a>";
+                        l_bil.CssClass = "hint stress";
+                    }
+
+                    //Итак. все значения вывели. 
+                    ole_con.Close();
+                }
         }
 
         protected void b_save_Click(object sender, EventArgs e)
         {
             string id_con = Request.QueryString["id_con"];
+            bool flag = true;
+
             OleDbConnection ole_con = new OleDbConnection(con_str);
             //Формируем запрос на изменение
-            bool flag = false;// Флаг. Индикатор отсутствия ошибки
+            string q_update_con = "UPDATE consumptions SET data_change ='";
             //Получим дату изменения
             string data_change = DateTime.Now.ToShortDateString();
+            q_update_con += data_change;
+            q_update_con += "'";
+
             //Получим ID категории
-            string num_cat = "";
-            if (tv.SelectedValue.ToString() == "")
+            if (tv.SelectedValue !="")
             {
-                l_cat.Text = "Укажите категорию";
-                l_cat.Style.Add("color", "red");
-                flag = true;
+                q_update_con += ", cat_con = ";
+                q_update_con += tv.SelectedValue.ToString();
             }
-            else
-            { num_cat = tv.SelectedValue.ToString(); }
             //Получим измененную дату создания заказа
-            DateTime dt = new DateTime();
-            dt = DateTime.Parse(tb_data.Text);
-            string data_create = dt.ToShortDateString();
-
+            if (tb_data.Text != "")
+            {
+                DateTime dt = new DateTime();
+                dt = DateTime.Parse(tb_data.Text);
+                q_update_con += ",";
+                q_update_con += " data_create = '";
+                q_update_con += dt.ToShortDateString();
+                q_update_con += "'";
+            }
             //Получим значение расхода
-            float value;
-            tb_value.Text = tb_value.Text.Replace('.', ',');
-            if (!Single.TryParse(tb_value.Text, out value))
+            if (tb_value.Text != "")
             {
-                l_value.Text = "Укажите Корректное число";
-                l_value.Style.Add("color", "red");
-                flag = true;
+                float value;
+                tb_value.Text = tb_value.Text.Replace('.', ',');
+                if (!Single.TryParse(tb_value.Text, out value))
+                {
+                    l_value.Text = "Укажите Корректное число";
+                    l_value.Style.Add("color", "red");
+                    flag = false;
+                }
+                else
+                {
+                    tb_value.Text = value.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                    q_update_con += ",";
+                    q_update_con += " value_con = ";
+                    q_update_con += tb_value.Text;
+                }
             }
-            else
-            {
-                tb_value.Text = value.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
-            }
+           
             //Получим значение счета
-            string bil = ddl_bils.SelectedItem.Text;
-
+            if (ddl_bils.SelectedIndex != 0)
+            {
+                q_update_con += ",";
+                q_update_con += " bil_con = '";
+                q_update_con += ddl_bils.SelectedItem.Text;
+                q_update_con += "'";
+            }
             //Объединим данные в переменной запроса
-            string q_update_con = "update consumptions set data_create='" + data_create + "', data_change ='" +
+          /*  string q_update_con = "update consumptions set data_create='" + data_create + "', data_change ='" +
             data_change + "', value_con = " + tb_value.Text + ", cat_con = " + num_cat +
             ", bil_con='" + bil + "', descript_con = '" + tb_descript.Text + "', change_login = '" +
-            login_user + "' where id_con = " + id_con;
+            login_user + "' where id_con = " + id_con;*/
 
-            if (!flag)
+            if (flag)
             {
+                q_update_con += " where id_con in (";
+                q_update_con += id_con;
+                q_update_con += ")";
                 ole_con.Open();
                 OleDbCommand com = new OleDbCommand(q_update_con, ole_con);
                 com.ExecuteNonQuery(); //Выполнить изменение данных в БД
@@ -170,8 +205,8 @@ namespace temp_web1
                 { Response.Redirect("consumptions.aspx"); }
                 else
                 { Response.Redirect("cons_user.aspx"); }
-
             }
+           
         }
 
         protected void b_cancel_Click(object sender, EventArgs e)
@@ -227,11 +262,13 @@ namespace temp_web1
             {
                 tv.ExpandAll();
                 l_collapse.Text = "Свернуть все";
+                ib_show_hide.CssClass = "checkbox_checked";
             }
             else
             {
                 tv.CollapseAll();
                 l_collapse.Text = "Развернуть все";
+                ib_show_hide.CssClass = "checkbox_uncheck";
             }
         }
 

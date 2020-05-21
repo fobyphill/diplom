@@ -1,20 +1,31 @@
 ﻿body
 {
     background-color:#e4e9eb;
+    margin: 0px;
+    
+}
+span
+{
+   font: 80% sans-serif;
 }
 p
 {
     margin:0px;
 }
-h1{
+h1, h2{
     margin:0;
 }
 a
 {
-    color:black;
+    color:#333333;
     font:85% sans-serif;
     text-decoration:none;
 }
+hr
+{
+    margin: 0px;
+}
+
 
 .mar10ver {
     margin: 10px 0;
@@ -26,13 +37,22 @@ a
 
 .myhead
 {
-    width:1170px;
     height:35px;
     background-color: white;
 }
 .maindiv
 {
-    margin: 10px 70px;
+    margin: 5px 70px;
+}
+.footer
+{
+    height:35px;
+    background-color: white;
+}
+.workspace
+{
+    width:1167px;
+    margin-left: 70px;
 }
 .auten
 {
@@ -44,8 +64,7 @@ a
 {
     display: table-cell;
     vertical-align:middle;
-    width:1170px;
-    height:70px;
+    height:35px;
 }
 .mymenu
 {
@@ -64,14 +83,17 @@ a
     color: #16dbdb;
     font: 100% sans-serif;
 }
+.logo3
+{
+    color: #046153;
+}
 
 .maincontent
 {
     width:955px;
-    //background-color: white;
     display: inline-block;
     vertical-align: top;
-    margin-left: 10px;
+    //margin-left: 10px;
 }
 .maincontent_user
 {
@@ -102,8 +124,19 @@ a
 {
     display:inline-block;
 }
-.mybutton {
+.bluebutton {
     background-color: #26a9e0;
+    color: white;
+}
+.greenbutton
+{
+    background-color: #16dbdb;
+    //margin-right: 9px;
+}
+
+.redbutton
+{
+    background-color: #f5593d;
     color: white;
 }
 .redtext
@@ -152,6 +185,11 @@ a
     background-color:#16dbdb;
     padding: 5px;
 }
+.diverror
+{
+    background-color:#f5593d;
+    padding: 5px;
+}
 .border1
 {
     border-color: #26a9e0;
@@ -161,5 +199,21 @@ a
 .textright
 {
     float: right;
-    font: 100% sans-serif;
+    //font: 100% sans-serif;
+}
+.checkbox_checked
+{
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
+   // overflow: hidden;
+    object-position:left center;
+}
+.checkbox_uncheck
+{
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
+   // overflow: hidden;
+    object-position:right center;
 }

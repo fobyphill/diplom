@@ -26,98 +26,99 @@ namespace temp_web1
             { Response.Redirect("autorise.aspx"); }
 
             string id_plan = Request.QueryString["id_plan"];// Получим айди записи из УРЛа
+            string count_rec = Request.QueryString["count_rec"];
             if (!Page.IsPostBack)
             {
-                //Получим данные записи о планировании
-                string q_plan = "select * from plans where id_plan = " + id_plan;
+                string data_plan = "", value_plan = "", cat_plan = "", bil_plan = "", descript_plan = "";
                 OleDbConnection ole_con = new OleDbConnection(con_str);
-                ole_con.Open();
-                OleDbCommand com = new OleDbCommand(q_plan, ole_con);
-                OleDbDataReader dr = com.ExecuteReader();
-                dr.Read();
-                string data_plan = dr[1].ToString();
-                string value_plan = dr[2].ToString();
-                string cat_plan = dr[3].ToString();
-                string bil_plan = dr[4].ToString();
-                string descript_plan = dr[5].ToString();
-                dr.Close();
-                com.Dispose();
+                if (count_rec == "1")
+                {
+                    //Получим данные записи о планировании
+                    string q_plan = "select * from plans where id_plan = " + id_plan;
+                    
+                    ole_con.Open();
+                    OleDbCommand com = new OleDbCommand(q_plan, ole_con);
+                    OleDbDataReader dr = com.ExecuteReader();
+                    dr.Read();
+                    data_plan = dr[1].ToString();
+                    value_plan = dr[2].ToString();
+                    cat_plan = dr[3].ToString();
+                    bil_plan = dr[4].ToString();
+                    descript_plan = dr[5].ToString();
+                    dr.Close();
+                    com.Dispose();
+                    ole_con.Close();
+                }
+                
 
                 //Заполним поля категорий
                 string q_cat = "select * from cats";
                 //соединение с БД
-                com = new OleDbCommand(q_cat, ole_con);
-                dr = com.ExecuteReader();
-                while (dr.Read())
+                ole_con.Open();
+                OleDbCommand com2 = new OleDbCommand(q_cat, ole_con);
+                OleDbDataReader dr2 = com2.ExecuteReader();
+                while (dr2.Read())
                 {
-                    if (dr[3].ToString() == "0")
+                    if (dr2[3].ToString() == "0")
                     {
-                        TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                        TreeNode node_cat = new TreeNode(dr2[1].ToString(), dr2[0].ToString());
                         find_child(node_cat);
                         tv.Nodes.Add(node_cat);
                     }
                 }
                 //закрываем БД
-                dr.Close();
-                com.Dispose();
-
-                //Выделим нужное значение категории
-                foreach (TreeNode n in tv.Nodes)
+                dr2.Close();
+                com2.Dispose();
+                if (count_rec == "1")
                 {
-                    if (n.Value.ToString() == cat_plan)
+                    //Выделим нужное значение категории
+                    foreach (TreeNode n in tv.Nodes)
                     {
-                        n.Select();
-                        break;
+                        if (n.Value.ToString() == cat_plan)
+                        {
+                            n.Select();
+                            break;
+                        }
+                        select_child(n, cat_plan);
                     }
-                    select_child(n, cat_plan);
                 }
-
                 //Заполняем комбобокс со счетами
                 string q_bil = "select name_bil from bils";
-                com = new OleDbCommand(q_bil, ole_con);
-                dr = com.ExecuteReader();
-                while (dr.Read())
+                com2 = new OleDbCommand(q_bil, ole_con);
+                dr2 = com2.ExecuteReader();
+                ddl_bils.Items.Add("Выберите счет");
+                while (dr2.Read())
                 {
-                    ddl_bils.Items.Add(dr[0].ToString());
+                    ddl_bils.Items.Add(dr2[0].ToString());
                 }
                 if (ddl_bils.Items.Count == 0)
                 {
                     l_bil.Text = "Создайте счет на странице \"Управление счетами\"";
                     l_bil.CssClass = "hint stress";
                 }
-                dr.Close();
+                dr2.Close();
                 ole_con.Close();
-                com.Dispose();
+                com2.Dispose();
 
-                for (int i = 0; i< ddl_bils.Items.Count; i++)
+                if (count_rec == "1")//вывод счета, значения и коммента
                 {
-                    if (ddl_bils.Items[i].Text == bil_plan)
+                    for (int i = 0; i < ddl_bils.Items.Count; i++)//выделяем счет
                     {
-                        ddl_bils.SelectedIndex = i;
-                        break;
+                        if (ddl_bils.Items[i].Text == bil_plan)
+                        {
+                            ddl_bils.SelectedIndex = i;
+                            break;
+                        }
                     }
+                    tb_value.Text = value_plan;//выводим значение в поле
+                    tb_descript.Text = descript_plan;//выводим комментарий
                 }
-                //ddl_bils.SelectedItem.Text = bil_plan;//выводим текущий счет
-                tb_value.Text = value_plan;//выводим значение в поле
-                tb_descript.Text = descript_plan;//выводим комментарий
-
-
                 //заполним комбобокс с годами
-                DateTime dt = DateTime.Parse(data_plan);
-                int year_selected = dt.Year;
-                ddl_year.Items.Add(year_selected.ToString());
-                int year_now = DateTime.Now.Year;
-                year_now--;
-                for (int i = 0; i < 5; i++)
+                if (count_rec == "1")
                 {
-                    if (year_now != year_selected)
-                    { ddl_year.Items.Add(year_now.ToString()); }
-                    year_now++;
-                }             
-
-                //Выведем необходимый месяц
-                int month_selected = DateTime.Parse(data_plan).Month;
-                ddl_month.SelectedValue = month_selected.ToString();
+                    DateTime dt = DateTime.Parse(data_plan);
+                    tb_data_plan.Text = dt.ToString("yyyy-MM");
+                }
 
             }
         }
@@ -141,45 +142,70 @@ namespace temp_web1
             string id_plan = Request.QueryString["id_plan"];
             OleDbConnection ole_con = new OleDbConnection(con_str);
             //Формируем запрос на изменение
-            bool flag = false;// Флаг. Индикатор отсутствия ошибки
+            string q_update_plan = "update plans set ";
+            bool flag = false, flag_error = false;// Флаг. Индикатор запроса и отсутствия ошибки
             //Получим обновленную дату планирования
-            int year_edit = Int32.Parse(ddl_year.SelectedItem.Text);
-            int month_edit = Int32.Parse(ddl_month.SelectedValue.ToString());
-            DateTime dt = new DateTime(year_edit, month_edit, 1);
-            string data_plan = dt.ToShortDateString();
-            //Получим ID категории
-            string cat_plan = "";
-            if (tv.SelectedValue.ToString() == "")
-            {
-                l_cat.Text = "Укажите категорию";
-                l_cat.Style.Add("color", "red");
-                flag = true;
-            }
-            else
-            { cat_plan = tv.SelectedValue.ToString(); }
 
-            //Получим значение расхода
-            float value_plan;
-            tb_value.Text = tb_value.Text.Replace('.', ',');
-            if (!Single.TryParse(tb_value.Text, out value_plan))
+            if (tb_data_plan.Text != "")
             {
-                l_value.Text = "Укажите Корректное число";
-                l_value.Style.Add("color", "red");
+                DateTime dt = new DateTime();
+                dt = DateTime.Parse(tb_data_plan.Text);
+
+                q_update_plan += "data_plan = '" + dt.ToShortDateString() + "'";
                 flag = true;
-            }
-            else
-            {
-                tb_value.Text = value_plan.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
             }
             
-            string bil_plan = ddl_bils.SelectedItem.Text;//Получим значение счета
-            string descript_plan = tb_descript.Text;//описание плана
-
-            //Объединим данные в переменной запроса
-            string q_update_plan = "update plans set  data_plan ='" + data_plan + "', value_plan = "+value_plan+", cat_plan = "+cat_plan+
-                ", bil_plan = '"+bil_plan+"', descript_plan = '"+ descript_plan+"', login_user = '"+login_user+"' where id_plan = "+id_plan;
-            if (!flag)
+            //Получим ID категории
+            if (tv.SelectedValue.ToString() != "")
             {
+                if (flag)
+                {q_update_plan +=", ";}
+                q_update_plan += "cat_plan = ";
+                q_update_plan += tv.SelectedValue.ToString();
+                flag = true;
+            }
+            //Получим значение расхода
+            if (tb_value.Text != "")
+            {
+                float value_plan;
+                tb_value.Text = tb_value.Text.Replace('.', ',');
+                if (!Single.TryParse(tb_value.Text, out value_plan))
+                {
+                    l_value.Text = "Укажите Корректное число";
+                    l_value.Style.Add("color", "red");
+                    flag_error = true;
+                }
+                else
+                {
+                    if (flag)
+                    { q_update_plan += ", "; }
+                    tb_value.Text = value_plan.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                    q_update_plan += "value_plan = " + tb_value.Text;
+                    flag = true;
+                }
+            }
+            //Получим значение счета
+            if (ddl_bils.SelectedIndex > 0)
+            {
+                if (flag)
+                { q_update_plan +=", ";}
+                q_update_plan += "bil_plan = '"+ ddl_bils.SelectedItem.Text+"'";
+                flag = true;
+            }
+            //описание плана
+            if (tb_descript.Text != "")
+            {
+                if (flag)
+                { q_update_plan +=", ";}
+                q_update_plan += "descript_plan = '"+ tb_descript.Text+"'";
+                flag = true;
+            }
+            //Объединим данные в переменной запроса
+           /* string q_update_plan = "update plans set  data_plan ='" + data_plan + "', value_plan = "+value_plan+", cat_plan = "+cat_plan+
+                ", bil_plan = '"+bil_plan+"', descript_plan = '"+ descript_plan+"', login_user = '"+login_user+"' where id_plan = "+id_plan;*/
+            if (!flag_error && flag)
+            {
+                q_update_plan += "where id_plan in ("+id_plan+")";
                 ole_con.Open();
                 OleDbCommand com = new OleDbCommand(q_update_plan, ole_con);
                 com.ExecuteNonQuery(); //Выполнить изменение данных в БД
@@ -195,6 +221,7 @@ namespace temp_web1
         {
             Response.Redirect("plans.aspx");
         }
+
         void find_child(TreeNode pn)
         {
             string id_con = Request.QueryString["id_con"];

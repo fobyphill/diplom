@@ -40,28 +40,32 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="maindiv myhead">
+        <div class="myhead">
+            <div class="maindiv workspace">
                 <div class="onerow mymenu">
                     <h1 ><span class="logo1">Pla</span><span class="logo2">Za</span></h1>
                 </div>
-            <div class="onerow mar7">
-                <asp:Label style="font:100% sans-serif; margin:7px 10px;" ID="l_title" runat="server" Text=""><%: Page.Title %></asp:Label>
+            <div class="onerow">
+                <asp:Label CssClass="logo1" ID="l_title" runat="server" Text=""><h2><%: Page.Title %></h2></asp:Label>
             </div>
                 <div class="textright mar7">
                      <asp:Label ID="l_user" runat="server" Text="Войдите в систему, пожалуйста"></asp:Label>
-                    <asp:Button ID="b_exit" CssClass="mybutton" runat="server" Text="Выход" OnClick="b_exit_Click" Visible="False" />
+                    <asp:Button ID="b_exit" CssClass="redbutton" runat="server" Text="Выход" OnClick="b_exit_Click" Visible="False" />
                 </div>
+            </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer class="myhead">
+            <footer class="footer">
+             <div class="workspace">
                 <div class="textcenter">
                 <p><span class="logo1">&copy;</span> 
                     <span class="logo2"> <%: DateTime.Now.Year %></span> 
                     <span class="logo1">Pla</span><span class="logo2">Za</span></p>
                     </div>
+                </div>
             </footer>
         </div>
 

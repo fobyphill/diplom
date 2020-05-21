@@ -216,6 +216,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="test.aspx" />
     <Content Include="users.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -382,6 +383,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="users.aspx.cs">
       <DependentUpon>users.aspx</DependentUpon>
