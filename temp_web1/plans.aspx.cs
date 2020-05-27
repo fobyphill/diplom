@@ -25,8 +25,8 @@ namespace temp_web1
             name_user = (string)Session["name_user"];
             fam_user = (string)Session["fam_user"];
             status_user = (string)Session["status_user"];
-            /*if (status_user != "a")
-            { Response.Redirect("autorise.aspx"); }*/
+            if (status_user != "a")
+            { Response.Redirect("autorise.aspx"); }
 
             if (!Page.IsPostBack)
             {

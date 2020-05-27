@@ -60,6 +60,23 @@ namespace temp_web1
                     i++;
                 }
                 ole_con.Close();
+                //Загрузим дерево категорий
+                string q_cat = "select * from cats";
+                OleDbConnection sql_con = new OleDbConnection(con_str);
+                ole_con.Open();
+                com = new OleDbCommand(q_cat, ole_con);
+                dr = com.ExecuteReader();
+                //Заполним поля категорий
+                while (dr.Read())
+                {
+                    if (dr[3].ToString() == "0")
+                    {
+                        TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                        find_child(node_cat);
+                        tv.Nodes.Add(node_cat);
+                    }
+                }
+                dr.Close();
             }
 
         }
@@ -189,7 +206,6 @@ namespace temp_web1
             //блок даты изменения затрат
             if (tb_date_change_begin.Text == "" && tb_date_change_end.Text != "")
             {
-                
                 DateTime dt = new DateTime();
                 dt = DateTime.Parse(tb_date_change_end.Text);
                 if (flag) { q_find_cons += " and"; }
@@ -198,13 +214,11 @@ namespace temp_web1
             }
             if (tb_date_change_begin.Text != "" && tb_date_change_end.Text == "")
             {
-                
                 DateTime dtb = new DateTime();
                 dtb = DateTime.Parse(tb_date_change_begin.Text);
                 if (flag) { q_find_cons += " and"; }
                 q_find_cons += " data_change >= '" + dtb.ToShortDateString() + "'";
                 flag = true;
-
             }
             if (tb_date_change_begin.Text != "" && tb_date_change_end.Text != "")
             {
@@ -334,8 +348,6 @@ namespace temp_web1
                 q_find_cons += " descript_con like '%" + tb_search.Text + "%'";
                 flag = true;
             }
-
-
             //Конец блока всех условий
             //вывод таблицы
             string q_table = "select top 10 * from cons_output order by data_create desc";
@@ -448,6 +460,34 @@ namespace temp_web1
                     chb.Checked = false;
                 }
              }
+        }
+
+        protected void tv_SelectedNodeChanged(object sender, EventArgs e)
+        {
+            tb_cats.Text = tv.SelectedNode.Text;
+        }
+
+        void find_child(TreeNode pn)
+        {
+            //соединились с БД
+            string q_cat = "select * from cats";
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_cat, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
+            //Забираем данные с нода
+            string p_i = pn.Value.ToString();
+
+            while (dr.Read())
+            {
+                if (dr[3].ToString() == p_i)
+                {
+                    TreeNode n = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                    find_child(n);
+                    pn.ChildNodes.Add(n);
+                }
+            }
+            dr.Close(); com.Dispose(); ole_con.Close();
         }
     }
 }

@@ -37,7 +37,12 @@ hr
 {
     margin: 0px;
 }
-
+.likebukva
+{
+    display: inline;
+    vertical-align:bottom;
+    text-align:left;
+}
 
 .mar10ver {
     margin: 10px 0;

@@ -77,7 +77,6 @@ namespace temp_web1
 
         protected void b_save_Click(object sender, EventArgs e)
         {
-            string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
             string sql_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
             string q_max_id = "SELECT max(id_con) from consumptions";// Запрос наибольшего айди
             //выполняем, получаем в переменную наибольший айди

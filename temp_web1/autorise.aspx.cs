@@ -40,8 +40,8 @@ namespace temp_web1.Content
                 Session["fam_user"] = dr[1].ToString();
                 Session["status_user"] = dr[4].ToString();
                 if ((string)Session["status_user"] == "a")
-                { Response.Redirect("consumptions.aspx"); }
-                else { Response.Redirect("cons_user.aspx"); }
+                {Response.Redirect("consumptions.aspx");}
+                else {Response.Redirect("cons_user.aspx");}
 
             }
             else { p_error.Visible = true; }

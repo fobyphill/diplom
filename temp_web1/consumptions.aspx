@@ -146,4 +146,10 @@
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>
+    <asp:Panel CssClass="modalwin" ID="p_modal_cats" ScrollBars="Vertical" runat="server" Width="300">
+        <asp:TreeView ID="tv" runat="server" OnSelectedNodeChanged="tv_SelectedNodeChanged" ForeColor="White"></asp:TreeView>
+        <asp:Button ID="b_close_cats" runat="server" Text="Закрыть" />
+    </asp:Panel>
+    <ajaxToolkit:ModalPopupExtender TargetControlID="b_show_tree" ID="mpe_cats" PopupControlID="p_modal_cats" CancelControlID="b_close_cats" 
+        runat="server"></ajaxToolkit:ModalPopupExtender>
 </asp:Content>

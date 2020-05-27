@@ -11,36 +11,63 @@ namespace temp_web1
 {
     public partial class test : System.Web.UI.Page
     {
+        string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
          protected void Page_Load(object sender, EventArgs e)
         {
-            string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
+            
            if (!Page.IsPostBack)
            {
+               string q_cat = "select * from cats";
                OleDbConnection ole_con = new OleDbConnection(con_str);
                ole_con.Open();
-               OleDbCommand com = new OleDbCommand("select * from bils", ole_con);
+               OleDbCommand com = new OleDbCommand(q_cat, ole_con);
                OleDbDataReader dr = com.ExecuteReader();
-               gv.DataSource = dr;
-               gv.DataBind();
+               //Заполним поля категорий
+               while (dr.Read())
+               {
+                   if (dr[3].ToString() == "0")
+                   {
+                       TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                       find_child(node_cat);
+                       tv.Nodes.Add(node_cat);
+                   }
+               }
+               dr.Close();
            }
              
         }
-
-         protected void cb_CheckedChanged(object sender, EventArgs e)
+         void find_child(TreeNode pn)
          {
-             for (int i = 0; i < gv.Rows.Count; i++ )
-             {
-                 CheckBox chb = (CheckBox)gv.Rows[i].FindControl("cb");
-                 if (chb.Checked)
-                 {
-                     gv.Rows[i].BackColor = System.Drawing.Color.FromArgb(22, 219, 219);
-                 }
-                 else if (i % 2 != 0)
-                     { gv.Rows[i].BackColor = System.Drawing.Color.White; }
-                 else { gv.Rows[i].BackColor = System.Drawing.Color.FromArgb(239, 243, 251); }
+             //соединились с БД
+             string q_cat = "select * from cats";
+             OleDbConnection ole_con = new OleDbConnection(con_str);
+             ole_con.Open();
+             OleDbCommand com = new OleDbCommand(q_cat, ole_con);
+             OleDbDataReader dr = com.ExecuteReader();
+             //Забираем данные с нода
+             string p_i = pn.Value.ToString();
 
+             while (dr.Read())
+             {
+                 if (dr[3].ToString() == p_i)
+                 {
+                     TreeNode n = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                     find_child(n);
+                     pn.ChildNodes.Add(n);
+                 }
              }
-                 
+             dr.Close(); com.Dispose(); ole_con.Close();
          }
+
+         protected void b_choise_Click(object sender, EventArgs e)
+         {
+             l_out.Text = "БАБУЛЯ";
+         }
+
+         protected void tv_SelectedNodeChanged(object sender, EventArgs e)
+         {
+             l_out.Text = tv.SelectedNode.Text;
+         }
+
     }
 }

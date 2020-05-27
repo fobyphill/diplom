@@ -107,7 +107,6 @@
     <Content Include="add_consumpt.aspx" />
     <Content Include="add_plan.aspx" />
     <Content Include="App_Data\plaza.accdb" />
-    <Content Include="autorise2.aspx" />
     <Content Include="bils.aspx" />
     <Content Include="cats.aspx" />
     <Content Include="consumptions.aspx" />
@@ -258,13 +257,6 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="autorise2.aspx.cs">
-      <DependentUpon>autorise2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="autorise2.aspx.designer.cs">
-      <DependentUpon>autorise2.aspx</DependentUpon>
-    </Compile>
     <Compile Include="bils.aspx.cs">
       <DependentUpon>bils.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
