@@ -60,12 +60,25 @@ namespace temp_web1
                     }
                     i++;
                 }
-                ole_con.Close();
                 ole_con.Close();// закрыть всех
-
-
+                //Загрузим дерево категорий
+                string q_cat = "select * from cats";
+                ole_con = new OleDbConnection(con_str);
+                ole_con.Open();
+                com = new OleDbCommand(q_cat, ole_con);
+                dr = com.ExecuteReader();
+                //Заполним поля категорий
+                while (dr.Read())
+                {
+                    if (dr[3].ToString() == "0")
+                    {
+                        TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                        find_child(node_cat);
+                        tv.Nodes.Add(node_cat);
+                    }
+                }
+                dr.Close();
             }
-
         }
 
         protected void b_add_con_Click(object sender, EventArgs e)
@@ -397,6 +410,34 @@ namespace temp_web1
                 l_collapse.Text = "Скрыть поиск";
                 ib_show_hide_search.CssClass = "checkbox_checked";
             }
+        }
+
+        void find_child(TreeNode pn)
+        {
+            //соединились с БД
+            string q_cat = "select * from cats";
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            OleDbCommand com = new OleDbCommand(q_cat, ole_con);
+            OleDbDataReader dr = com.ExecuteReader();
+            //Забираем данные с нода
+            string p_i = pn.Value.ToString();
+
+            while (dr.Read())
+            {
+                if (dr[3].ToString() == p_i)
+                {
+                    TreeNode n = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                    find_child(n);
+                    pn.ChildNodes.Add(n);
+                }
+            }
+            dr.Close(); com.Dispose(); ole_con.Close();
+        }
+
+        protected void tv_SelectedNodeChanged(object sender, EventArgs e)
+        {
+            tb_cats.Text = tv.SelectedNode.Text;
         }
 
     }

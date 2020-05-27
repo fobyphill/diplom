@@ -13,31 +13,49 @@ namespace temp_web1 {
     public partial class reports {
         
         /// <summary>
-        /// l_hint_no_1 control.
+        /// p_error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_hint_no_1;
+        protected global::System.Web.UI.WebControls.Panel p_error;
         
         /// <summary>
-        /// l_click_left control.
+        /// l_error control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label l_click_left;
+        protected global::System.Web.UI.WebControls.Label l_error;
         
         /// <summary>
-        /// ddl_month control.
+        /// rbl_choice_report control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_month;
+        protected global::System.Web.UI.WebControls.RadioButtonList rbl_choice_report;
+        
+        /// <summary>
+        /// p_fast_report control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_fast_report;
+        
+        /// <summary>
+        /// tb_month control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_month;
         
         /// <summary>
         /// b_print control.
@@ -47,24 +65,6 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button b_print;
-        
-        /// <summary>
-        /// b_change control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button b_change;
-        
-        /// <summary>
-        /// b_delete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button b_delete;
         
         /// <summary>
         /// b_clear control.

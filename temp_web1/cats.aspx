@@ -34,7 +34,7 @@
                     
                 <div class="mar10ver">
                 <asp:TextBox CssClass="border1" ID="tb_parent_cat" Width="292" runat="server"></asp:TextBox>
-                <asp:Label ID="l_parent_cat" runat="server" Text="Родительская категория"></asp:Label>
+                <asp:Label ID="l_parent_cat" runat="server" Text="Родительская категория"></asp:Label><asp:Button CssClass="bluebutton" ID="b_win_cats" runat="server" Text="Открыть дерево" />
                 </div>
                  <div class="mar10ver">
                  <asp:TextBox CssClass="border1" ID="tb_cat" Width="292" runat="server"></asp:TextBox>
@@ -71,5 +71,11 @@
                 <asp:Button ID="b_yes" runat="server" Text="Да" OnClick="b_yes_Click" />
                 <asp:Button ID="b_no" runat="server" Text="Нет" />
             </asp:Panel>
+        
+    <asp:Panel ScrollBars="Vertical" Width="300" ID="p_modal_cats" CssClass="modalwin" runat="server">
+        <asp:TreeView NodeStyle-ForeColor="White"  ID="tv_parent" runat="server" OnSelectedNodeChanged="tv_parent_SelectedNodeChanged"></asp:TreeView>
+        <asp:Button ID="b_close_cats" runat="server" Text="Закрыть" />
+    </asp:Panel>
+    <ajaxToolkit:ModalPopupExtender ID="mde_parent" TargetControlID ="b_win_cats" PopupControlID="p_modal_cats" CancelControlID="b_close_cats" runat="server"></ajaxToolkit:ModalPopupExtender>
         </div>
 </asp:Content>

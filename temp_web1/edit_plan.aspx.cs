@@ -35,7 +35,6 @@ namespace temp_web1
                 {
                     //Получим данные записи о планировании
                     string q_plan = "select * from plans where id_plan = " + id_plan;
-                    
                     ole_con.Open();
                     OleDbCommand com = new OleDbCommand(q_plan, ole_con);
                     OleDbDataReader dr = com.ExecuteReader();
@@ -49,8 +48,6 @@ namespace temp_web1
                     com.Dispose();
                     ole_con.Close();
                 }
-                
-
                 //Заполним поля категорий
                 string q_cat = "select * from cats";
                 //соединение с БД

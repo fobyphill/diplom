@@ -14,7 +14,10 @@ namespace temp_web1
        
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                tb_month.Text = DateTime.Now.ToString("yyyy-MM");
+            }
         }
 
         protected void b_add_Click(object sender, EventArgs e)
@@ -25,9 +28,9 @@ namespace temp_web1
             OleDbDataAdapter da = new OleDbDataAdapter("select name_cat from cats where parent_id = 0", ole_con);
             DataSet ds = new DataSet();
             da.Fill(ds);*/
-
-
-            Response.Redirect("rept.aspx?month="+ddl_month.SelectedIndex.ToString());
+            string month = DateTime.Parse(tb_month.Text).Month.ToString();
+            string year = DateTime.Parse(tb_month.Text).Year.ToString();
+            Response.Redirect("rept.aspx?month="+month+"&year="+year);
         }
 
         protected void b_change_Click(object sender, EventArgs e)
@@ -39,6 +42,12 @@ namespace temp_web1
             OleDbDataReader dr = com.ExecuteReader();
             dr.Read();
             string aaa = dr[4].ToString;*/
+        }
+
+        protected void rbl_choice_report_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbl_choice_report.SelectedIndex == 0)
+            { p_fast_report.Visible = true; }
         }
 
     }

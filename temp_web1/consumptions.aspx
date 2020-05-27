@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Управление затратами" Language="C#" MasterPageFile="~/Site.Master" 
     AutoEventWireup="true" CodeBehind="consumptions.aspx.cs" Inherits="temp_web1.consumptions" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="maindiv">

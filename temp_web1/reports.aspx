@@ -2,58 +2,31 @@
     Inherits="temp_web1.reports" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="mymenu">
-       <div class="forlink"><a href="Default.aspx">Главная</a></div>
-       <div class="forlink"><a href="consumptions.aspx">Управление затратами</a></div>
-        <div class="forlink"><a href="plans.aspx">Планирование затрат</a></div>
-       <div class="forlink"> <a href="cats.aspx">Категории затрат</a></div>
-       <div class="forlink"> <a href="bils.aspx">Счета</a></div>
-       <div class="forlink"> <a href="users.aspx">Пользователи</a></div>
-       <div class="forlink"> <a href="reports.aspx">Отчеты</a></div>
+    <div class="maindiv">
+    <div class="onerow mymenu">
+       <div class="mar10ver"><a href="Default.aspx">Главная</a></div>
+       <div class="mar10ver"><a href="consumptions.aspx">Управление затратами</a></div>
+        <div class="mar10ver"><a href="plans.aspx">Планирование затрат</a></div>
+       <div class="mar10ver"> <a href="cats.aspx">Категории затрат</a></div>
+       <div class="mar10ver"> <a href="bils.aspx">Счета</a></div>
+       <div class="mar10ver"> <a href="users.aspx">Пользователи</a></div>
+       <div class="mar10ver"> <a href="reports.aspx">Отчеты</a></div>
    </div>
-    <div class="maincontent">
-        
-        <div class="divhint">
-            <asp:Label cssclass ="hint stress" ID="l_hint_no_1" runat="server" 
-            Text="Отчет не выбран. " Visible="False"></asp:Label>
-            <asp:Label CssClass="hint" ID="l_click_left" runat="server" 
-            Text="Выберите параметры отчета"></asp:Label>
-        </div>
-            <div class="mar10 onerow">
-                <asp:DropDownList ID="ddl_month" runat="server">
-                    <asp:ListItem>Январь</asp:ListItem>
-                    <asp:ListItem>Февраль</asp:ListItem>
-                    <asp:ListItem>Март</asp:ListItem>
-                    <asp:ListItem>Апрель</asp:ListItem>
-                    <asp:ListItem>Май</asp:ListItem>
-                    <asp:ListItem>Июнь</asp:ListItem>
-                    <asp:ListItem>Июль</asp:ListItem>
-                    <asp:ListItem>Август</asp:ListItem>
-                    <asp:ListItem>Сентябрь</asp:ListItem>
-                    <asp:ListItem>Октябрь</asp:ListItem>
-                    <asp:ListItem>Ноябрь</asp:ListItem>
-                    <asp:ListItem>Декабрь</asp:ListItem>
-                </asp:DropDownList>
-            </div>
-            <div class="onerow">
-            </div>
-        <div>
-        <div class="onerow mar10">
-        <asp:Button  ID="b_print" runat="server" Text="Вывести" 
+    <div class="onerow maincontent">
+        <asp:Panel CssClass="diverror" ID="p_error" runat="server" Visible="false">
+            <asp:Label  ID="l_error" runat="server" Text="Отчет не выбран"></asp:Label>
+        </asp:Panel>
+        <asp:RadioButtonList ID="rbl_choice_report" runat="server" AutoPostBack="True" OnSelectedIndexChanged="rbl_choice_report_SelectedIndexChanged">
+            <asp:ListItem Value="0">Быстрый отчет</asp:ListItem>
+            <asp:ListItem Value="1">Настраиваемый отчет</asp:ListItem>
+        </asp:RadioButtonList>
+        <asp:Panel Visible="false" CssClass="mar10" ID="p_fast_report" runat="server">
+            <asp:TextBox ID="tb_month" runat="server" TextMode="Month" Width="135px"></asp:TextBox>
+        </asp:Panel>
+        <asp:Button CssClass="bluebutton mar10"  ID="b_print" runat="server" Text="Вывести" 
             OnClick="b_add_Click" OnClientClick="SetTarget();" />
-            </div>
-       <div class="onerow mar10">
-            <asp:Button ID="b_change" runat="server" Text="Изменить" OnClick="b_change_Click" />
-           </div>
-        <div class="onerow mar10">
-                    <asp:Button ID="b_delete" runat="server" Text="Удалить"/>
-            
-            </div>
-            <div class="onerow mar10">
-                    <asp:Button ID="b_clear" runat="server" Text="Очистить" />
-            
-            </div>
-            </div>
+        <asp:Button ID="b_clear" runat="server" Text="Очистить" CssClass="redbutton mar10" />
+
             <ajaxtoolkit:modalpopupextender TargetControlID="b_inv" PopupControlID="p_modal_confirm" 
                 ID="mpe" runat="server" DropShadow="True"></ajaxtoolkit:modalpopupextender>
        
@@ -72,6 +45,7 @@
             document.forms[0].target = "_blank";
         }
 </script>
+        </div>
 </asp:Content>
 
 

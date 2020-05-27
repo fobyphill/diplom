@@ -85,6 +85,15 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_parent_cat;
         
         /// <summary>
+        /// b_win_cats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button b_win_cats;
+        
+        /// <summary>
         /// tb_cat control.
         /// </summary>
         /// <remarks>
@@ -191,5 +200,41 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button b_no;
+        
+        /// <summary>
+        /// p_modal_cats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_modal_cats;
+        
+        /// <summary>
+        /// tv_parent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TreeView tv_parent;
+        
+        /// <summary>
+        /// b_close_cats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button b_close_cats;
+        
+        /// <summary>
+        /// mde_parent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender mde_parent;
     }
 }

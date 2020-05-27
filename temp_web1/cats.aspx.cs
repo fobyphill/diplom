@@ -61,6 +61,21 @@ namespace temp_web1
                     }
                 }
                 dr.Close();
+                //Заполним всплывающее окно категориями
+                OleDbConnection ole_con = new OleDbConnection(con_str);
+                ole_con.Open();
+                OleDbCommand com = new OleDbCommand(q_cat, ole_con);
+                dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr[3].ToString() == "0")
+                    {
+                        TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                        find_child(node_cat);
+                        tv_parent.Nodes.Add(node_cat);
+                    }
+                }
+                dr.Close();
             }
         }
 
@@ -167,7 +182,6 @@ namespace temp_web1
 
         }
         
-
         protected void b_change_Click(object sender, EventArgs e)
         {
             bool flag_edit = false;
@@ -398,5 +412,10 @@ namespace temp_web1
             com.ExecuteNonQuery();
             ole_con.Close();
         }
+
+    protected void tv_parent_SelectedNodeChanged(object sender, EventArgs e)
+    {
+        tb_parent_cat.Text = tv_parent.SelectedNode.Text;
+    }
     }
 }
