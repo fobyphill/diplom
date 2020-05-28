@@ -11,43 +11,127 @@ namespace temp_web1
 {
     public partial class reports : System.Web.UI.Page
     {
-       
+        string con_str = "Provider=SQLOLEDB;Data Source=PHILL-ПК\\SQLEXPRESS;Initial Catalog=plaza;Integrated Security=SSPI";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                tb_month.Text = DateTime.Now.ToString("yyyy-MM");
+
+                tb_month.Text = DateTime.Now.ToString("yyyy-MM");//Выведем текущий месяц по умолчанию
+                //Выведем все категории в дерево
+                string q_cat = "select * from cats";
+                OleDbConnection ole_con = new OleDbConnection(con_str);
+                ole_con.Open();
+                OleDbCommand com = new OleDbCommand(q_cat, ole_con);
+                OleDbDataReader dr = com.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (dr[3].ToString() == "0")
+                    {
+                        TreeNode node_cat = new TreeNode(dr[1].ToString(), dr[0].ToString());
+                        //string parent_id = dr[0].ToString();
+                        edit_consumpt2 ec2 = new edit_consumpt2();
+                        ec2.find_child(node_cat);
+                        tv.Nodes.Add(node_cat);
+                    }
+                }
+                dr.Close(); ole_con.Close();
             }
         }
 
-        protected void b_add_Click(object sender, EventArgs e)
+        protected void b_print_Click(object sender, EventArgs e)
         {
-            //Выведем список главных категорий
-            /*OleDbConnection ole_con = new OleDbConnection(con_str);
-            ole_con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("select name_cat from cats where parent_id = 0", ole_con);
-            DataSet ds = new DataSet();
-            da.Fill(ds);*/
-            string month = DateTime.Parse(tb_month.Text).Month.ToString();
+            bool flag_error = false;
+            string type_report;
+            string month = DateTime.Parse(tb_month.Text).Month.ToString();//передаем месяц и год
             string year = DateTime.Parse(tb_month.Text).Year.ToString();
-            Response.Redirect("rept.aspx?month="+month+"&year="+year);
-        }
+            string checked_cats = "";//перечень выделенных категорий
+            if (rbl_choice_report.SelectedIndex == 1)
+            {
+                type_report = "custom";
+                foreach (TreeNode tn in tv.Nodes)//Найдем выделенные категории
+                {
+                    if (tn.Checked)
+                    {
+                        checked_cats += tn.Value.ToString();
+                        checked_cats += ",";
+                    }
+                    checked_cats += find_check_cats(tn);
+                }
 
-        protected void b_change_Click(object sender, EventArgs e)
-        {
-            /*string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
-            OleDbConnection ole = new OleDbConnection(con_str);
-            ole.Open();
-            OleDbCommand com = new OleDbCommand("select * from cons_output" /*where data_change = #08/05/2020#", ole);
-            OleDbDataReader dr = com.ExecuteReader();
-            dr.Read();
-            string aaa = dr[4].ToString;*/
+                if (checked_cats == "")
+                {
+                    flag_error = true;
+                    
+                    l_cats.Text = "Не выбрана ни одна категория";
+                    l_cats.CssClass = "stress";
+                }
+                else { checked_cats = checked_cats.Substring(0, checked_cats.Length - 1); }
+            }
+            else { type_report = "fast"; }
+            if (!flag_error)
+            {
+                Response.Redirect("rept.aspx?type="+type_report+"&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats);
+            }
+                
         }
 
         protected void rbl_choice_report_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (rbl_choice_report.SelectedIndex == 0)
-            { p_fast_report.Visible = true; }
+            { 
+                p_fast_report.Visible = true;
+                p_custom_report.Visible = false;
+            }
+            else if (rbl_choice_report.SelectedIndex == 1)
+            {
+                p_fast_report.Visible = true;
+                p_custom_report.Visible = true;
+                l_cats.Text = "";
+            }
+        }
+
+        protected void b_clear_Click(object sender, EventArgs e)
+        {
+            p_fast_report.Visible = false;
+            p_custom_report.Visible = false;
+            rbl_choice_report.SelectedIndex = -1;
+        }
+
+        protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
+        {
+            if (l_collapse.Text == "Развернуть все")
+            {
+                tv.ExpandAll();
+                l_collapse.Text = "Свернуть все";
+                ib_show_hide.CssClass = "checkbox_checked";
+            }
+            else
+            {
+                tv.CollapseAll();
+                l_collapse.Text = "Развернуть все";
+                ib_show_hide.CssClass = "checkbox_uncheck";
+            }
+        }
+
+        string find_check_cats(TreeNode n)
+        {
+            if (n.ChildNodes.Count > 0)
+            {
+                string s = "";
+                foreach (TreeNode tn in n.ChildNodes)
+                {
+                    if (tn.Checked)
+                    {
+                        s += tn.Value.ToString();
+                        s += ",";
+                        s += find_check_cats(tn);
+                    }
+                    
+                }
+                return s;
+            }
+            else return "";
         }
 
     }

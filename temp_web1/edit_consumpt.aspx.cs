@@ -64,7 +64,6 @@ namespace temp_web1
                     ole_con.Open();
                     OleDbCommand com2 = new OleDbCommand(q_cat, ole_con);
                     OleDbDataReader dr2 = com2.ExecuteReader();
-                    //Заполняем категориями Дерево
                     while (dr2.Read())
                     {
                         if (dr2[3].ToString() == "0")
@@ -216,7 +215,7 @@ namespace temp_web1
             else
             { Response.Redirect("cons_user.aspx"); }
         }
-        void find_child(TreeNode pn)
+       public void find_child(TreeNode pn)
         {
             //соединились с БД
            // string con_str = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\plaza.accdb";
