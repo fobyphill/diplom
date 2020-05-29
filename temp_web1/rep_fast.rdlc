@@ -26,10 +26,16 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Категория</Value>
-                              <Style />
+                              <MarkupType>HTML</MarkupType>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox1</rd:DefaultName>
@@ -56,10 +62,15 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Затраты</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox3</rd:DefaultName>
@@ -162,7 +173,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ds_fast</DataSetName>
-        <Top>0cm</Top>
+        <Left>0.29104cm</Left>
         <Height>1.2cm</Height>
         <Width>11.11125cm</Width>
         <Style>
@@ -241,7 +252,7 @@
                   <FontSize>8pt</FontSize>
                 </Style>
                 <ChartAxisTitle>
-                  <Caption>Axis Title</Caption>
+                  <Caption />
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -416,7 +427,7 @@
           </Style>
         </ChartNoDataMessage>
         <DataSetName>ds_fast</DataSetName>
-        <Top>1.37639cm</Top>
+        <Top>2.27597cm</Top>
         <Height>8.06544cm</Height>
         <Width>11.11125cm</Width>
         <ZIndex>1</ZIndex>
@@ -695,6 +706,7 @@
         </ChartNoDataMessage>
         <DataSetName>ds_fast</DataSetName>
         <Top>9.44182cm</Top>
+        <Left>0.29104cm</Left>
         <Height>8.01625cm</Height>
         <Width>11.11125cm</Width>
         <ZIndex>2</ZIndex>
@@ -707,11 +719,76 @@
           <BackgroundGradientType>None</BackgroundGradientType>
         </Style>
       </Chart>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Итого:</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox2</rd:DefaultName>
+        <Top>1.2cm</Top>
+        <Left>0.29104cm</Left>
+        <Height>0.6cm</Height>
+        <Width>7.43889cm</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Sum(Fields!summa.Value, "ds_fast")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox4</rd:DefaultName>
+        <Top>1.2cm</Top>
+        <Left>7.87104cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.53125cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>10.22767in</Height>
     <Style />
   </Body>
-  <Width>4.41667in</Width>
+  <Width>4.53125in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

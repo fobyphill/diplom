@@ -71,7 +71,9 @@ namespace temp_web1
             else { type_report = "fast"; }
             if (!flag_error)
             {
-                Response.Redirect("rept.aspx?type="+type_report+"&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats);
+                Response.Write("<script>window.open ('rept.aspx?type="+type_report+
+                    "&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats+"','_blank');</script>");
+                //Response.Redirect("rept.aspx?type="+type_report+"&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats);
             }
                 
         }
@@ -80,22 +82,12 @@ namespace temp_web1
         {
             if (rbl_choice_report.SelectedIndex == 0)
             { 
-                p_fast_report.Visible = true;
                 p_custom_report.Visible = false;
             }
-            else if (rbl_choice_report.SelectedIndex == 1)
+            else 
             {
-                p_fast_report.Visible = true;
                 p_custom_report.Visible = true;
-                l_cats.Text = "";
             }
-        }
-
-        protected void b_clear_Click(object sender, EventArgs e)
-        {
-            p_fast_report.Visible = false;
-            p_custom_report.Visible = false;
-            rbl_choice_report.SelectedIndex = -1;
         }
 
         protected void ib_show_hide_Click(object sender, ImageClickEventArgs e)
@@ -127,12 +119,48 @@ namespace temp_web1
                         s += ",";
                         s += find_check_cats(tn);
                     }
-                    
                 }
                 return s;
             }
             else return "";
         }
 
+        protected void ib_check_Click(object sender, ImageClickEventArgs e)
+        {
+            if (l_check.Text == "Отметить все")
+            {
+                l_check.Text = "Снять все отметки";
+                ib_check.CssClass = "checkbox_checked";
+                foreach (TreeNode tn in tv.Nodes)
+                {
+                    tn.Checked = true;
+                    check_tree(tn, true);
+                }
+                
+            }
+            else
+            {
+                l_check.Text = "Отметить все";
+                ib_check.CssClass = "checkbox_uncheck";
+                foreach (TreeNode tn in tv.Nodes)
+                {
+                    tn.Checked = false;
+                    check_tree(tn, false);
+                }
+            }
+
+        }
+
+        void check_tree(TreeNode n, bool v)
+        {
+            if (n.ChildNodes.Count > 0)
+            {
+                foreach (TreeNode tn in n.ChildNodes)
+                {
+                    tn.Checked = v;
+                    check_tree(tn, v);
+                }
+            }
+        }
     }
 }

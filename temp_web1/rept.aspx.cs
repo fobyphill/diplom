@@ -29,8 +29,6 @@ namespace temp_web1
                 else if (type_report == "custom")
                 { custom_report(); }
             }
-            
-            
         }
         float summa_cons(DataSet d, string id)
         {
@@ -56,7 +54,9 @@ namespace temp_web1
             string q_all_cats = "select name_cat, id_cat, parent_id from cats";//Собираем список из главных категорий
             OleDbDataAdapter da = new OleDbDataAdapter(q_all_cats, ole_con);
             da.Fill(ds);
-            ds.Tables[0].Columns.Add("summa");//Добавим столбец
+            DataColumn col_summa = new DataColumn("summa");
+            col_summa.DataType = System.Type.GetType("System.Single");
+            ds.Tables[0].Columns.Add(col_summa);//Добавим столбец
             string q_report = "SELECT cats.name_cat, cats.id_cat, cats.parent_id, sum(consumptions.value_con) as summa " +
             "FROM consumptions INNER JOIN cats ON consumptions.cat_con=cats.id_cat " +
             "WHERE month(consumptions.data_create) = " + month + " and year(consumptions.data_create) = " + year +
@@ -112,7 +112,20 @@ namespace temp_web1
 
         void custom_report()
         {
-
+            string month = Request.QueryString["month"];
+            string year = Request.QueryString["year"];
+            string checked_cats = Request.QueryString["checked_cats"];
+            DataSet ds = new DataSet("ds_rep");
+            OleDbConnection ole_con = new OleDbConnection(con_str);
+            ole_con.Open();
+            string q_report = "SELECT cats.name_cat, cats.id_cat,  sum(consumptions.value_con) as summa " +
+            "FROM consumptions INNER JOIN cats ON consumptions.cat_con=cats.id_cat " +
+            "WHERE month(consumptions.data_create) = " + month + " and year(consumptions.data_create) = " + year +
+            " and cats.id_cat in("+checked_cats+") GROUP BY cats.name_cat, cats.id_cat";// Получим нужные данные в запросе
+            //OleDbCommand com = new OleDbCommand(q_report, ole_con);
+            OleDbDataAdapter da = new OleDbDataAdapter(q_report, ole_con);
+            da.Fill(ds);
+            print_report(ds);
         }
 
         void print_report(DataSet dset)
