@@ -18,7 +18,7 @@
         <h2><asp:Label ID="l_descript" runat="server" Text=""></asp:Label></h2>
         </asp:Panel>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <rsweb:ReportViewer ID="rv" runat="server" Height="665px" Width="477px" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
+        <rsweb:ReportViewer ID="rv" runat="server" Height="1065px" Width="477px" Font-Names="Verdana" Font-Size="8pt" WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt">
             <LocalReport ReportPath="rep_complex.rdlc">
                 <DataSources>
                     <rsweb:ReportDataSource DataSourceId="ObjectDataSource1" Name="dset_complex" />

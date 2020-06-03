@@ -190,10 +190,22 @@
     <Content Include="ds_test.xss">
       <DependentUpon>ds_test.xsd</DependentUpon>
     </Content>
+    <Content Include="rds_complex.xsc">
+      <DependentUpon>rds_complex.xsd</DependentUpon>
+    </Content>
+    <None Include="rds_complex.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rds_complex.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="rds_complex.xss">
+      <DependentUpon>rds_complex.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="plans.aspx" />
     <Content Include="reports.aspx" />
     <Content Include="rept.aspx" />
+    <Content Include="rept_complex.aspx" />
     <Content Include="rept_plan.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -373,6 +385,11 @@
       <DependentUpon>plans.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rds_complex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rds_complex.xsd</DependentUpon>
+    </Compile>
     <Compile Include="reports.aspx.cs">
       <DependentUpon>reports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -386,6 +403,13 @@
     </Compile>
     <Compile Include="rept.aspx.designer.cs">
       <DependentUpon>rept.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="rept_complex.aspx.cs">
+      <DependentUpon>rept_complex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rept_complex.aspx.designer.cs">
+      <DependentUpon>rept_complex.aspx</DependentUpon>
     </Compile>
     <Compile Include="rept_plan.aspx.cs">
       <DependentUpon>rept_plan.aspx</DependentUpon>
