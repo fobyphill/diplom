@@ -36,29 +36,56 @@ namespace temp_web1
                     }
                 }
                 dr.Close(); ole_con.Close();
+                //вкинем даты
+                DateTime date_now = new DateTime();
+                date_now = DateTime.Now;
+                int mons = DateTime.Now.Month;
+                mons--;
+                int day = date_now.Day;
+                int year_now = date_now.Year;
+                DateTime date_before = new DateTime(year_now, mons, day);
+                tb_date_to.Text = date_now.ToString("yyyy-MM-dd");
+                tb_date_from.Text = date_before.ToString("yyyy-MM-dd");
             }
         }
 
         protected void b_print_Click(object sender, EventArgs e)
         {
             bool flag_error = false;
-            string type_report;
-            string month = DateTime.Parse(tb_month.Text).Month.ToString();//передаем месяц и год
-            string year = DateTime.Parse(tb_month.Text).Year.ToString();
+            string type_report, month = "", year = "";
+            if (rbl_period_choise.SelectedIndex == 0)//если период выбран Месяц, то
+            {
+                month = DateTime.Parse(tb_month.Text).Month.ToString();//передаем месяц и год
+                year = DateTime.Parse(tb_month.Text).Year.ToString();
+                Session["method_date"] = "month";
+            }
+            else//если период произвольный - то
+            {
+                DateTime temp_date;
+                if (DateTime.TryParse(tb_date_from.Text, out temp_date))
+                { month = temp_date.ToShortDateString(); }
+                if (DateTime.TryParse(tb_date_to.Text, out temp_date))
+                {year = temp_date.ToShortDateString();}
+                Session["method_date"] = "period";
+            }
             string checked_cats = "";//перечень выделенных категорий
             if (rbl_choice_report.SelectedIndex == 1)
             {
-                type_report = "custom";
-                foreach (TreeNode tn in tv.Nodes)//Найдем выделенные категории
-                {
-                    if (tn.Checked)
-                    {
-                        checked_cats += tn.Value.ToString();
-                        checked_cats += ",";
+                if (rbl_option.SelectedIndex == 0)
+                { type_report = "only_cats"; }
+                else { 
+                        type_report = "with_include";
+                        string list_cats = "";
+                        foreach (TreeNode tn in tv.CheckedNodes)
+                        {list_cats += find_check_and_child(tn);}
+                        list_cats = list_cats.Substring(0, list_cats.Length - 1);
+                        Session["list_cats"] = list_cats;
                     }
-                    checked_cats += find_check_cats(tn);
+                foreach (TreeNode tn in tv.CheckedNodes)//Найдем выделенные категории
+                {
+                    checked_cats += tn.Value.ToString();
+                    checked_cats += ",";
                 }
-
                 if (checked_cats == "")
                 {
                     flag_error = true;
@@ -71,9 +98,32 @@ namespace temp_web1
             else { type_report = "fast"; }
             if (!flag_error)
             {
-                Response.Write("<script>window.open ('rept.aspx?type="+type_report+
-                    "&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats+"','_blank');</script>");
-                //Response.Redirect("rept.aspx?type="+type_report+"&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats);
+                int count = 0;
+                foreach (ListItem cb in cbl_con_plan.Items)
+                {
+                    if (cb.Selected == true)
+                    { count++; }
+                }
+                if (count == 1 && cbl_con_plan.SelectedIndex == 0)//если одна галка и она затраты
+                {
+                    Response.Write("<script>window.open ('rept.aspx?type=" + type_report +
+                    "&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats + "','_blank');</script>");
+                }
+                else if (count == 1 && cbl_con_plan.SelectedIndex == 1)//если одна галка и она планирование
+                {
+                    Response.Write("<script>window.open ('rept_plan.aspx?type=" + type_report +
+                    "&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats + "','_blank');</script>");
+                }
+                else if (count == 2)//если обе галки - показываем комплексный отчет
+                {
+                    Response.Write("<script>window.open ('rept_complex.aspx?type=" + type_report +
+                     "&month=" + month + "&year=" + year + "&checked_cats=" + checked_cats + "','_blank');</script>");
+                }
+                else
+                {
+                    l_con_plan.Text = "Не выбран тип отчета - по затратам, планам или комплексный";
+                    l_con_plan.CssClass = "stress";
+                }
             }
                 
         }
@@ -83,10 +133,15 @@ namespace temp_web1
             if (rbl_choice_report.SelectedIndex == 0)
             { 
                 p_custom_report.Visible = false;
+                p_period_choise.Visible = false;
+                rbl_period_choise.SelectedIndex = 0;
+                p_free_period.Visible = false;
+                p_fast_report.Visible = true;
             }
             else 
             {
                 p_custom_report.Visible = true;
+                p_period_choise.Visible = true;
             }
         }
 
@@ -104,25 +159,6 @@ namespace temp_web1
                 l_collapse.Text = "Развернуть все";
                 ib_show_hide.CssClass = "checkbox_uncheck";
             }
-        }
-
-        string find_check_cats(TreeNode n)
-        {
-            if (n.ChildNodes.Count > 0)
-            {
-                string s = "";
-                foreach (TreeNode tn in n.ChildNodes)
-                {
-                    if (tn.Checked)
-                    {
-                        s += tn.Value.ToString();
-                        s += ",";
-                        s += find_check_cats(tn);
-                    }
-                }
-                return s;
-            }
-            else return "";
         }
 
         protected void ib_check_Click(object sender, ImageClickEventArgs e)
@@ -160,6 +196,49 @@ namespace temp_web1
                     tn.Checked = v;
                     check_tree(tn, v);
                 }
+            }
+        }
+
+        string find_check_and_child(TreeNode n)
+        {
+            string s = n.Value.ToString()+",";
+            if (n.ChildNodes.Count > 0)
+            {
+                foreach (TreeNode tn in n.ChildNodes)
+                {
+                    s += find_check_and_child(tn);
+                }
+            }
+            return s;
+        }
+
+        protected void rbl_period_choise_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbl_period_choise.SelectedIndex == 0)
+            {
+                p_fast_report.Visible = true;
+                p_free_period.Visible = false;
+            }
+            else
+            {
+                p_free_period.Visible = true;
+                p_fast_report.Visible = false;
+            }
+        }
+
+        protected void cbl_con_plan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbl_con_plan.Items[1].Selected)
+            {
+                rbl_period_choise.SelectedIndex = 0;
+                var li = rbl_period_choise.Items.FindByValue("1");
+                li.Enabled = false;
+                p_fast_report.Visible = true;
+                p_free_period.Visible = false;
+            }
+            else
+            {
+                rbl_period_choise.Items.FindByValue("1").Enabled = true;
             }
         }
     }

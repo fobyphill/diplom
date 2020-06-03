@@ -13,6 +13,24 @@ namespace temp_web1 {
     public partial class reports {
         
         /// <summary>
+        /// cbl_con_plan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cbl_con_plan;
+        
+        /// <summary>
+        /// l_con_plan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_con_plan;
+        
+        /// <summary>
         /// rbl_choice_report control.
         /// </summary>
         /// <remarks>
@@ -20,6 +38,24 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rbl_choice_report;
+        
+        /// <summary>
+        /// p_period_choise control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_period_choise;
+        
+        /// <summary>
+        /// rbl_period_choise control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbl_period_choise;
         
         /// <summary>
         /// p_fast_report control.
@@ -40,6 +76,33 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.TextBox tb_month;
         
         /// <summary>
+        /// p_free_period control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel p_free_period;
+        
+        /// <summary>
+        /// tb_date_from control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_date_from;
+        
+        /// <summary>
+        /// tb_date_to control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tb_date_to;
+        
+        /// <summary>
         /// p_custom_report control.
         /// </summary>
         /// <remarks>
@@ -47,6 +110,15 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel p_custom_report;
+        
+        /// <summary>
+        /// rbl_option control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbl_option;
         
         /// <summary>
         /// ib_check control.

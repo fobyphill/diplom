@@ -6,10 +6,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>7.47417cm</Width>
+              <Width>7.55354cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.63708cm</Width>
+              <Width>3.58542cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -26,7 +26,6 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Категория</Value>
-                              <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>12pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -124,21 +123,23 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="summa">
+                    <Textbox Name="value_plan">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!summa.Value</Value>
+                              <Value>=Fields!value_plan.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>summa</rd:DefaultName>
+                      <rd:DefaultName>value_plan</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -172,21 +173,21 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>ds_fast</DataSetName>
-        <Left>0.29104cm</Left>
+        <DataSetName>dset_plan</DataSetName>
+        <Left>0.37042cm</Left>
         <Height>1.2cm</Height>
-        <Width>11.11125cm</Width>
+        <Width>11.13896cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
-      <Chart Name="ch_gist">
+      <Chart Name="Chart1">
         <ChartCategoryHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Group Name="ch_gist_CategoryGroup">
+              <Group Name="Chart1_CategoryGroup">
                 <GroupExpressions>
                   <GroupExpression>=Fields!name_cat.Value</GroupExpression>
                 </GroupExpressions>
@@ -203,17 +204,17 @@
         <ChartSeriesHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Label>summa</Label>
+              <Label>value plan</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
         <ChartData>
           <ChartSeriesCollection>
-            <ChartSeries Name="summa">
+            <ChartSeries Name="value_plan">
               <ChartDataPoints>
                 <ChartDataPoint>
                   <ChartDataPointValues>
-                    <Y>=(Fields!summa.Value)</Y>
+                    <Y>=Sum(Fields!value_plan.Value)</Y>
                   </ChartDataPointValues>
                   <ChartDataLabel>
                     <Style />
@@ -401,7 +402,7 @@
         </ChartAreas>
         <ChartTitles>
           <ChartTitle Name="Default">
-            <Caption>Абсолтный показатель</Caption>
+            <Caption>Абсолютный показатель</Caption>
             <Style>
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontWeight>Bold</FontWeight>
@@ -426,11 +427,11 @@
             <VerticalAlign>Top</VerticalAlign>
           </Style>
         </ChartNoDataMessage>
-        <DataSetName>ds_fast</DataSetName>
-        <Top>1.90583cm</Top>
-        <Left>0.29104cm</Left>
-        <Height>8.06544cm</Height>
-        <Width>11.11125cm</Width>
+        <DataSetName>dset_plan</DataSetName>
+        <Top>1.83528cm</Top>
+        <Left>0.37042cm</Left>
+        <Height>6.64042cm</Height>
+        <Width>11.13896cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -441,11 +442,11 @@
           <BackgroundGradientType>None</BackgroundGradientType>
         </Style>
       </Chart>
-      <Chart Name="Chart2">
+      <Chart Name="Chart3">
         <ChartCategoryHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Group Name="Chart2_CategoryGroup">
+              <Group Name="Chart3_CategoryGroup">
                 <GroupExpressions>
                   <GroupExpression>=Fields!name_cat.Value</GroupExpression>
                 </GroupExpressions>
@@ -462,17 +463,17 @@
         <ChartSeriesHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Label>summa</Label>
+              <Label>value plan</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
         <ChartData>
           <ChartSeriesCollection>
-            <ChartSeries Name="summa">
+            <ChartSeries Name="value_plan">
               <ChartDataPoints>
                 <ChartDataPoint>
                   <ChartDataPointValues>
-                    <Y>=Fields!summa.Value</Y>
+                    <Y>=Sum(Fields!value_plan.Value)</Y>
                   </ChartDataPointValues>
                   <ChartDataLabel>
                     <Style />
@@ -485,7 +486,7 @@
                 </ChartDataPoint>
               </ChartDataPoints>
               <Type>Shape</Type>
-              <Subtype>ExplodedDoughnut</Subtype>
+              <Subtype>Doughnut</Subtype>
               <Style />
               <ChartEmptyPoints>
                 <Style />
@@ -705,11 +706,11 @@
             <VerticalAlign>Top</VerticalAlign>
           </Style>
         </ChartNoDataMessage>
-        <DataSetName>ds_fast</DataSetName>
-        <Top>9.97127cm</Top>
-        <Left>0.29104cm</Left>
-        <Height>8.01625cm</Height>
-        <Width>11.11125cm</Width>
+        <DataSetName>dset_plan</DataSetName>
+        <Top>8.4757cm</Top>
+        <Left>0.37042cm</Left>
+        <Height>8.67771cm</Height>
+        <Width>11.13896cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -734,16 +735,14 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
+            <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>1.2cm</Top>
-        <Left>0.29104cm</Left>
-        <Height>0.6cm</Height>
-        <Width>7.43889cm</Width>
+        <Top>1.23528cm</Top>
+        <Left>0.37042cm</Left>
+        <Height>0.56472cm</Height>
+        <Width>7.55354cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -762,8 +761,11 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Sum(Fields!summa.Value, "ds_fast")</Value>
-                <Style />
+                <Value>=Sum(Fields!value_plan.Value, "dset_plan")</Value>
+                <Style>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -771,9 +773,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox4</rd:DefaultName>
         <Top>1.2cm</Top>
-        <Left>7.87104cm</Left>
+        <Left>8.10035cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.53125cm</Width>
+        <Width>3.31047cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -785,76 +787,8 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Tablix Name="Tablix2">
-        <TablixBody>
-          <TablixColumns>
-            <TablixColumn>
-              <Width>5cm</Width>
-            </TablixColumn>
-          </TablixColumns>
-          <TablixRows>
-            <TablixRow>
-              <Height>2.5cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox6">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox6</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                    <rd:Selected>true</rd:Selected>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-          </TablixRows>
-        </TablixBody>
-        <TablixColumnHierarchy>
-          <TablixMembers>
-            <TablixMember />
-          </TablixMembers>
-        </TablixColumnHierarchy>
-        <TablixRowHierarchy>
-          <TablixMembers>
-            <TablixMember>
-              <Group Name="Details1" />
-            </TablixMember>
-          </TablixMembers>
-        </TablixRowHierarchy>
-        <Top>18.20016cm</Top>
-        <Left>1.87537cm</Left>
-        <Height>2.5cm</Height>
-        <Width>5cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Tablix>
     </ReportItems>
-    <Height>8.14967in</Height>
+    <Height>17.22877cm</Height>
     <Style />
   </Body>
   <Width>4.53125in</Width>
@@ -870,48 +804,64 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="ds_full">
+    <DataSource Name="dset_plans_output">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>9f348e13-7788-4142-8f2e-91d7265d516e</rd:DataSourceID>
+      <rd:DataSourceID>cbf2565c-b70a-47b9-84be-c81d469bf3a2</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ds_fast">
+    <DataSet Name="dset_plan">
       <Query>
-        <DataSourceName>ds_full</DataSourceName>
+        <DataSourceName>dset_plans_output</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="id_plan">
+          <DataField>id_plan</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="data_plan">
+          <DataField>data_plan</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="value_plan">
+          <DataField>value_plan</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
         <Field Name="name_cat">
           <DataField>name_cat</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="id_cat">
-          <DataField>id_cat</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
+        <Field Name="bil_plan">
+          <DataField>bil_plan</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="parent_id">
-          <DataField>parent_id</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
+        <Field Name="descript_plan">
+          <DataField>descript_plan</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="summa">
-          <DataField>summa</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="fam_user">
+          <DataField>fam_user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="login_user">
+          <DataField>login_user</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>ds_full</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\phill\Documents\Visual Studio 2013\Projects\diplom\temp_web1\ds_full.xsd</rd:SchemaPath>
-        <rd:TableName>report_fast</rd:TableName>
+        <rd:DataSetName>dset_plans_output</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\phill\Documents\Visual Studio 2013\Projects\diplom\temp_web1\dset_plans_output.xsd</rd:SchemaPath>
+        <rd:TableName>plans_output</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>report_fastTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>plans_outputTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>cf920772-bad5-4f32-b328-b53764090e25</rd:ReportID>
+  <rd:ReportID>7db8aff6-88c1-4bb2-b4ae-82832fc87650</rd:ReportID>
 </Report>

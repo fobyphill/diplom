@@ -21,8 +21,8 @@
             <asp:TextBox ID="tb_value_bottom" width="70px" runat="server"></asp:TextBox><span> до </span>
             <asp:TextBox ID="tb_value_top" width="70px" runat="server"></asp:TextBox>
             <asp:Label CssClass="mar40left" ID="l_cats" runat="server" Text="Категория"></asp:Label>
-            <asp:TextBox ID="tb_cats" Width="100px" runat="server"></asp:TextBox>
             <asp:Button CssClass="bluebutton" ID="b_show_tree" runat="server" Text="Показать дерево" />
+            <asp:Label ID="l_find_cats" Width="350px" runat="server" Text=""></asp:Label>
             <p class="mar5ver" />
             <asp:Label ID="l_bils" runat="server" Text="Счета "></asp:Label>
             <asp:DropDownList ID="ddl_bils" Width="200px" runat="server">
@@ -30,7 +30,6 @@
             </asp:DropDownList>
             <asp:Label CssClass="mar40left" ID="L_search" runat="server" Text="Номер записи или комментарий"></asp:Label>
             <asp:TextBox ID="tb_search" runat="server" Width="440px"></asp:TextBox>
-            
             <p class="mar5ver" />
             <asp:DropDownList ID="ddl_user" runat="server">
                 <asp:ListItem>Все пользователи</asp:ListItem>

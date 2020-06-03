@@ -24,7 +24,9 @@
             <asp:Button ID="b_choise" runat="server" Text="Выбрать" OnClick="b_choise_Click" />
             <asp:Button ID="b_cancel" runat="server" Text="Отмена" />
         </asp:Panel>
-        
+        <asp:TextBox ID="tb_linq" runat="server"></asp:TextBox>
+        <asp:Button ID="b_linq" runat="server" Text="to" OnClick="b_linq_Click" />
+        <asp:Button ID="b_linq0" runat="server" Text="from" OnClick="b_linq0_Click" />
     </form>
 </body>
 </html>

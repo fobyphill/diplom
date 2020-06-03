@@ -163,6 +163,17 @@
     <Content Include="ds_full.xsc">
       <DependentUpon>ds_full.xsd</DependentUpon>
     </Content>
+    <Content Include="dset_plans_output.xsc">
+      <DependentUpon>dset_plans_output.xsd</DependentUpon>
+    </Content>
+    <None Include="dset_plans_output.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dset_plans_output.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="dset_plans_output.xss">
+      <DependentUpon>dset_plans_output.xsd</DependentUpon>
+    </Content>
     <None Include="ds_full.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ds_full.Designer.cs</LastGenOutput>
@@ -183,6 +194,7 @@
     <Content Include="plans.aspx" />
     <Content Include="reports.aspx" />
     <Content Include="rept.aspx" />
+    <Content Include="rept_plan.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -321,6 +333,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds3.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dset_plans_output.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dset_plans_output.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ds_full.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -370,6 +387,13 @@
     <Compile Include="rept.aspx.designer.cs">
       <DependentUpon>rept.aspx</DependentUpon>
     </Compile>
+    <Compile Include="rept_plan.aspx.cs">
+      <DependentUpon>rept_plan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rept_plan.aspx.designer.cs">
+      <DependentUpon>rept_plan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -407,7 +431,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="rep_complex.rdlc" />
     <EmbeddedResource Include="rep_fast.rdlc" />
+    <EmbeddedResource Include="rep_plan.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

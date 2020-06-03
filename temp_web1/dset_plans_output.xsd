@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dset_plans_output" targetNamespace="http://tempuri.org/dset_plans_output.xsd" xmlns:mstns="http://tempuri.org/dset_plans_output.xsd" xmlns="http://tempuri.org/dset_plans_output.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="con_str_sql" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="con_str_sql (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.con_str_sql.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="plans_outputTableAdapter" GeneratorDataComponentClassName="plans_outputTableAdapter" Name="plans_output" UserDataComponentName="plans_outputTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="con_str_sql (Web.config)" DbObjectName="plaza.dbo.plans_output" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT id_plan, data_plan, value_plan, name_cat, bil_plan, descript_plan, fam_user, login_user FROM dbo.plans_output</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id_plan" DataSetColumn="id_plan" />
+              <Mapping SourceColumn="data_plan" DataSetColumn="data_plan" />
+              <Mapping SourceColumn="value_plan" DataSetColumn="value_plan" />
+              <Mapping SourceColumn="name_cat" DataSetColumn="name_cat" />
+              <Mapping SourceColumn="bil_plan" DataSetColumn="bil_plan" />
+              <Mapping SourceColumn="descript_plan" DataSetColumn="descript_plan" />
+              <Mapping SourceColumn="fam_user" DataSetColumn="fam_user" />
+              <Mapping SourceColumn="login_user" DataSetColumn="login_user" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dset_plans_output" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="dset_plans_output" msprop:Generator_UserDSName="dset_plans_output">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="plans_output" msprop:Generator_TableClassName="plans_outputDataTable" msprop:Generator_TableVarName="tableplans_output" msprop:Generator_TablePropName="plans_output" msprop:Generator_RowDeletingName="plans_outputRowDeleting" msprop:Generator_RowChangingName="plans_outputRowChanging" msprop:Generator_RowEvHandlerName="plans_outputRowChangeEventHandler" msprop:Generator_RowDeletedName="plans_outputRowDeleted" msprop:Generator_UserTableName="plans_output" msprop:Generator_RowChangedName="plans_outputRowChanged" msprop:Generator_RowEvArgName="plans_outputRowChangeEvent" msprop:Generator_RowClassName="plans_outputRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id_plan" msprop:Generator_ColumnVarNameInTable="columnid_plan" msprop:Generator_ColumnPropNameInRow="id_plan" msprop:Generator_ColumnPropNameInTable="id_planColumn" msprop:Generator_UserColumnName="id_plan" type="xs:int" />
+              <xs:element name="data_plan" msprop:Generator_ColumnVarNameInTable="columndata_plan" msprop:Generator_ColumnPropNameInRow="data_plan" msprop:Generator_ColumnPropNameInTable="data_planColumn" msprop:Generator_UserColumnName="data_plan" type="xs:dateTime" />
+              <xs:element name="value_plan" msprop:Generator_ColumnVarNameInTable="columnvalue_plan" msprop:Generator_ColumnPropNameInRow="value_plan" msprop:Generator_ColumnPropNameInTable="value_planColumn" msprop:Generator_UserColumnName="value_plan" type="xs:decimal" />
+              <xs:element name="name_cat" msprop:Generator_ColumnVarNameInTable="columnname_cat" msprop:Generator_ColumnPropNameInRow="name_cat" msprop:Generator_ColumnPropNameInTable="name_catColumn" msprop:Generator_UserColumnName="name_cat">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="bil_plan" msprop:Generator_ColumnVarNameInTable="columnbil_plan" msprop:Generator_ColumnPropNameInRow="bil_plan" msprop:Generator_ColumnPropNameInTable="bil_planColumn" msprop:Generator_UserColumnName="bil_plan">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="descript_plan" msprop:Generator_ColumnVarNameInTable="columndescript_plan" msprop:Generator_ColumnPropNameInRow="descript_plan" msprop:Generator_ColumnPropNameInTable="descript_planColumn" msprop:Generator_UserColumnName="descript_plan" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="fam_user" msprop:Generator_ColumnVarNameInTable="columnfam_user" msprop:Generator_ColumnPropNameInRow="fam_user" msprop:Generator_ColumnPropNameInTable="fam_userColumn" msprop:Generator_UserColumnName="fam_user" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="login_user" msprop:Generator_ColumnVarNameInTable="columnlogin_user" msprop:Generator_ColumnPropNameInRow="login_user" msprop:Generator_ColumnPropNameInTable="login_userColumn" msprop:Generator_UserColumnName="login_user">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:plans_output" />
+      <xs:field xpath="mstns:id_plan" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

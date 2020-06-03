@@ -8,7 +8,7 @@
 <head runat="server">
         <link href="/Content/mycss.css" rel="stylesheet"/>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <title></title>
+    <title>Отчет о затратах</title>
 </head>
 <body>
     <form id="form1" runat="server">

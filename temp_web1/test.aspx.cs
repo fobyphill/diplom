@@ -69,5 +69,19 @@ namespace temp_web1
              l_out.Text = tv.SelectedNode.Text;
          }
 
+         protected void b_linq_Click(object sender, EventArgs e)
+         {
+             int[] digits = new int[5] {1, 5, 8, 7, 0};
+             Session["dig"] = digits;
+
+         }
+
+         protected void b_linq0_Click(object sender, EventArgs e)
+         {
+             string aaa = "1, 3, 5, 3, 2, 1";
+             string[] bbb = aaa.Split(',');
+             tb_linq.Text = bbb[1];
+         }
+
     }
 }

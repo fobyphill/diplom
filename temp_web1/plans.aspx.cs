@@ -298,28 +298,11 @@ namespace temp_web1
                 }
             }
             //блок категорий
-            if (tb_cats.Text != "")
+            if (l_find_cats.Text != "")
             {
-                //Парсим категорию
-                string q_ver_cat = "select count(*) from cats where name_cat = '" + tb_cats.Text + "'";
-                OleDbConnection ole_con2 = new OleDbConnection(con_str);
-                ole_con2.Open();
-                OleDbCommand com2 = new OleDbCommand(q_ver_cat, ole_con2);
-                OleDbDataReader dr2 = com2.ExecuteReader();
-                dr2.Read();
-                if (dr2[0].ToString() == "0")
-                {
-                    l_hint_no_1.Text = "Категория указана неверно.";
-                    p_error.Visible = true;
-                    flag_error = true;
-                }
-                else
-                {
-                    if (flag) { q_find_plans += " and"; }
-                    q_find_plans += " name_cat = '" + tb_cats.Text + "'";
-                    flag = true;
-                }
-                dr2.Dispose();com2.Dispose();ole_con2.Close();
+                if (flag) { q_find_plans += " and"; }
+                q_find_plans += " name_cat in (" + l_find_cats.Text + ")";
+                flag = true;
             }
             //блок счетов
             if (ddl_bils.SelectedIndex > 0)
@@ -390,7 +373,7 @@ namespace temp_web1
             tb_date_create_end.Text = "";
             tb_value_bottom.Text = "";
             tb_value_top.Text = "";
-            tb_cats.Text = "";
+            l_find_cats.Text = "";
             ddl_bils.SelectedIndex = 0;
             ddl_user.SelectedIndex = 0;
             tb_search.Text = "";
@@ -437,7 +420,14 @@ namespace temp_web1
 
         protected void tv_SelectedNodeChanged(object sender, EventArgs e)
         {
-            tb_cats.Text = tv.SelectedNode.Text;
+            if (l_find_cats.Text == "")
+            { l_find_cats.Text = "'" + tv.SelectedNode.Text + "'"; }
+            else
+            {
+                l_find_cats.Text += ",'";
+                l_find_cats.Text += tv.SelectedNode.Text;
+                l_find_cats.Text += "'";
+            }
         }
 
     }

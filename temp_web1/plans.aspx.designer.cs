@@ -85,15 +85,6 @@ namespace temp_web1 {
         protected global::System.Web.UI.WebControls.Label l_cats;
         
         /// <summary>
-        /// tb_cats control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_cats;
-        
-        /// <summary>
         /// b_show_tree control.
         /// </summary>
         /// <remarks>
@@ -101,6 +92,15 @@ namespace temp_web1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button b_show_tree;
+        
+        /// <summary>
+        /// l_find_cats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label l_find_cats;
         
         /// <summary>
         /// l_bils control.
